@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Team Moshe Promo</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root { --red:#e3121b; --red2:#ff3b30; --gold:#f5c542; --gold2:#ffe39a; --white:#f7f4ee; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100vw; height:100vh; overflow:hidden; background:#050505; }
+  body { font-family:'Heebo', sans-serif; color:var(--white); }
+  #bg { position:absolute; inset:0; width:100%; height:100%; }
+  #stage { position:absolute; inset:0; will-change:transform; }
+  .scene { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.2vmin; text-align:center; padding:0 6vw; }
+  @media (orientation: portrait){ .scene{ transform:scale(1.1); padding:0 9vw; } }
+  @media (orientation: landscape){ .scene.s7{ transform:scale(.86); } }
+  .fx { opacity:0; will-change:transform,opacity,filter; }
+  #flash { position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; mix-blend-mode:screen; }
+  #fade { position:absolute; inset:0; background:#000; opacity:0; pointer-events:none; }
+  #grain { position:absolute; inset:0; width:100%; height:100%; opacity:.09; mix-blend-mode:overlay; pointer-events:none; }
+  #bars { position:absolute; inset:0; pointer-events:none; }
+
+  .t-xs { font-size:4.2vmin; font-weight:500; letter-spacing:.06em; color:#cfc8bd; }
+  .t-sm { font-size:6vmin; font-weight:700; }
+  .t-md { font-size:8.5vmin; font-weight:800; line-height:1.08; }
+  .t-lg { font-size:13vmin; font-weight:900; line-height:1; }
+  .t-xl { font-size:24vmin; font-weight:900; line-height:.95; letter-spacing:-.01em; }
+  .red  { color:var(--red2); text-shadow:0 0 4vmin rgba(227,18,27,.55); }
+  .gold { background:linear-gradient(180deg,#fff6d2 0%,var(--gold) 45%,#b07a10 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 0 3vmin rgba(245,197,66,.35)); }
+  .chrome { background:linear-gradient(180deg,#ffffff 0%,#d9d4cc 48%,#8e877c 52%,#e9e4dc 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 1vmin 2vmin rgba(0,0,0,.8)); }
+  .latin { font-family:'Bebas Neue', sans-serif; font-weight:400; letter-spacing:.04em; direction:ltr; }
+  .rule { width:38vmin; height:.7vmin; background:linear-gradient(90deg,transparent,var(--red),transparent); }
+  .rule.gold-r { background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+
+  .count { font-family:'Bebas Neue', sans-serif; font-size:44vmin; line-height:.85; direction:ltr; }
+  .title-card { display:flex; flex-direction:column; align-items:center; gap:2.5vmin; }
+  .medal { width:24vmin; height:auto; }
+  .badge { display:inline-block; font-family:'Bebas Neue',sans-serif; font-size:12vmin; line-height:1; padding:.6vmin 3.2vmin .2vmin; background:var(--red); color:#fff; transform:skewX(-10deg); box-shadow:0 0 5vmin rgba(227,18,27,.6); direction:ltr; }
+  .big18 { font-family:'Bebas Neue',sans-serif; font-size:40vmin; line-height:.8; direction:ltr; }
+  .word { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .cta { font-size:6.4vmin; font-weight:900; padding:2.2vmin 5vmin; background:var(--red); color:#fff; border-radius:1.2vmin; box-shadow:0 0 6vmin rgba(227,18,27,.55); line-height:1.15; }
+  .contact { font-size:5vmin; font-weight:700; color:var(--gold2); direction:ltr; }
+  .emblem { width:34vmin; height:auto; }
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div id="stage">
+
+  <!-- S1: hook -->
+  <section class="scene">
+    <div class="fx t-md" data-in="0.5" data-out="3.85" data-fx="rise">כל אלוף</div>
+    <div class="fx t-md red" data-in="1.5" data-out="3.85" data-fx="rise">התחיל באימון הראשון</div>
+  </section>
+
+  <!-- S2: name -->
+  <section class="scene">
+    <div class="fx t-xl chrome" data-in="4.0" data-out="7.9" data-fx="slam">אור משה</div>
+    <div class="fx rule" data-in="4.5" data-out="7.9" data-fx="wipe"></div>
+    <div class="fx t-sm" data-in="5.0" data-out="7.9" data-fx="wipe">מתאגרף תאילנדי<br>וקיקבוקסר מקצועי</div>
+  </section>
+
+  <!-- S3: 200+ fights -->
+  <section class="scene">
+    <div class="fx t-sm" data-in="8.0" data-out="11.9" data-fx="rise">מעל</div>
+    <div class="fx count gold" data-in="8.1" data-out="11.9" data-fx="pop" data-count="200" data-count-end="9.5" data-hit="9.5">0</div>
+    <div class="fx t-lg red" data-in="10.0" data-out="11.9" data-fx="slam">קרבות זירה</div>
+  </section>
+
+  <!-- S4: titles -->
+  <section class="scene" style="justify-content:flex-start; padding-top:16vh;">
+    <div class="fx t-xs" data-in="12.0" data-out="23.9" data-fx="rise">ה י ש ג י ם</div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="12.0" data-out="13.9" data-fx="slam">
+      <svg class="medal" data-medal></svg>
+      <div class="t-lg gold">אלוף<br>משחקי העולם</div>
+    </div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="14.0" data-out="15.9" data-fx="slam">
+      <svg class="medal" data-medal></svg>
+      <div class="t-lg gold">אלוף אירופה</div>
+      <div class="badge">X2</div>
+    </div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="16.0" data-out="17.9" data-fx="slam">
+      <svg class="medal" data-medal="silver"></svg>
+      <div class="t-lg chrome">סגן אלוף העולם</div>
+      <div class="badge">X2</div>
+    </div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="18.0" data-out="19.9" data-fx="slam">
+      <svg class="medal" data-medal></svg>
+      <div class="t-lg gold">אלוף<br>גביע העולם</div>
+    </div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="20.0" data-out="21.9" data-fx="slam">
+      <svg class="medal" data-medal></svg>
+      <div class="t-lg gold">אלוף<br>גביע אירופה</div>
+    </div>
+  </section>
+  <section class="scene">
+    <div class="fx title-card" data-in="22.0" data-out="23.9" data-fx="slam">
+      <div class="big18 gold">18</div>
+      <div class="t-md">פעמים</div>
+      <div class="t-lg red">אלוף ישראל</div>
+    </div>
+  </section>
+
+  <!-- S5: mission -->
+  <section class="scene">
+    <div class="fx t-sm" data-in="24.0" data-out="27.9" data-fx="rise">אחרי מאות קרבות בזירה</div>
+    <div class="fx t-md" data-in="25.0" data-out="27.9" data-fx="wipe">הגיע הזמן להעביר<br>את הידע שלי</div>
+    <div class="fx t-lg gold" data-in="26.0" data-out="27.9" data-fx="slam">לדור הבא</div>
+  </section>
+  <section class="scene">
+    <div class="fx t-md" data-in="28.0" data-out="31.9" data-fx="rise">אני לא רק מאמן<br>לוחמים</div>
+    <div class="fx rule gold-r" data-in="28.8" data-out="31.9" data-fx="wipe"></div>
+    <div class="fx t-lg" data-in="29.5" data-out="31.9" data-fx="slam">אני מגדל</div>
+    <div class="fx t-xl gold" data-in="30.0" data-out="31.9" data-fx="slam">אלופים</div>
+  </section>
+
+  <!-- S6: values -->
+  <section class="scene"><div class="word"><div class="fx t-xl chrome" data-in="32.0" data-out="32.95" data-fx="slam">משמעת</div></div></section>
+  <section class="scene"><div class="word"><div class="fx t-lg red" style="font-size:16vmin" data-in="33.0" data-out="33.95" data-fx="slam">ביטחון עצמי</div></div></section>
+  <section class="scene"><div class="word"><div class="fx t-xl gold" data-in="34.0" data-out="34.95" data-fx="slam">כבוד</div></div></section>
+  <section class="scene"><div class="word"><div class="fx t-xl chrome" data-in="35.0" data-out="35.95" data-fx="slam">כוח</div></div></section>
+  <section class="scene"><div class="word"><div class="fx t-xl red" data-in="36.0" data-out="36.95" data-fx="slam">אופי</div></div></section>
+  <section class="scene">
+    <div class="fx t-lg" data-in="37.0" data-out="39.45" data-fx="slam">בזירה</div>
+    <div class="fx t-lg gold" data-in="38.0" data-out="39.45" data-fx="slam">וגם בחיים.</div>
+  </section>
+
+  <!-- S7: logo + CTA -->
+  <section class="scene s7" style="gap:2.6vmin">
+    <svg class="fx emblem" id="emblem" data-in="40.0" data-out="99" data-fx="slam"></svg>
+    <div class="fx latin chrome" style="font-size:19vmin; line-height:.9" data-in="40.5" data-out="99" data-fx="wipe">TEAM MOSHE</div>
+    <div class="fx t-sm" data-in="41.0" data-out="99" data-fx="rise">המכון החדש של <span class="red">אור משה</span></div>
+    <div class="fx t-xs" style="font-size:5vmin; color:#fff" data-in="41.8" data-out="99" data-fx="rise">מואי תאי &nbsp;·&nbsp; קיקבוקס</div>
+    <div class="fx t-xs" style="font-size:4.4vmin" data-in="42.4" data-out="99" data-fx="rise">ילדים &nbsp;·&nbsp; נוער &nbsp;·&nbsp; בוגרים</div>
+    <div class="fx cta" data-in="43.5" data-out="99" data-fx="slam">ההרשמה נפתחה!<br>בואו לשיעור ניסיון</div>
+    <div class="fx contact" id="contact" data-in="44.5" data-out="99" data-fx="rise"></div>
+  </section>
+</div>
+<canvas id="grain"></canvas>
+<div id="flash"></div>
+<div id="fade"></div>
+
+<script>
+// ---------- editable details (phone / address / instagram) ----------
+const CONTACT = new URLSearchParams(location.search).get('contact') || '';
+const DURATION = 48;
+
+// ---------- helpers ----------
+const clamp = (x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const seg = (t,a,b)=>clamp((t-a)/(b-a));
+const eOut = x=>1-Math.pow(1-x,3);
+const eBack = x=>{const c=1.70158,c3=c+1;return 1+c3*Math.pow(x-1,3)+c*Math.pow(x-1,2);};
+const lerp=(a,b,x)=>a+(b-a)*x;
+function rng(seed){return ()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+// ---------- SVG art ----------
+function medalSVG(kind){
+  const g = kind==='silver' ? ['#ffffff','#c9c9c9','#7d7d7d'] : ['#fff1b8','#f5c542','#a8700c'];
+  return `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+   <defs><linearGradient id="m${kind}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${g[0]}"/><stop offset=".5" stop-color="${g[1]}"/><stop offset="1" stop-color="${g[2]}"/></linearGradient></defs>
+   <path d="M55 0 L95 90 L75 100 L30 0Z" fill="#e3121b"/><path d="M145 0 L105 90 L125 100 L170 0Z" fill="#b30d14"/>
+   <circle cx="100" cy="150" r="78" fill="url(#m${kind})"/><circle cx="100" cy="150" r="62" fill="none" stroke="${g[2]}" stroke-width="4" opacity=".7"/>
+   <path d="M100 103 l13.5 27.4 30.2 4.4 -21.9 21.3 5.2 30.1 -27-14.2 -27 14.2 5.2-30.1 -21.9-21.3 30.2-4.4z" fill="${g[2]}" opacity=".85"/></svg>`;
+}
+document.querySelectorAll('svg[data-medal]').forEach(s=>{ s.outerHTML = medalSVG(s.dataset.medal||'gold').replace('<svg ', `<svg class="medal" `); });
+document.getElementById('emblem').outerHTML = `<svg class="fx emblem" data-in="40.0" data-out="99" data-fx="slam" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".5" stop-color="#f5c542"/><stop offset="1" stop-color="#a8700c"/></linearGradient></defs>
+  <circle cx="150" cy="150" r="140" fill="#0b0b0b" stroke="url(#eg)" stroke-width="8"/>
+  <circle cx="150" cy="150" r="118" fill="none" stroke="#e3121b" stroke-width="5"/>
+  <g fill="#e3121b"><path d="M150 32 l8 16 -8 6 -8 -6z"/><path d="M150 268 l8 -16 -8 -6 -8 6z"/></g>
+  <text x="150" y="182" text-anchor="middle" font-family="Bebas Neue" font-size="112" fill="url(#eg)" letter-spacing="4">TM</text>
+  <text x="150" y="222" text-anchor="middle" font-family="Bebas Neue" font-size="24" fill="#f7f4ee" letter-spacing="6">MUAY THAI · KICKBOXING</text>
+  <text x="150" y="96" text-anchor="middle" font-family="Bebas Neue" font-size="26" fill="#f7f4ee" letter-spacing="8">EST. 2026</text></svg>`;
+const contactEl = document.getElementById('contact');
+if (CONTACT) contactEl.textContent = CONTACT; else contactEl.remove();
+
+// ---------- timeline ----------
+const items = [...document.querySelectorAll('.fx')].map(el=>({
+  el, tin:+el.dataset.in, tout:+el.dataset.out, fx:el.dataset.fx,
+  count: el.dataset.count? +el.dataset.count : null, countEnd: +el.dataset.countEnd||0,
+}));
+const HITS = [...new Set([
+  ...items.filter(i=>i.fx==='slam').map(i=>i.tin),
+  ...[...document.querySelectorAll('[data-hit]')].map(e=>+e.dataset.hit)
+])].sort((a,b)=>a-b);
+window.HITS = HITS; window.DURATION = DURATION;
+
+function applyItem(it,t){
+  const {el,tin,tout,fx}=it;
+  if (t < tin-0.01 || t > tout+0.01){ el.style.opacity=0; return; }
+  const life = t-tin;
+  const outP = eOut(seg(t, tout-0.3, tout));
+  let op=1, tx=0, ty=0, sc=1, blur=0, clip='none';
+  if (fx==='slam'){ const p=seg(life,0,0.22); op=clamp(p*2.5); sc=lerp(2.4,1,eOut(p)) * (1+0.035*seg(life,0.22,3)); blur=(1-p)*14; }
+  else if (fx==='pop'){ const p=seg(life,0,0.45); op=p; sc=lerp(.6,1,eBack(p)); }
+  else if (fx==='rise'){ const p=eOut(seg(life,0,0.6)); op=p; ty=(1-p)*6; blur=(1-p)*6; }
+  else if (fx==='wipe'){ const p=eOut(seg(life,0,0.55)); clip=`inset(0 0 0 ${(1-p)*100}%)`; op=1; }
+  // out
+  op *= 1-outP; sc *= 1+0.12*outP; blur += outP*10;
+  el.style.opacity = op;
+  el.style.transform = `translate(${tx}vmin,${ty}vmin) scale(${sc})`;
+  el.style.filter = blur>0.05 ? `blur(${blur.toFixed(2)}px)` : '';
+  el.style.clipPath = clip;
+  if (it.count!=null){
+    const p = eOut(seg(t, tin, it.countEnd));
+    el.textContent = Math.round(p*it.count) + (p>=1?'+':'');
+  }
+}
+
+// ---------- background ----------
+const bg = document.getElementById('bg'), ctx = bg.getContext('2d');
+const grain = document.getElementById('grain'), gctx = grain.getContext('2d');
+let W,H; const grains=[];
+function setup(){
+  W=bg.width=innerWidth; H=bg.height=innerHeight;
+  grain.width=Math.ceil(W/3); grain.height=Math.ceil(H/3);
+  const r=rng(7);
+  for(let k=0;k<6;k++){ const id=gctx.createImageData(grain.width,grain.height);
+    for(let i=0;i<id.data.length;i+=4){const v=r()*255; id.data[i]=id.data[i+1]=id.data[i+2]=v; id.data[i+3]=255;} grains.push(id); }
+}
+setup();
+const R = rng(42);
+const embers = Array.from({length:110},()=>({x:R(),y:R(),s:R()*0.8+0.2,sp:R()*0.06+0.02,ph:R()*6.28,w:R()*0.03}));
+const beat = 0.5;
+
+function palette(t){ // glow color by section
+  if (t>=12 && t<24) return [245,180,50];
+  if (t>=24 && t<32) return [245,170,60];
+  if (t>=40) return [235,170,50];
+  return [227,18,27];
+}
+function drawBG(t){
+  const vm=Math.min(W,H);
+  ctx.globalCompositeOperation='source-over';
+  ctx.fillStyle='#060505'; ctx.fillRect(0,0,W,H);
+  const [r,g,b]=palette(t);
+  const sinceBeat = (t>=4 && !(t>=24&&t<28)) ? (t%beat)/beat : 1;
+  const pulse = 0.55 + 0.45*Math.exp(-sinceBeat*4);
+  const intro = seg(t,0,3.5);
+  const amp = (t<4? 0.35*intro : 1) * pulse;
+  // main glow
+  let grd=ctx.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,vm*0.95);
+  grd.addColorStop(0,`rgba(${r},${g},${b},${0.42*amp})`); grd.addColorStop(.45,`rgba(${r},${g},${b},${0.12*amp})`); grd.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grd; ctx.fillRect(0,0,W,H);
+  // spotlight cone from top
+  ctx.globalCompositeOperation='lighter';
+  const sx=W/2+Math.sin(t*0.35)*W*0.12;
+  grd=ctx.createLinearGradient(0,0,0,H);
+  grd.addColorStop(0,`rgba(255,240,220,${0.10*Math.max(intro,0.4)})`); grd.addColorStop(1,'rgba(255,240,220,0)');
+  ctx.fillStyle=grd; ctx.beginPath(); ctx.moveTo(sx-vm*0.08,0); ctx.lineTo(sx+vm*0.08,0); ctx.lineTo(sx+vm*0.7,H); ctx.lineTo(sx-vm*0.7,H); ctx.closePath(); ctx.fill();
+  // ring ropes (perspective lines near bottom)
+  for(let i=0;i<3;i++){
+    const y=H*(0.80+i*0.055)+Math.sin(t*1.3+i)*vm*0.004;
+    const a=0.22+0.25*amp;
+    ctx.strokeStyle= i===1? `rgba(245,240,230,${a*0.6})` : `rgba(227,18,27,${a})`;
+    ctx.lineWidth=vm*(0.006+i*0.003);
+    ctx.beginPath(); ctx.moveTo(-W*0.1,y+vm*0.05); ctx.quadraticCurveTo(W/2,y-vm*0.02,W*1.1,y+vm*0.05); ctx.stroke();
+  }
+  // light sweep on hits
+  for(const h of HITS){ const d=t-h; if(d<0||d>0.6) continue;
+    const p=d/0.6, x=lerp(-0.3,1.3,p)*W;
+    grd=ctx.createLinearGradient(x-vm*0.25,0,x+vm*0.25,0);
+    grd.addColorStop(0,'rgba(255,255,255,0)'); grd.addColorStop(.5,`rgba(255,230,200,${0.10*(1-p)})`); grd.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle=grd; ctx.fillRect(0,0,W,H);
+  }
+  // embers
+  for(const e of embers){
+    const y=((e.y - t*e.sp*e.s) % 1 + 1) % 1;
+    const x=e.x + Math.sin(t*0.8+e.ph)*e.w;
+    const fl=0.5+0.5*Math.sin(t*6+e.ph*3);
+    const rad=vm*0.0035*e.s*(1+fl*0.6);
+    ctx.fillStyle=`rgba(255,${120+Math.floor(80*e.s)},40,${(0.25+0.6*fl)*e.s*Math.max(intro,.3)})`;
+    ctx.beginPath(); ctx.arc(x*W,y*H,rad,0,6.283); ctx.fill();
+  }
+  // vignette
+  ctx.globalCompositeOperation='source-over';
+  grd=ctx.createRadialGradient(W/2,H/2,vm*0.35,W/2,H/2,Math.hypot(W,H)*0.62);
+  grd.addColorStop(0,'rgba(0,0,0,0)'); grd.addColorStop(1,'rgba(0,0,0,0.92)');
+  ctx.fillStyle=grd; ctx.fillRect(0,0,W,H);
+}
+
+// ---------- seek ----------
+const stage=document.getElementById('stage'), flash=document.getElementById('flash'), fade=document.getElementById('fade');
+function seek(t){
+  drawBG(t);
+  items.forEach(it=>applyItem(it,t));
+  // camera shake + flash from hits
+  let sh=0, fl=0, zoom=0;
+  for(const h of HITS){ const d=t-h; if(d<0||d>0.5) continue; sh+=Math.exp(-d*11); fl+=Math.exp(-d*16)*0.55; zoom+=Math.exp(-d*8)*0.025; }
+  const big = [4.0,40.0].some(h=>t>=h&&t-h<0.6) ? 1.8 : 1;
+  const vm=Math.min(innerWidth,innerHeight);
+  const sx=Math.sin(t*93.1)*sh*vm*0.014*big, sy=Math.cos(t*71.7)*sh*vm*0.014*big;
+  stage.style.transform=`translate(${sx}px,${sy}px) scale(${1+zoom})`;
+  flash.style.opacity=clamp(fl*big*0.8,0,0.85);
+  fade.style.opacity = Math.max(1-seg(t,0,0.6), seg(t,DURATION-1.2,DURATION));
+  const frame=Math.floor(t*30);
+  gctx.putImageData(grains[frame%grains.length],0,0);
+}
+window.seek=seek;
+window.ready = document.fonts.ready.then(()=>{ seek(0); return true; });
+</script>
+</body>
+</html>
