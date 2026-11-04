@@ -5,7 +5,7 @@
 <title>Team Moshe Overlay</title>
 <link rel="stylesheet" href="../src/fonts/fonts.css">
 <style>
-  :root { --red:#e3121b; --gold:#f5c542; --white:#f7f4ee; }
+  :root { --red:#1e90ff; --gold:#7cc8ff; --white:#f7f4ee; }
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { width:1080px; height:1920px; overflow:hidden; background:transparent; }
   body { font-family:'Heebo',sans-serif; color:var(--white); }
@@ -15,7 +15,7 @@
   .shadow { text-shadow:0 6px 30px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.9); }
   .latin { font-family:'Bebas Neue',sans-serif; letter-spacing:.04em; direction:ltr; }
   .chrome { background:linear-gradient(180deg,#fff 0%,#e6e1d9 46%,#9a9286 54%,#f1ece4 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 8px 24px rgba(0,0,0,.9)); }
-  .gold { background:linear-gradient(180deg,#fff6d2 0%,var(--gold) 45%,#b07a10 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 22px rgba(0,0,0,.9)); }
+  .gold { background:linear-gradient(180deg,#ffffff 0%,#9fd6ff 40%,#1e7fe8 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 22px rgba(0,0,0,.9)); }
   .rule { height:6px; width:360px; margin:0 auto; background:linear-gradient(90deg,transparent,var(--red),transparent); }
   .cap { font-size:112px; font-weight:900; line-height:1; letter-spacing:-.01em; }
   .cap .dot { color:var(--red); }
@@ -54,20 +54,13 @@
   <div class="fx tag shadow" style="top:1400px" data-in="37.5" data-out="39.9" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>18 פעמים</b> אלוף ישראל</div></div>
 
   <!-- OUTRO -->
-  <svg class="fx emblem" style="top:420px" data-in="40.25" data-out="99" data-fx="slam" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-    <defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".5" stop-color="#f5c542"/><stop offset="1" stop-color="#a8700c"/></linearGradient></defs>
-    <circle cx="150" cy="150" r="140" fill="rgba(8,8,8,.85)" stroke="url(#eg)" stroke-width="8"/>
-    <circle cx="150" cy="150" r="118" fill="none" stroke="#e3121b" stroke-width="5"/>
-    <text x="150" y="190" text-anchor="middle" font-family="Bebas Neue" font-size="130" fill="url(#eg)" letter-spacing="4">TM</text>
-    <text x="150" y="236" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#f7f4ee" letter-spacing="3">MUAY THAI · KICKBOXING</text>
-  </svg>
-  <div class="fx center latin chrome" style="top:770px; font-size:188px; line-height:.9" data-in="40.6" data-out="99" data-fx="wipe">TEAM MOSHE</div>
-  <div class="fx center" style="top:965px" data-in="40.9" data-out="99" data-fx="wipe"><div class="rule" style="width:520px"></div></div>
-  <div class="fx center info shadow" style="top:1010px" data-in="41.1" data-out="99" data-fx="rise">אגרוף תאילנדי<span class="sep">|</span>קיקבוקסינג</div>
-  <div class="fx center info shadow" style="top:1095px" data-in="41.6" data-out="99" data-fx="rise">ילדים<span class="sep">|</span>נוער<span class="sep">|</span>מבוגרים</div>
-  <div class="fx center info shadow" style="top:1180px; color:var(--gold)" data-in="42.1" data-out="99" data-fx="rise">
-    <svg width="40" height="48" viewBox="0 0 24 30" style="vertical-align:-6px; margin-left:12px"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0zm0 16.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" fill="#e3121b"/></svg>קיבוץ לוחמי הגטאות</div>
-  <div class="fx center cta" style="top:1420px" data-in="43.5" data-out="99" data-fx="slam"><span class="shadow">האימון הבא שלך</span><br><span style="font-size:104px; color:var(--gold); text-shadow:0 6px 30px rgba(0,0,0,.9)">מתחיל כאן.</span></div>
+  <div class="fx" style="left:-60px; top:80px; width:1200px; height:1100px; background:radial-gradient(closest-side, rgba(0,0,0,.72), rgba(0,0,0,.45) 60%, transparent)" data-in="40.0" data-out="99" data-fx="rise"></div>
+  <img class="fx" src="../assets/team_moshe_logo.png" style="left:120px; top:210px; width:840px; height:840px" data-in="40.25" data-out="99" data-fx="slam">
+  <div class="fx center info shadow" style="top:1075px" data-in="41.1" data-out="99" data-fx="rise">אגרוף תאילנדי<span class="sep">|</span>קיקבוקסינג</div>
+  <div class="fx center info shadow" style="top:1160px" data-in="41.6" data-out="99" data-fx="rise">ילדים<span class="sep">|</span>נוער<span class="sep">|</span>מבוגרים</div>
+  <div class="fx center info shadow" style="top:1245px; color:var(--gold)" data-in="42.1" data-out="99" data-fx="rise">
+    <svg width="40" height="48" viewBox="0 0 24 30" style="vertical-align:-6px; margin-left:12px"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0zm0 16.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" fill="#1e90ff"/></svg>קיבוץ לוחמי הגטאות</div>
+  <div class="fx center cta" style="top:1450px" data-in="43.5" data-out="99" data-fx="slam"><span class="shadow">האימון הבא שלך</span><br><span style="font-size:104px; color:var(--gold); text-shadow:0 6px 30px rgba(0,0,0,.9)">מתחיל כאן.</span></div>
 </div>
 <div id="flash"></div>
 <div id="fade"></div>
@@ -88,7 +81,7 @@ function apply(it,t){
   else if(fx==='slide'){const p=eOut(seg(life,0,0.3));op=p;tx=(1-p)*160;}
   op*=1-outP; blur+=outP*8; sc*=1+0.08*outP;
   el.style.opacity=op; el.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;
-  el.style.filter=(blur>0.05?`blur(${blur.toFixed(2)}px) `:'')+(el.classList.contains('chrome')||el.classList.contains('gold')?'drop-shadow(0 8px 24px rgba(0,0,0,.9))':'');
+  el.style.filter=(blur>0.05?`blur(${blur.toFixed(2)}px) `:'')+(el.classList.contains('chrome')||el.classList.contains('gold')?'drop-shadow(0 8px 24px rgba(0,0,0,.9))':'')+(el.tagName==='IMG'?'drop-shadow(0 0 28px rgba(30,144,255,.55)) brightness(1.12)':'');
   el.style.clipPath=clip;
 }
 function seek(t){
