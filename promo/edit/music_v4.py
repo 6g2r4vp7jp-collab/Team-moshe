@@ -6,7 +6,8 @@ usage: python3 music_v4.py out.wav
 import os, sys, wave
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
-from edl import SHOTS, DURATION, hit_times
+from edl import SHOTS, DURATION as PIC_DURATION, MUSIC_OFFSET as OFF, hit_times
+DURATION = PIC_DURATION + OFF          # the score keeps its original timing; first OFF seconds trimmed at the end
 
 SR = 44100
 N = int(SR * DURATION)
@@ -233,7 +234,7 @@ put("fx", whoosh(.9), 46.9, .35)
 
 # ---- strike sound design (real-sounding, synced to the verified hits) ----
 for h in hit_times():
-    put("fx", punch(), h, .8); put("fx", breath(), h - .05, .35)
+    put("fx", punch(), h + OFF, .8); put("fx", breath(), h + OFF - .05, .35)
 # arena atmosphere bed under the fights
 t = tt(16.0); put("fx", crowd(16.0, .5) * 0 + np.stack([fft_bp(rng.standard_normal(len(t)), 250, 2500)] * 2, 1) * .06, 4.0, 1.0)
 
@@ -243,6 +244,7 @@ LOC = {"IMG_7970.mov": .5, "IMG_7991.MOV": .4, "IMG_7997.MOV": .35, "D67A6790.MP
 for i, s in enumerate(SHOTS):
     t0, dur, src, sin, speed, crop = s[:6]
     p = os.path.join(SHOTDIR, f"{i:02d}.wav")
+    t0 += OFF
     if speed != 1.0 or not os.path.exists(p) or src not in LOC or t0 >= 44.0: continue
     if src.startswith("v29025") and t0 < 40.0: continue        # only the GFN crowd at the hand raise
     with wave.open(p) as w:
@@ -275,6 +277,8 @@ tl = np.arange(N) / SR
 mix *= np.clip((DURATION - tl) / 1.4, 0, 1)[:, None]
 mix = np.tanh(mix / np.percentile(np.abs(mix), 99.7) * 1.15)
 mix = mix / np.max(np.abs(mix)) * 0.93
+mix = mix[int(OFF * SR):int(OFF * SR) + int(PIC_DURATION * SR)]
+k = int(.12 * SR); mix[:k] *= np.linspace(0, 1, k)[:, None]
 with wave.open(sys.argv[1], "wb") as w:
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
     w.writeframes((mix * 32767).astype(np.int16).tobytes())

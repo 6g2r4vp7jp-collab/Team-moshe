@@ -31,18 +31,24 @@ def chain(shot):
     sw, sh, hlg = probe(os.path.join(RAW, src))
     f = []
     tail = []
-    if speed != 1.0: tail.append(f"setpts=PTS/{speed}")
+    pre = ""
+    if speed != 1.0:
+        if src.startswith("RPReplay"):            # 60p screen recording of ~30p broadcast: drop dupes, re-time, interpolate
+            pre = "mpdecimate,setpts=N/30/TB,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
+        elif src.startswith("v29025"):            # 25p broadcast: motion-interpolate to 60p before slowing down
+            pre = "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
+        tail.append(f"setpts=PTS/{speed}")
     tail += [f"fps={FPS}", GRADE]
     if t0 in DIM: tail.append(f"eq=brightness=-{DIM[t0] * 0.25}:saturation=0.8,gblur=sigma=2")
     tail.append("format=yuv420p")
     if crop["type"] == "rect":                     # upscaled broadcast material: lanczos + extra sharpening
-        return (f"crop={crop['w']}:{crop['h']}:{crop['x']}:{crop['y']},scale={W}:{H}:flags=lanczos,"
+        return (pre + f"crop={crop['w']}:{crop['h']}:{crop['x']}:{crop['y']},scale={W}:{H}:flags=lanczos,"
                 "unsharp=5:5:1.0:3:3:0.4,hqdn3d=1:1:3:3," + ",".join(tail))
     if crop["type"] == "panel":                    # landscape action kept whole, full-width, over its own blurred fill
         pw, ph = crop["w"], crop["h"]
         fh = int(round(W * ph / pw / 2)) * 2
         c = f"crop={pw}:{ph}:{crop['x']}:{crop['y']}"
-        return (f"{c},split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
+        return (pre + f"{c},split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
                 f"gblur=sigma=40,eq=brightness=-0.32:saturation=0.6[bg];[b]scale={W}:{fh}:flags=lanczos,unsharp=5:5:0.8[fg];"
                 f"[bg][fg]overlay=0:{(H - fh) // 2}," + ",".join(tail))
     if crop["type"] == "win":                      # 16:9 -> 9:16 window, then scale (no stretch)
