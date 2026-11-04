@@ -2,3 +2,5 @@ promo/raw/
 promo/out/
 promo/work/
 __pycache__/
+promo/edit/*.log
+promo/edit/*.mov
