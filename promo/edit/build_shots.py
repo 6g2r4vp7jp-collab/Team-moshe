@@ -38,11 +38,13 @@ def chain(shot):
     if crop["type"] == "rect":                     # upscaled broadcast material: lanczos + extra sharpening
         return (f"crop={crop['w']}:{crop['h']}:{crop['x']}:{crop['y']},scale={W}:{H}:flags=lanczos,"
                 "unsharp=5:5:1.0:3:3:0.4,hqdn3d=1:1:3:3," + ",".join(tail))
-    if crop["type"] == "panel":
-        c = f"crop={crop['s']}:{crop['s']}:{crop['x']}:{crop['y']}"
+    if crop["type"] == "panel":                    # landscape action kept whole, full-width, over its own blurred fill
+        pw, ph = crop["w"], crop["h"]
+        fh = int(round(W * ph / pw / 2)) * 2
+        c = f"crop={pw}:{ph}:{crop['x']}:{crop['y']}"
         return (f"{c},split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
-                f"gblur=sigma=40,eq=brightness=-0.32:saturation=0.6[bg];[b]scale={W}:{W}:flags=lanczos,unsharp=5:5:0.8[fg];"
-                f"[bg][fg]overlay=0:{(H - W) // 2}," + ",".join(tail))
+                f"gblur=sigma=40,eq=brightness=-0.32:saturation=0.6[bg];[b]scale={W}:{fh}:flags=lanczos,unsharp=5:5:0.8[fg];"
+                f"[bg][fg]overlay=0:{(H - fh) // 2}," + ",".join(tail))
     if crop["type"] == "win":                      # 16:9 -> 9:16 window, then scale (no stretch)
         cw = round(sh * 9 / 16 / 2) * 2
         f.append(f"crop={cw}:{sh}:{crop['x']}:0")
