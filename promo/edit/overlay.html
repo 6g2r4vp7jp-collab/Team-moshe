@@ -15,7 +15,7 @@
   .fx { position:absolute; opacity:0; will-change:transform,opacity,filter,letter-spacing; }
   .center { left:0; right:0; text-align:center; }
   .sh { text-shadow:0 4px 24px rgba(0,0,0,.75), 0 1px 3px rgba(0,0,0,.8); }
-  .name { font-weight:800; font-size:132px; letter-spacing:.26em; padding-left:.26em; line-height:1; }
+  .name { white-space:nowrap; font-weight:800; font-size:112px; letter-spacing:.26em; padding-left:.26em; line-height:1; }
   .line { height:3px; background:linear-gradient(90deg,transparent,var(--blue),transparent); box-shadow:0 0 14px rgba(30,144,255,.9); margin:0 auto; }
   .kick { font-weight:600; font-size:30px; letter-spacing:.55em; padding-left:.55em; color:var(--ice); }
   .title { left:90px; right:150px; text-align:left; }
@@ -81,7 +81,7 @@ function apply(it,t){
   if(t<tin-0.01||t>tout+0.01){el.style.opacity=0;return;}
   const life=t-tin, outP=eOut(seg(t,tout-0.22,tout));
   let op=1,tx=0,ty=0,sc=1,blur=0,clip='none',ls=null;
-  if(fx==='track'){const p=eOut(seg(life,0,1.1)); op=clamp(p*1.6); blur=(1-p)*14; ls=lerp(.6,.26,p)+'em'; sc=lerp(1.06,1,p);}
+  if(fx==='track'){const p=eOut(seg(life,0,1.1)); op=clamp(p*1.6); blur=(1-p)*14; ls=lerp(.42,.26,p)+"em"; sc=lerp(1.06,1,p);}
   else if(fx==='track2'){const p=eOut(seg(life,0,0.5)); op=p; blur=(1-p)*10; ls=lerp(.35,.12,p)+'em';}
   else if(fx==='rise'){const p=eOut(seg(life,0,0.45));op=p;ty=(1-p)*30;blur=(1-p)*5;}
   else if(fx==='wipe'){const p=eIO(seg(life,0,0.6));clip=`inset(0 ${(1-p)*50}% 0 ${(1-p)*50}%)`;}
