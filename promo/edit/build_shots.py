@@ -27,9 +27,22 @@ GRADE = ("eq=contrast=1.13:saturation=1.15:brightness=-0.015:gamma=0.97,"
          "vignette=angle=PI/4.2")
 
 def chain(shot):
-    t0, dur, src, sin, speed, crop = shot
+    t0, dur, src, sin, speed, crop = shot[:6]
     sw, sh, hlg = probe(os.path.join(RAW, src))
     f = []
+    tail = []
+    if speed != 1.0: tail.append(f"setpts=PTS/{speed}")
+    tail += [f"fps={FPS}", GRADE]
+    if t0 in DIM: tail.append(f"eq=brightness=-{DIM[t0] * 0.25}:saturation=0.8,gblur=sigma=2")
+    tail.append("format=yuv420p")
+    if crop["type"] == "rect":                     # upscaled broadcast material: lanczos + extra sharpening
+        return (f"crop={crop['w']}:{crop['h']}:{crop['x']}:{crop['y']},scale={W}:{H}:flags=lanczos,"
+                "unsharp=5:5:1.0:3:3:0.4,hqdn3d=1:1:3:3," + ",".join(tail))
+    if crop["type"] == "panel":
+        c = f"crop={crop['s']}:{crop['s']}:{crop['x']}:{crop['y']}"
+        return (f"{c},split[a][b];[a]scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
+                f"gblur=sigma=40,eq=brightness=-0.32:saturation=0.6[bg];[b]scale={W}:{W}:flags=lanczos,unsharp=5:5:0.8[fg];"
+                f"[bg][fg]overlay=0:{(H - W) // 2}," + ",".join(tail))
     if crop["type"] == "win":                      # 16:9 -> 9:16 window, then scale (no stretch)
         cw = round(sh * 9 / 16 / 2) * 2
         f.append(f"crop={cw}:{sh}:{crop['x']}:0")
@@ -56,7 +69,7 @@ def chain(shot):
 
 def render(i_shot):
     i, shot = i_shot
-    t0, dur, src, sin, speed, crop = shot
+    t0, dur, src, sin, speed, crop = shot[:6]
     n = int((t0 + dur) * FPS + 0.5) - int(t0 * FPS + 0.5)
     name = os.path.join(OUT, f"{i:02d}.mp4")
     src_len = dur * speed + 0.25

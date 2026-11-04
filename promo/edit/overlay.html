@@ -52,18 +52,20 @@
   <div class="fx center" style="top:1475px" data-in="2.4" data-out="4.9" data-fx="wipe"><div class="rule"></div></div>
   <div class="fx center shadow" style="top:1505px; font-size:58px; font-weight:700" data-in="2.6" data-out="4.9" data-fx="wipe">המייסד של <span class="latin" style="font-size:66px; color:var(--ice)">TEAM MOSHE</span></div>
 
-  <!-- BUILD: the story -->
-  <div class="fx center cap shadow" style="top:1400px" data-in="5.25" data-out="7.9" data-fx="slam">מעל 15 שנה<br>בזירה<span class="dot">.</span></div>
-  <div class="fx center cap shadow" style="top:1400px; font-size:92px" data-in="10.0" data-out="12.9" data-fx="rise">עכשיו הוא בונה<br>את <span class="ice" style="text-shadow:none; filter:drop-shadow(0 4px 14px rgba(0,0,0,.95))">הדור הבא</span><span class="dot">.</span></div>
-  <div class="fx center cap shadow" style="top:1450px" data-in="15.25" data-out="16.95" data-fx="slam">בונים ביטחון<span class="dot">.</span></div>
-  <div class="fx center cap shadow" style="top:1450px" data-in="17.0" data-out="18.9" data-fx="slam">מפתחים משמעת<span class="dot">.</span></div>
+  <!-- THE FIGHTER: credentials on the matching footage -->
+  <div class="fx center cap shadow" style="top:1400px" data-in="5.25" data-out="6.95" data-fx="slam">מעל 15 שנה<br>בזירה<span class="dot">.</span></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="7.0" data-out="7.95" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>פעמיים</b> אלוף אירופה</div></div>
+  <div class="fx tag shadow" style="top:1520px" data-in="8.0" data-out="8.95" data-fx="slide"><div class="k">אור משה</div><div class="v">אלוף משחקי העולם <b>2022</b></div></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="9.0" data-out="9.95" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>3 פעמים</b> סגן אלוף העולם</div></div>
+
+  <!-- THE COACH -->
+  <div class="fx center cap shadow" style="top:1400px; font-size:92px" data-in="13.5" data-out="16.4" data-fx="rise">עכשיו הוא בונה<br>את <span class="ice" style="text-shadow:none; filter:drop-shadow(0 4px 14px rgba(0,0,0,.95))">הדור הבא</span><span class="dot">.</span></div>
+  <div class="fx center cap shadow" style="top:1450px" data-in="17.5" data-out="18.95" data-fx="slam">בונים ביטחון<span class="dot">.</span></div>
+  <div class="fx center cap shadow" style="top:1450px" data-in="19.0" data-out="20.9" data-fx="slam">מפתחים משמעת<span class="dot">.</span></div>
 
   <!-- CLIMAX -->
-  <div class="fx center cap ice" style="top:1330px; font-size:132px; filter:drop-shadow(0 6px 22px rgba(0,0,0,.95))" data-in="27.75" data-out="29.9" data-fx="slam">יוצרים אלופים.</div>
-  <div class="fx tag shadow" style="top:1380px" data-in="30.0" data-out="31.2" data-fx="slide"><div class="k">אור משה</div><div class="v">אלוף משחקי העולם <b>2022</b></div></div>
-  <div class="fx tag shadow" style="top:1380px" data-in="31.25" data-out="32.45" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>פעמיים</b> אלוף אירופה</div></div>
-  <div class="fx tag shadow" style="top:1380px" data-in="32.5" data-out="33.7" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>3 פעמים</b> סגן אלוף העולם</div></div>
-  <div class="fx tag shadow" style="top:1380px" data-in="33.75" data-out="34.95" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>18 פעמים</b> אלוף ישראל</div></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="29.5" data-out="30.95" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>18 פעמים</b> אלוף ישראל</div></div>
+  <div class="fx center cap ice" style="top:1330px; font-size:132px; filter:drop-shadow(0 6px 22px rgba(0,0,0,.95))" data-in="31.0" data-out="32.45" data-fx="slam">יוצרים אלופים.</div>
 
   <!-- FINALE: logo reveal + info -->
   <div id="logoWrap"><div id="halo"></div><img src="../assets/team_moshe_logo.png"><div id="sweep"></div></div>
@@ -77,9 +79,9 @@
 <div id="fade"></div>
 <script>
 const DURATION = 46;
-const FLASH_AT = [0.0, 0.75, 1.5, 5.0, 15.0, 20.0, 25.0, 30.0];
-const GRAD = [[1.5,5.0],[5.0,8.0],[10.0,13.0],[15.0,19.0],[27.5,35.0]];
-const LETTERBOX = [[25.0,30.0],[35.0,37.5]];
+const FLASH_AT = [0.0, 1.5, 5.0, 13.5, 22.0, 24.0, 27.0, 29.5];
+const GRAD = [[1.5,5.0],[5.0,10.0],[13.5,16.5],[17.5,21.0],[29.5,32.5]];
+const LETTERBOX = [[27.0,29.5],[35.0,37.5]];
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), seg=(t,a,b)=>clamp((t-a)/(b-a)), eOut=x=>1-Math.pow(1-x,3), lerp=(a,b,x)=>a+(b-a)*x;
 const $=id=>document.getElementById(id);
 const items=[...document.querySelectorAll('.fx')].map(el=>({el,tin:+el.dataset.in,tout:+el.dataset.out,fx:el.dataset.fx,base:el.style.filter||''}));
