@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Team Moshe Overlay</title>
+<link rel="stylesheet" href="../src/fonts/fonts.css">
+<style>
+  :root { --red:#e3121b; --gold:#f5c542; --white:#f7f4ee; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:transparent; }
+  body { font-family:'Heebo',sans-serif; color:var(--white); }
+  .layer { position:absolute; inset:0; }
+  .fx { position:absolute; opacity:0; will-change:transform,opacity,filter; }
+  .center { left:0; right:0; text-align:center; }
+  .shadow { text-shadow:0 6px 30px rgba(0,0,0,.85), 0 2px 6px rgba(0,0,0,.9); }
+  .latin { font-family:'Bebas Neue',sans-serif; letter-spacing:.04em; direction:ltr; }
+  .chrome { background:linear-gradient(180deg,#fff 0%,#e6e1d9 46%,#9a9286 54%,#f1ece4 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 8px 24px rgba(0,0,0,.9)); }
+  .gold { background:linear-gradient(180deg,#fff6d2 0%,var(--gold) 45%,#b07a10 100%); -webkit-background-clip:text; background-clip:text; color:transparent; filter:drop-shadow(0 6px 22px rgba(0,0,0,.9)); }
+  .rule { height:6px; width:360px; margin:0 auto; background:linear-gradient(90deg,transparent,var(--red),transparent); }
+  .cap { font-size:112px; font-weight:900; line-height:1; letter-spacing:-.01em; }
+  .cap .dot { color:var(--red); }
+  /* lower-third achievement tag */
+  .tag { right:64px; display:flex; flex-direction:column; align-items:flex-start; gap:10px; }
+  .tag .k { font-size:34px; font-weight:800; background:var(--red); color:#fff; padding:6px 18px 8px; transform:skewX(-8deg); }
+  .tag .v { font-size:78px; font-weight:900; line-height:1.02; }
+  .tag .v b { color:var(--gold); font-weight:900; }
+  #flash { position:absolute; inset:0; background:#fff; opacity:0; }
+  #fade { position:absolute; inset:0; background:#000; opacity:0; }
+  #grad { position:absolute; left:0; right:0; bottom:0; height:900px; background:linear-gradient(0deg,rgba(0,0,0,.75),transparent); opacity:0; }
+  .emblem { width:300px; height:300px; left:390px; }
+  .info { font-size:54px; font-weight:700; }
+  .info .sep { color:var(--red); padding:0 14px; }
+  .cta { font-size:72px; font-weight:900; line-height:1.1; }
+</style>
+</head>
+<body>
+<div id="grad"></div>
+<div class="layer">
+  <!-- OPENING -->
+  <div class="fx center latin chrome" style="top:720px; font-size:205px; line-height:.9" data-in="2.0" data-out="4.9" data-fx="slam">TEAM MOSHE</div>
+  <div class="fx center" style="top:930px" data-in="2.5" data-out="4.9" data-fx="wipe"><div class="rule"></div></div>
+  <div class="fx center latin shadow" style="top:960px; font-size:74px; letter-spacing:.32em; color:#fff" data-in="2.75" data-out="4.9" data-fx="wipe">MORE THAN FIGHTING</div>
+
+  <!-- PART 3 -->
+  <div class="fx tag shadow" style="top:1440px" data-in="15.25" data-out="16.9" data-fx="rise"><div class="k">מאמן ראשי</div><div class="v">אור משה</div><div class="info" style="font-size:44px; font-weight:600">מעל 15 שנות ניסיון</div></div>
+  <div class="fx center cap shadow" style="top:1380px" data-in="17.25" data-out="18.9" data-fx="slam">בונים ביטחון<span class="dot">.</span></div>
+  <div class="fx center cap shadow" style="top:1380px" data-in="21.25" data-out="22.9" data-fx="slam">מפתחים משמעת<span class="dot">.</span></div>
+  <div class="fx center cap gold" style="top:1380px; font-size:132px" data-in="27.5" data-out="29.9" data-fx="slam">יוצרים אלופים.</div>
+
+  <!-- CLIMAX achievements -->
+  <div class="fx tag shadow" style="top:1400px" data-in="30.0" data-out="31.9" data-fx="slide"><div class="k">אור משה</div><div class="v">אלוף משחקי העולם <b>2022</b></div></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="32.0" data-out="33.4" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>פעמיים</b> אלוף אירופה</div></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="33.5" data-out="34.95" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>3 פעמים</b> סגן אלוף העולם</div></div>
+  <div class="fx tag shadow" style="top:1400px" data-in="37.5" data-out="39.9" data-fx="slide"><div class="k">אור משה</div><div class="v"><b>18 פעמים</b> אלוף ישראל</div></div>
+
+  <!-- OUTRO -->
+  <svg class="fx emblem" style="top:420px" data-in="40.25" data-out="99" data-fx="slam" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="eg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1b8"/><stop offset=".5" stop-color="#f5c542"/><stop offset="1" stop-color="#a8700c"/></linearGradient></defs>
+    <circle cx="150" cy="150" r="140" fill="rgba(8,8,8,.85)" stroke="url(#eg)" stroke-width="8"/>
+    <circle cx="150" cy="150" r="118" fill="none" stroke="#e3121b" stroke-width="5"/>
+    <text x="150" y="190" text-anchor="middle" font-family="Bebas Neue" font-size="130" fill="url(#eg)" letter-spacing="4">TM</text>
+    <text x="150" y="236" text-anchor="middle" font-family="Bebas Neue" font-size="20" fill="#f7f4ee" letter-spacing="3">MUAY THAI · KICKBOXING</text>
+  </svg>
+  <div class="fx center latin chrome" style="top:770px; font-size:188px; line-height:.9" data-in="40.6" data-out="99" data-fx="wipe">TEAM MOSHE</div>
+  <div class="fx center" style="top:965px" data-in="40.9" data-out="99" data-fx="wipe"><div class="rule" style="width:520px"></div></div>
+  <div class="fx center info shadow" style="top:1010px" data-in="41.1" data-out="99" data-fx="rise">אגרוף תאילנדי<span class="sep">|</span>קיקבוקסינג</div>
+  <div class="fx center info shadow" style="top:1095px" data-in="41.6" data-out="99" data-fx="rise">ילדים<span class="sep">|</span>נוער<span class="sep">|</span>מבוגרים</div>
+  <div class="fx center info shadow" style="top:1180px; color:var(--gold)" data-in="42.1" data-out="99" data-fx="rise">
+    <svg width="40" height="48" viewBox="0 0 24 30" style="vertical-align:-6px; margin-left:12px"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.5 12 30 12 30s12-9.5 12-18.3C24 5.2 18.6 0 12 0zm0 16.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10z" fill="#e3121b"/></svg>קיבוץ לוחמי הגטאות</div>
+  <div class="fx center cta" style="top:1420px" data-in="43.5" data-out="99" data-fx="slam"><span class="shadow">האימון הבא שלך</span><br><span style="font-size:104px; color:var(--gold); text-shadow:0 6px 30px rgba(0,0,0,.9)">מתחיל כאן.</span></div>
+</div>
+<div id="flash"></div>
+<div id="fade"></div>
+<script>
+const DURATION = 48;
+const FLASH_AT = [0.0, 0.75, 1.5, 5.0, 15.0, 30.0, 35.0, 40.0];
+const GRAD = [[15.0,17.0],[17.0,19.0],[21.0,23.0],[27.0,30.0],[30.0,35.0],[37.5,40.0]];
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), seg=(t,a,b)=>clamp((t-a)/(b-a)), eOut=x=>1-Math.pow(1-x,3), lerp=(a,b,x)=>a+(b-a)*x;
+const items=[...document.querySelectorAll('.fx')].map(el=>({el,tin:+el.dataset.in,tout:+el.dataset.out,fx:el.dataset.fx}));
+function apply(it,t){
+  const {el,tin,tout,fx}=it;
+  if(t<tin-0.01||t>tout+0.01){el.style.opacity=0;return;}
+  const life=t-tin, outP=eOut(seg(t,tout-0.25,tout));
+  let op=1,tx=0,ty=0,sc=1,blur=0,clip='none';
+  if(fx==='slam'){const p=seg(life,0,0.2);op=clamp(p*2.5);sc=lerp(1.9,1,eOut(p))*(1+0.03*seg(life,0.2,4));blur=(1-p)*12;}
+  else if(fx==='rise'){const p=eOut(seg(life,0,0.5));op=p;ty=(1-p)*50;blur=(1-p)*6;}
+  else if(fx==='wipe'){const p=eOut(seg(life,0,0.5));clip=`inset(0 ${(1-p)*50}% 0 ${(1-p)*50}%)`;}
+  else if(fx==='slide'){const p=eOut(seg(life,0,0.3));op=p;tx=(1-p)*160;}
+  op*=1-outP; blur+=outP*8; sc*=1+0.08*outP;
+  el.style.opacity=op; el.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;
+  el.style.filter=(blur>0.05?`blur(${blur.toFixed(2)}px) `:'')+(el.classList.contains('chrome')||el.classList.contains('gold')?'drop-shadow(0 8px 24px rgba(0,0,0,.9))':'');
+  el.style.clipPath=clip;
+}
+function seek(t){
+  items.forEach(i=>apply(i,t));
+  let fl=0; for(const h of FLASH_AT){const d=t-h; if(d>=0&&d<0.4) fl+=Math.exp(-d*14);}
+  document.getElementById('flash').style.opacity=clamp(fl*0.75,0,0.8);
+  let g=0; for(const [a,b] of GRAD){ g=Math.max(g, Math.min(seg(t,a,a+0.3), 1-seg(t,b-0.3,b))); }
+  if(t>=40) g=Math.max(g, seg(t,40,40.6));
+  document.getElementById('grad').style.opacity=g;
+  document.getElementById('fade').style.opacity=Math.max(0, seg(t,DURATION-1.0,DURATION));
+}
+window.seek=seek; window.DURATION=DURATION;
+window.ready=document.fonts.ready.then(()=>{seek(0);return true;});
+</script>
+</body>
+</html>
