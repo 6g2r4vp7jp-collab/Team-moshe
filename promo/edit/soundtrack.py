@@ -78,6 +78,10 @@ def sub_drop(d=1.5):
     return np.sin(2*np.pi*np.cumsum(f)/SR) * np.exp(-t * 1.0)
 def heartbeat():
     return kick(0.55) * 0.8
+def breath(d=0.6):                         # sharp fighter exhale
+    t = tt(d); n = rng.standard_normal(len(t))
+    x = hp(lp(n, .35), .04) * (np.minimum(t / .03, 1) * np.exp(-t / (d * .3)))
+    return x * 1.4
 
 PROG_A = [57, 53, 55, 52]          # Am F G Em   (dark)
 PROG_B = [53, 48, 55, 57]          # F  C G Am   (lift)
@@ -112,63 +116,72 @@ def beat(t0, t1, g=1.0, hats16=False, snare_on=True):
         steps = (0, .125, .25, .375) if hats16 else (0, .25)
         for o in steps: add(hat(op=(o == .25 and not hats16)), b + o, (.45 if o else .28) * g, .25)
 
-# ---------------- arrangement (matches the picture) ----------------
-# 0-1.5 cold open: two hits
-add(impact(1.0), 0.0, .9); add(punch(), 0.0, .6)
+# ---------------- arrangement v2 (matches the picture, 46 s) ----------------
+# 0-1.5 cold open: two hits on Or's strikes
+add(impact(1.0), 0.0, .9); add(punch(), 0.0, .7)
 add(impact(.6), 0.75, .6); add(punch(), 0.75, .6)
 add(whoosh(.6), 0.9, .5)
-# 1.5-5 walkout: drone, heartbeat, taiko, riser into the drop
+# 1.5-5 hero walkout (slow-mo): drone, crowd air, taiko, riser into the drop
 t = tt(3.5); drone = lp(saw(mtof(33), t) + saw(mtof(33) * 1.006, t), .02) * np.minimum(t / 1.0, 1) * .55
 add(drone, 1.5, .7)
-add(impact(.8), 2.0, .7)                           # title slam
+add(impact(.8), 2.0, .75)                          # name slam "אור משה"
 for b in (2.5, 3.0, 3.5, 4.0, 4.25, 4.5, 4.75): add(tom(85 if b < 4 else 105, .6), b, .45, -.15)
 pad(1.5, 5.0, .16, PROG_A, .03)
 add(riser(2.5), 2.5, .55)
-# 5-15 TRAINING: the drop
+# 5-15 BUILD A: the drop, fighter <-> coach
 add(impact(1.0), 5.0, .8)
 beat(5.0, 15.0); bass(5.0, 15.0, .33, PROG_A); pad(5.0, 15.0, .14, PROG_A)
-add(whoosh(.8), 14.2, .55)
-# 15-30 THE CLUB: lift, warmer
-add(impact(.6), 15.0, .5)
-beat(15.0, 28.5, .85); bass(15.0, 28.5, .26, PROG_B, 1.6); pad(15.0, 30.0, .22, PROG_B, .06); arp(15.0, 30.0, .075, PROG_B)
-for i, b in enumerate(np.arange(28.5, 30.0, .125)): add(snare(), b, .12 + .025 * i)
-add(riser(1.5), 28.5, .6)
-add(impact(.7), 27.5, .45)                         # "יוצרים אלופים"
-# 30-35 CLIMAX: heavier, 16th hats, toms on every cut
-add(impact(1.0), 30.0, .85)
-beat(30.0, 35.0, 1.05, hats16=True); bass(30.0, 35.0, .38, PROG_A, 3.5); pad(30.0, 35.0, .16, PROG_A)
-for b in np.arange(30.0, 35.0, .5): add(tom(110, .5), b, .25, .2)
-add(whoosh(.5), 34.5, .6)
-# 35-37.5 SLOW MOTION: music drops out, sub + heartbeat, KO impact
-add(sub_drop(2.0), 35.0, .9); add(impact(.9), 35.0, .6)
+add(impact(.5), 10.0, .4)                          # "עכשיו הוא בונה את הדור הבא"
+# 15-20 BUILD B: lift + faster cuts, snare roll into the ring
+beat(15.0, 18.5, .95, hats16=True); bass(15.0, 18.5, .3, PROG_B, 1.8); pad(15.0, 20.0, .2, PROG_B, .06); arp(15.0, 20.0, .08, PROG_B)
+for i, b in enumerate(np.arange(18.5, 20.0, .125)): add(snare(), b, .12 + .025 * i)
+add(riser(1.5), 18.5, .6); add(whoosh(.8), 19.2, .5)
+# 20-25 CLIMAX: heavy, toms on every half-beat cut
+add(impact(1.0), 20.0, .9)
+beat(20.0, 25.0, 1.05, hats16=True); bass(20.0, 25.0, .38, PROG_A, 3.5); pad(20.0, 25.0, .16, PROG_A)
+for b in np.arange(21.0, 25.0, .5): add(tom(110, .5), b, .25, .2); add(punch(), b, .35)
+add(whoosh(.5), 24.5, .6)
+# 25-27.5 SLOW-MO knockdown: music drops out
+add(sub_drop(2.0), 25.0, .9); add(impact(.9), 25.0, .6)
 t = tt(2.5); air = lp(rng.standard_normal(len(t)), .01) * np.sin(np.pi * t / 2.5) * 1.2
-add(air, 35.0, .5)
-for b in (35.5, 35.75, 36.75, 37.0): add(heartbeat(), b, .7)
-add(impact(1.0), 36.25, .9); add(punch(), 36.25, .7)  # the knockdown lands
-add(riser(1.0), 36.5, .5)
-# 37.5-40 back to speed
-add(impact(.8), 37.5, .7)
-beat(37.5, 40.0, 1.05, hats16=True); bass(37.5, 40.0, .38, PROG_A, 3.5); pad(37.5, 40.0, .16, PROG_A)
-add(whoosh(.8), 39.2, .6)
-# 40-48 OUTRO: big hit, open chord, final hit on CTA
-add(impact(1.0), 40.0, .95)
-pad(40.0, 48.0, .26, [57, 53, 55, 57], .05)
-for b in np.arange(40.0, 43.5, 1.0): add(kick(.8), b, .6)
-add(tom(80, 1.2), 41.0, .35); add(tom(90, 1.2), 42.0, .35)
-add(riser(1.0), 42.5, .45)
-add(impact(1.0), 43.5, .85)
-t = tt(4.5); add(lp(saw(mtof(45), t) + saw(mtof(45) * 1.005, t), .03) * np.exp(-t / 2.5), 43.5, .5)
+add(air, 25.0, .5)
+for b in (25.5, 25.75, 26.75, 27.0): add(heartbeat(), b, .7)
+add(impact(1.0), 26.25, .9); add(punch(), 26.25, .8)      # the knockdown lands
+add(breath(.6), 25.2, .5)
+# 27.5-30 hand raised: triumphant chord, "יוצרים אלופים"
+add(impact(.8), 27.5, .7)
+pad(27.5, 30.0, .3, [57, 53], .08); arp(27.5, 30.0, .09, [57, 53])
+for b in np.arange(27.5, 30.0, 1.0): add(kick(.8), b, .55)
+add(riser(.8), 29.2, .5)
+# 30-35 achievements: full power
+add(impact(1.0), 30.0, .85)
+beat(30.0, 35.0, 1.05, hats16=True); bass(30.0, 35.0, .38, PROG_A, 3.5); pad(30.0, 35.0, .18, PROG_A)
+for b in np.arange(30.0, 35.0, .5): add(punch(), b, .3)
+add(whoosh(.5), 34.5, .6)
+# 35-37.5 final hero moment: tension, heartbeat, riser
+add(sub_drop(2.5), 35.0, .7)
+t = tt(2.5); add(lp(saw(mtof(45), t) + saw(mtof(45) * 1.004, t), .015) * (t / 2.5), 35.0, .55)
+for b in (35.5, 36.0, 36.5, 36.75, 37.0, 37.125, 37.25): add(heartbeat(), b, .6)
+add(riser(2.4), 35.0, .7); add(breath(.7), 35.3, .45)
+# 37.5 LOGO REVEAL: the biggest hit, then the outro
+add(impact(1.0), 37.5, 1.0); add(impact(.7), 37.5, .5); add(whoosh(.9, up=False), 37.5, .5)
+pad(37.5, 46.0, .26, [57, 53, 55, 57], .05)
+for b in np.arange(38.5, 41.0, 1.0): add(kick(.8), b, .55)
+add(tom(80, 1.2), 39.0, .3); add(tom(90, 1.2), 40.0, .3)
+add(riser(.9), 40.1, .45)
+add(impact(1.0), 41.0, .85)                        # CTA
+t = tt(5.0); add(lp(saw(mtof(45), t) + saw(mtof(45) * 1.005, t), .03) * np.exp(-t / 2.5), 41.0, .5)
 
 # lower-third swishes
-for ts in (15.25, 30.0, 32.0, 33.5, 37.5): add(whoosh(.3, up=False), ts, .25, .3)
+for ts in (30.0, 31.25, 32.5, 33.75): add(whoosh(.3, up=False), ts, .25, .3)
 
 # ---------------- location sound from the training shots ----------------
-LOC_GAIN = {"IMG_7970.mov": .55, "D67A6790.MP4": .45, "D67A6791.MP4": .45, "D67A6795.MP4": .35,
-            "IMG_1612.MOV": .45, "IMG_1601.MOV": .4, "IMG_7892.MOV": .5, "IMG_7997.MOV": .35, "IMG_7991.MOV": .35,
+LOC_GAIN = {"IMG_7970.mov": .7, "D67A6790.MP4": .45, "D67A6791.MP4": .45, "D67A6795.MP4": .35,
+            "IMG_1612.MOV": .45, "IMG_1601.MOV": .4, "IMG_7892.MOV": .5, "IMG_7997.MOV": .35, "IMG_7991.MOV": .45,
             "IMG_7991_small.mov": .0}
 for i, (t0, dur, src, sin, speed, crop) in enumerate(SHOTS):
     p = os.path.join(SHOTDIR, f"{i:02d}.wav")
-    if speed != 1.0 or not os.path.exists(p) or t0 >= 40: continue
+    if speed != 1.0 or not os.path.exists(p) or t0 >= 37.5: continue
     with wave.open(p) as w:
         x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, w.getnchannels()).astype(float) / 32768
     if x.shape[1] == 1: x = np.repeat(x, 2, 1)
