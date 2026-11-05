@@ -13,34 +13,34 @@ os.makedirs(WORK, exist_ok=True)
 
 # (caption time, spoken text)  - numbers written as words for correct pronunciation
 LINES = [
-    (0.70,  "אור משה."),
-    (6.45,  "אלוף משחקי העולם."),
-    (8.70,  "מעל מאתיים קרבות זירה."),
-    (13.75, "אלופים לא נולדים, הם נבנים."),
-    (24.20, "פעמיים אלוף אירופה."),
+    (0.70,  "אור משה!"),
+    (6.45,  "אלוף משחקי העולם!"),
+    (8.70,  "מעל מאתיים קרבות זירה!"),
+    (13.75, "אלופים לא נולדים, הם נבנים!"),
+    (24.20, "פעמיים אלוף אירופה!"),
     (29.70, "גם אתם חולמים להיות אלופים?"),
     (32.30, "מהזירה..."),
-    (33.30, "לדור הבא."),
-    (38.05, "כל אלוף התחיל מצעד ראשון."),
-    (41.30, "כאן מגדלים אלופים."),
+    (33.30, "לדור הבא!"),
+    (38.05, "כל אלוף התחיל מצעד ראשון!"),
+    (41.30, "כאן מגדלים אלופים!"),
     (46.65, "אלוף גביע העולם."),
     (47.65, "אלוף גביע אירופה."),
     (48.90, "שלוש פעמים סגן אלוף העולם."),
     (50.15, "פעמיים ספורטאי השנה."),
     (52.15, "שמונה עשרה פעמים אלוף ישראל."),
-    (55.40, "טים משה."),
-    (57.45, "בואו להיות חלק ממשפחת טים משה."),
+    (55.40, "טים משה!"),
+    (57.45, "בואו להיות חלק ממשפחת טים משה!"),
 ]
 
 async def synth(text, path, rate):
     proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
-    await edge_tts.Communicate(text, "he-IL-AvriNeural", rate=rate, pitch="+0Hz", proxy=proxy).save(path)
+    await edge_tts.Communicate(text, "he-IL-AvriNeural", rate=rate, pitch="+6Hz", proxy=proxy).save(path)
 
 def load(path):
     # warm, natural, inviting voice: no pitch shift, no echo; gentle warmth + clarity, light compression
     out = path.replace(".mp3", ".wav")
-    af = ("aresample=48000,highpass=f=70,equalizer=f=160:t=q:w=1.0:g=2,equalizer=f=450:t=q:w=1.2:g=-1.5,"
-          "equalizer=f=5500:t=q:w=1.0:g=2,acompressor=threshold=-18dB:ratio=2:attack=10:release=200:makeup=3,"
+    af = ("aresample=48000,highpass=f=70,equalizer=f=160:t=q:w=1.0:g=0.5,equalizer=f=450:t=q:w=1.2:g=-1.5,"
+          "equalizer=f=4500:t=q:w=1.0:g=3.5,acompressor=threshold=-18dB:ratio=2:attack=10:release=200:makeup=3,"
           "alimiter=limit=0.9")
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", path, "-af", af, "-ac", "1", out], check=True)
     with wave.open(out) as w:
@@ -52,7 +52,7 @@ def main(dst):
     track = np.zeros(int(SR * DURATION))
     cursor = 0.0
     for i, (t, text) in enumerate(LINES):
-        rate = "+0%" if (44.0 <= t < 55.0) or t >= 57.0 else "-6%"   # honor roll + closing line a little quicker
+        rate = "+10%" if (44.0 <= t < 55.0) or t >= 57.0 else "+4%"   # honor roll + closing line a little quicker
         p = os.path.join(WORK, f"l{i:02d}.mp3")
         asyncio.run(synth(text, p, rate))
         x = load(p)
