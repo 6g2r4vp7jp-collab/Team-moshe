@@ -1,4 +1,4 @@
-"""TEAM MOSHE promo v7 - Edit Decision List (the "project file").
+"""TEAM MOSHE promo v8 - Edit Decision List (the "project file").
 
 Brief v4: cinematic slow-mo opening; fight footage from DIFFERENT competitions (no knockdowns at all,
 only ONE pad-work shot); coach section; emotional run of hand-raises from different events; logo.
@@ -63,7 +63,7 @@ SHOTS = [
     (1.25, 0.50, EU,   12.72, 1.0, panel(640, 40, 820, 820)),          # DROP - Euro: Or takes off...
     (1.75, 1.10, EU,   13.22, 0.4, panel(660, 40, 820, 820), 13.30),   # ...flying knee + punch land (slow-mo)
     (2.85, 1.52, GFN,  29.58, 1.0, BC, 30.40),                         # NEW 3rd clip: right hand lands, Or drives him to the ropes (ends 31.10, before any fall)
-    (4.37, 1.00, "PHOTO", 0, 1.0, photo("IMG_8678.JPG", "panel", .30, .45, 1.02, 1.12)),  # photo: fight-night focus | אלוף משחקי העולם
+    (4.37, 1.00, WGF2,  0.00, 0.9, panel(450, 60, 1100, 828)),       # NEW: World Games - Or (blue) attacks, cut before the clinch | אלוף משחקי העולם
     (5.37, 1.68, GFN,   6.82, 1.0, BC, 8.05),                          # NEW: Or presses forward, body kick lands 8.05 | מעל 200 קרבות זירה
     (7.05, 1.20, EU,   14.10, 1.0, rect(760, 0, 500, 888), 14.84),     # spinning kick lands 14.84 + follow-up
     (8.25, 1.25, GFN,  19.45, 1.0, BC, 20.50),                         # knee + punch on the ropes, lands 20.5, head snaps
@@ -95,7 +95,7 @@ SHOTS = [
     (30.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
     (31.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
     (32.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
-    (33.50, 1.25, WG418, 1.40, 1.0, panel(230, 280, 780, 510)),
+    (33.50, 1.25, "PHOTO", 0, 1.0, photo("f6ef7cb0.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: WAKO European Championship hand raise
     (34.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
     (36.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
     (38.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
