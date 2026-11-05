@@ -105,7 +105,11 @@ PUFFS_BLUR = [vblur(p, 14) for p in PUFFS]
 
 # ------------------------------------------------------------------ faces
 def load_face(path):
-    return Image.open(os.path.join(HERE, path)).convert("RGB")
+    from PIL import ImageEnhance
+    f = Image.open(os.path.join(HERE, path)).convert("RGB")
+    f = f.filter(ImageFilter.UnsharpMask(radius=2, percent=60, threshold=2))
+    f = ImageEnhance.Brightness(f).enhance(1.06)
+    return ImageEnhance.Contrast(f).enhance(1.05)
 
 FACE_DAD = load_face("assets_face_dad.png")
 FACE_BABY = load_face("assets_face_baby.png")
@@ -118,8 +122,8 @@ def wind_warp(img, t, amp):
     h, w = a.shape[:2]
     yy, xx = np.mgrid[0:h, 0:w]
     k = (yy / h) ** 1.5
-    dx = amp * k * np.sin(yy * 0.09 + t * 38) * (0.5 + 0.5 * np.sin(xx * 0.05 + t * 21))
-    dy = amp * 0.4 * k * np.sin(xx * 0.07 + t * 33)
+    dx = 0.5 * amp * k * np.sin(yy * 0.09 + t * 38) * (0.5 + 0.5 * np.sin(xx * 0.05 + t * 21))
+    dy = amp * 0.2 * k * np.sin(xx * 0.07 + t * 33)
     sx = np.clip((xx + dx).astype(np.int32), 0, w - 1)
     sy = np.clip((yy + dy).astype(np.int32), 0, h - 1)
     return Image.fromarray(a[sy, sx])
@@ -217,7 +221,7 @@ def draw_rig(pose, t, scale, flutter=0.0, face_wind=0.0, ss=2):
         d.line([P(s * 0.62, 1.2), P(s * 0.25, 1.75)], fill=STRAP, width=int(0.17 * u))
     # ---- baby
     bsh = pose["bsh"]; bha = pose["bha"]; bkn = pose["bkn"]
-    by0 = 0.25
+    by0 = 0.42
     for s in (-1, 1):
         k = (s * bkn[0] + fl(s, 15) * 0.25, by0 + bkn[1])
         limb((s * 0.3, by0 + 0.75), k, 0.36, PINK)
@@ -271,17 +275,17 @@ def draw_rig(pose, t, scale, flutter=0.0, face_wind=0.0, ss=2):
         # inner shadow of the opening
         d.ellipse([X - orx, oy_ - ory, X + orx, oy_ + ory], outline=tuple(int(c * 0.6) for c in shell), width=max(2, int(R * 0.05)))
         if goggles:
-            gy = Y - R * 0.68
-            d.rounded_rectangle([X - R * 0.62, gy - R * 0.17, X + R * 0.62, gy + R * 0.17], radius=R * 0.15,
+            gy = Y - R * 0.88
+            d.rounded_rectangle([X - R * 0.5, gy - R * 0.11, X + R * 0.5, gy + R * 0.11], radius=R * 0.1,
                                 fill=(90, 160, 200), outline=(20, 20, 20), width=max(2, int(R * 0.05)))
-            d.line([X - R * 0.45, gy - R * 0.08, X - R * 0.1, gy - R * 0.08], fill=(230, 245, 255), width=max(2, int(R * 0.05)))
-    head(0, -2.45, 1.02, (25, 25, 30), 0.64, 0.8, FACE_DAD, face_wind, True)
+            d.line([X - R * 0.38, gy - R * 0.04, X - R * 0.1, gy - R * 0.04], fill=(230, 245, 255), width=max(2, int(R * 0.05)))
+    head(0, -2.45, 1.08, (25, 25, 30), 0.78, 0.92, FACE_DAD, face_wind, True)
     # baby: soft pink hood with ear protectors
-    bx, byy = P(0, by0 - 1.05); R = 0.66 * u
+    bx, byy = P(0, by0 - 1.05); R = 0.74 * u
     for s in (-1, 1):
         ex = bx + s * R * 0.92; r = R * 0.3
         d.ellipse([ex - r, byy - r, ex + r, byy + r], fill=(245, 245, 250), outline=(200, 200, 210), width=max(2, int(r * 0.12)))
-    head(0, by0 - 1.05, 0.66, HOOD, 0.5, 0.58, FACE_BABY, face_wind * 0.8, False)
+    head(0, by0 - 1.05, 0.74, HOOD, 0.6, 0.7, FACE_BABY, face_wind * 0.8, False)
 
     return im.resize((cw // ss, ch // ss), Image.LANCZOS), (ox / ss, oy / ss)
 
@@ -414,7 +418,7 @@ def title(txt, size, color=(255, 255, 255)):
     ImageDraw.Draw(im).text((30 - bb[0], 30 - bb[1]), txt, font=f, fill=color, direction="rtl", language="he")
     return im
 
-T_END1 = title("אבא ואני", 120)
+T_END1 = title("דוד אור והדר", 120)
 T_END2 = title("הקפיצה הראשונה שלנו", 62, (255, 225, 170))
 
 
@@ -519,7 +523,7 @@ def shot_front(t, T, cam_bias=0.0):
         x = r.uniform(-400, W - 200)
         pf = PUFFS_BLUR[k % 6]
         pf = pf.resize((int(pf.width * depth * 1.3), int(pf.height * depth * 2.2)))
-        paste(img, pf, x + pf.width / 2, y + pf.height / 2, alpha=0.4)
+        paste(img, pf, x + pf.width / 2, y + pf.height / 2, alpha=0.22)
     d = ImageDraw.Draw(img)
     for k in range(40):  # speed streaks
         r = random.Random(k * 13 + int(t * FPS))
@@ -587,7 +591,8 @@ def shot_glide(t, T):
     if a > 0:
         paste(img, T_END1, W / 2, 330, alpha=a)
         paste(img, T_END2, W / 2, 470, alpha=clamp((p - 0.55) / 0.15))
-    return img, dict(shake=1.0, zoom=1.0 + 0.05 * (1 - p))
+    zoom = 1.0 + 1.3 * (1 - ease(p / 0.4))  # open on a close-up of the faces, then pull back
+    return img, dict(shake=1.0, zoom=zoom, zoom_center=(rx, ry - 1.6 * sc))
 
 
 SHOT_FN = dict(cabin=shot_cabin, door=shot_door, jump=shot_jump, front=shot_front, wide=shot_wide, chute=shot_chute, glide=shot_glide)
