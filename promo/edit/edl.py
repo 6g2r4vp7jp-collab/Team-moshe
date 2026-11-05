@@ -63,25 +63,25 @@ SHOTS = [
     (0.00, 1.25, "IMG_7991.MOV", 88.10, 0.5, zoom(1.25, 0.48, 0.42)),  # arena lights | אור משה
 
     # ---- 1.25-22.25 FIGHTS: GFN shots extended; Euro + World Games kept ----------------------------
-    (1.25, 0.50, EU,   12.72, 1.0, panel(640, 40, 820, 820)),          # DROP - Euro: Or takes off...
-    (1.75, 1.10, EU,   13.22, 0.4, panel(660, 40, 820, 820), 13.30),   # ...flying knee + punch land (slow-mo)
+    (1.25, 0.50, EU,   12.72, 1.0, panel(520, 0, 1120, 888)),          # DROP - Euro: Or takes off...
+    (1.75, 1.10, EU,   13.22, 0.4, panel(540, 0, 1120, 888), 13.30),   # ...flying knee + punch land (slow-mo)
     (2.85, 1.52, GFN,  29.58, 1.0, BC, 30.40),                         # GFN: right hand lands, Or drives him to the ropes (ends before any fall)
     (4.37, 1.00, WGF2,  0.00, 0.9, panel(450, 60, 1100, 828)),       # World Games: Or (blue) attacks | אלוף משחקי העולם
     (5.37, 2.75, GFN,   6.15, 1.0, BC, 8.05),                          # GFN (extended): knee, pressure, body kick lands 8.05 | מעל 200 קרבות זירה
-    (8.12, 1.55, EU,   13.75, 1.0, rect(760, 0, 500, 888), 14.84),     # Euro: spinning kick lands 14.84
+    (8.12, 1.55, EU,   13.75, 1.0, panel(600, 0, 1148, 888), 14.84),     # Euro: spinning kick lands 14.84
     (9.67, 0.45, GFN,  18.55, 1.0, BC, 18.80),                         # GFN: Or's punch lands
     (10.12, 1.50, GFN, 19.45, 1.0, BC, 20.50),                         # GFN (extended): knee + punch on the ropes, head snaps
     (11.62, 1.63, "PHOTO", 0, 1.0, photo("IMG_8697.JPG", "panel", .55, .45, 1.0, 1.10)),  # photo: Or's straight right (GFN)
-    (13.25, 2.20, MT,   3.30, 1.0, panel(500, 40, 760, 760), 5.20),     # NEW Muay Thai: clinch, punches, Or's knee
-    (15.45, 1.80, WGP,  4.65, 1.0, panel(130, 0, 400, 256), 5.20),       # NEW World GP: Or's combination snaps his head back
+    (13.25, 2.20, MT,   3.30, 1.0, panel(380, 6, 1040, 822), 5.20),     # NEW Muay Thai: clinch, punches, Or's knee
+    (15.45, 1.80, WGP,  4.65, 1.0, panel(60, 0, 520, 256), 5.20),       # NEW World GP: Or's combination snaps his head back
     (17.25, 1.30, GFN, 14.50, 1.0, BC, 15.10),                         # NEW knee: straight right, then Or's knee lands
     (18.55, 1.50, GFN, 50.78, 1.0, BC),                                # close-up: Or's clinch control (opponent's knee in the wide angle cut out)
-    (20.05, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # Euro attack - punches + kicks
-    (21.90, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # Euro kick lands | פעמיים אלוף אירופה
-    (22.83, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle
+    (20.05, 1.85, EU,  10.10, 1.0, panel(420, 0, 1160, 888), 10.80),  # Euro attack - punches + kicks
+    (21.90, 0.93, EU,   5.35, 1.0, panel(480, 0, 1120, 888), 6.12),      # Euro kick lands | פעמיים אלוף אירופה
+    (22.83, 0.77, EU,   6.33, 1.0, panel(240, 0, 1160, 888)),            # same exchange, 2nd broadcast angle
     (23.60, 0.95, GFN,  1.30, 1.0, BC, 1.55),                          # GFN: Or's high kick + recovery
     (24.55, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
-    (25.55, 2.70, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # GFN ringside: kicks + exchanges
+    (25.55, 2.70, "IMG_7997.MOV", 32.60, 1.0, zoom(1.3, 0.50, 0.58), 33.20),  # GFN ringside: kicks + exchanges
 
     # ---- 18.25-30.25 TEAM MOSHE ---------------------------------------------------------------------
     (28.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
