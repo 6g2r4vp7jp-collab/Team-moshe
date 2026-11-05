@@ -281,11 +281,11 @@ def draw_rig(pose, t, scale, flutter=0.0, face_wind=0.0, ss=2):
             d.line([X - R * 0.38, gy - R * 0.04, X - R * 0.1, gy - R * 0.04], fill=(230, 245, 255), width=max(2, int(R * 0.05)))
     head(0, -2.45, 1.08, (25, 25, 30), 0.78, 0.92, FACE_DAD, face_wind, True)
     # baby: soft pink hood with ear protectors
-    bx, byy = P(0, by0 - 1.05); R = 0.74 * u
+    bx, byy = P(0, by0 - 1.05); R = 0.78 * u
     for s in (-1, 1):
         ex = bx + s * R * 0.92; r = R * 0.3
         d.ellipse([ex - r, byy - r, ex + r, byy + r], fill=(245, 245, 250), outline=(200, 200, 210), width=max(2, int(r * 0.12)))
-    head(0, by0 - 1.05, 0.74, HOOD, 0.6, 0.7, FACE_BABY, face_wind * 0.8, False)
+    head(0, by0 - 1.05, 0.78, HOOD, 0.64, 0.76, FACE_BABY, face_wind * 0.8, False)
 
     return im.resize((cw // ss, ch // ss), Image.LANCZOS), (ox / ss, oy / ss)
 
