@@ -61,6 +61,11 @@
   <div class="fx title lux gshadow" style="top:1170px" data-in="5.45" data-out="7" data-fx="write"><div class="big" style="font-weight:900">מעל <b>200</b><br>קרבות זירה</div></div>
   <div class="fx title lux gshadow" style="top:1170px" data-in="15.15" data-out="16.0" data-fx="write"><div class="big" style="font-weight:900"><b>פעמיים</b><br>אלוף אירופה</div></div>
 
+  <!-- MARKETING -->
+  <div class="fx center lux gshadow" style="top:1150px; font-size:104px; line-height:1.1" data-in="11.7" data-out="13.2" data-fx="write">אלופים לא נולדים.<br><b>הם נבנים.</b></div>
+  <div class="fx center lux gshadow" style="top:1150px; font-size:100px; line-height:1.1" data-in="19.2" data-out="22.1" data-fx="write">גם אתם חולמים<br><b>להיות אלופים?</b></div>
+  <div class="fx center lux gshadow" style="top:1150px; font-size:100px; line-height:1.1" data-in="28.0" data-out="30.4" data-fx="write">כל אלוף התחיל<br><b>מצעד ראשון.</b></div>
+
   <!-- TEAM MOSHE -->
   <div class="fx center lux gshadow" style="top:1160px; font-size:150px; line-height:1" data-in="22.25" data-out="23.2" data-fx="write">מהזירה</div>
   <div class="fx center lux gshadow" style="top:1160px; font-size:150px; line-height:1" data-in="23.25" data-out="25.65" data-fx="write"><b>לדור הבא</b></div>
@@ -80,13 +85,14 @@
   <div id="logoWrap"><div id="halo"></div><img src="../assets/team_moshe_logo.png"><div id="sweep"></div></div>
   <div class="fx center lux gshadow" style="top:1125px; font-size:50px" data-in="46.25" data-out="99" data-fx="write">אגרוף תאילנדי · קיקבוקסינג</div>
   <div class="fx center lux gshadow" style="top:1200px; font-size:46px; font-weight:600" data-in="46.75" data-out="99" data-fx="write">קיבוץ לוחמי הגטאות</div>
+  <div class="fx center lux gshadow" style="top:1310px; font-size:66px; line-height:1.15" data-in="47.4" data-out="99" data-fx="write">בואו להיות חלק<br>ממשפחת <b>TEAM MOSHE</b></div>
 </div>
 <div id="flash"></div>
 <div id="fade"></div>
 <script>
 const DURATION = 50.25;
 const FLASH_AT = [1.25, 22.25, 34.25];
-const GRAD = [[0.0,1.25],[4.37,8.12],[15.10,16.03],[22.25,25.75],[31.25,32.75],[34.25,45.25]];
+const GRAD = [[0.0,1.25],[4.37,8.12],[11.62,13.25],[15.10,16.03],[19.0,25.75],[27.9,32.75],[34.25,45.25]];
 const LETTERBOX = [[0.0,1.25]];
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), seg=(t,a,b)=>clamp((t-a)/(b-a)), eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, lerp=(a,b,x)=>a+(b-a)*x;
 const $=id=>document.getElementById(id);
@@ -96,7 +102,7 @@ function splitChars(root){
     [...node.childNodes].forEach(c=>{
       if(c.nodeType===3){
         const frag=document.createDocumentFragment();
-        for(const chr of (c.textContent.match(/[0-9A-Za-z.,×]+|./gsu)||[])){ const sp=document.createElement('span'); sp.className='ch'+(hi?' hi':''); sp.textContent=chr; if(/[0-9A-Za-z]/.test(chr)) sp.style.unicodeBidi='isolate'; frag.appendChild(sp); out.push(sp); }
+        for(const chr of (c.textContent.match(/[0-9A-Za-z.,×]+(?: [0-9A-Za-z.,×]+)*|./gsu)||[])){ const sp=document.createElement('span'); sp.className='ch'+(hi?' hi':''); sp.textContent=chr; if(/[0-9A-Za-z]/.test(chr)) sp.style.unicodeBidi='isolate'; frag.appendChild(sp); out.push(sp); }
         c.replaceWith(frag);
       } else if(c.nodeType===1 && c.tagName!=='BR'){ walk(c, hi || c.tagName==='B'); }
     });
