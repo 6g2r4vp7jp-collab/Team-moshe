@@ -34,15 +34,14 @@ LINES = [
 
 async def synth(text, path, rate):
     proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
-    await edge_tts.Communicate(text, "he-IL-AvriNeural", rate=rate, pitch="-10Hz", proxy=proxy).save(path)
+    await edge_tts.Communicate(text, "he-IL-AvriNeural", rate=rate, pitch="+0Hz", proxy=proxy).save(path)
 
 def load(path):
-    # deep "trailer" voice: pitch down ~2.5 semitones (tempo kept), warm low end, presence, compression, tight room
+    # warm, natural, inviting voice: no pitch shift, no echo; gentle warmth + clarity, light compression
     out = path.replace(".mp3", ".wav")
-    af = ("aresample=48000,asetrate=48000*0.86,aresample=48000,atempo=1.1628,"
-          "highpass=f=60,equalizer=f=110:t=q:w=1.0:g=5,equalizer=f=320:t=q:w=1.2:g=-2,"
-          "equalizer=f=3200:t=q:w=1.0:g=3,acompressor=threshold=-20dB:ratio=4:attack=5:release=120:makeup=6,"
-          "aecho=0.8:0.6:38|71:0.18|0.10,alimiter=limit=0.9")
+    af = ("aresample=48000,highpass=f=70,equalizer=f=160:t=q:w=1.0:g=2,equalizer=f=450:t=q:w=1.2:g=-1.5,"
+          "equalizer=f=5500:t=q:w=1.0:g=2,acompressor=threshold=-18dB:ratio=2:attack=10:release=200:makeup=3,"
+          "alimiter=limit=0.9")
     subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", path, "-af", af, "-ac", "1", out], check=True)
     with wave.open(out) as w:
         x = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(float) / 32768
@@ -53,7 +52,7 @@ def main(dst):
     track = np.zeros(int(SR * DURATION))
     cursor = 0.0
     for i, (t, text) in enumerate(LINES):
-        rate = "-6%" if (44.0 <= t < 55.0) or t >= 57.0 else "-15%"   # honor roll + closing line a little quicker
+        rate = "+0%" if (44.0 <= t < 55.0) or t >= 57.0 else "-6%"   # honor roll + closing line a little quicker
         p = os.path.join(WORK, f"l{i:02d}.mp3")
         asyncio.run(synth(text, p, rate))
         x = load(p)
