@@ -61,8 +61,8 @@ def cloud_sea(base_rgb, horizon, travel, look_x=0.0, sun=(0.75, 0.25), tint=(255
     if len(ys) == 0: return img
     z = 260.0 / (ys - horizon + 1e-3)                    # depth per row
     xs = (np.arange(W) - W / 2)[None, :] / W
-    u = ((xs * z[:, None] * 900 + look_x * 400) % 2048).astype(np.int32)
-    v = ((z[:, None] * 180 + travel) % 1024).astype(np.int32) * np.ones_like(u)
+    u = ((xs * z[:, None] * 900 + look_x * 400) % 2048).astype(np.int32) % 2048
+    v = (((z[:, None] * 180 + travel) % 1024).astype(np.int32) % 1024) * np.ones_like(u)
     dens = CLOUD_TEX[v, u]
     det = DETAIL_TEX[v, u]
     # lighting: sample texture slightly toward the sun to fake self-shadowing
@@ -390,8 +390,9 @@ def landscape(t, cam_y=0.0, horizon=820):
         z = 200.0 / (ys[rows] - floor + 5)
         uu = ((xs[None, :] - W / 2) * z[:, None] * 2 + 1024 + t * 10) % 2048
         vv = (z[:, None] * 300 + t * 40 + cam_y) % 1024
-        n = DETAIL_TEX[vv.astype(int), uu.astype(int)]
-        lake = CLOUD_TEX[vv.astype(int), (uu.astype(int) + 700) % 2048] > 0.55
+        vi = vv.astype(int) % 1024; ui = uu.astype(int) % 2048
+        n = DETAIL_TEX[vi, ui]
+        lake = CLOUD_TEX[vi, (ui + 700) % 2048] > 0.55
         grass = np.stack([lerp(70, 140, n), lerp(110, 170, n), lerp(50, 80, n)], -1)
         water = np.stack([np.full_like(n, 60), lerp(150, 190, n), lerp(170, 210, n)], -1)
         col = np.where(lake[..., None], water, grass)
@@ -701,6 +702,10 @@ def make_audio(path, sr=44100):
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(sr); w.writeframes(np.stack([pcm, pcm], 1).tobytes())
 
 
+def render_bytes(i):
+    return render(i).tobytes()
+
+
 def main(out):
     wav = out + ".wav"; make_audio(wav)
     ff = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
@@ -708,9 +713,11 @@ def main(out):
                            "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "256k", "-shortest", "-movflags", "+faststart", out],
                           stdin=subprocess.PIPE)
     N = int(DUR * FPS)
-    for i in range(N):
-        ff.stdin.write(render(i).tobytes())
-        if i % 60 == 0: print(f"{i}/{N}", flush=True)
+    from multiprocessing import Pool
+    with Pool(max(1, os.cpu_count() - 1)) as pool:
+        for i, fr in enumerate(pool.imap(render_bytes, range(N), chunksize=2)):
+            ff.stdin.write(fr)
+            if i % 60 == 0: print(f"{i}/{N}", flush=True)
     ff.stdin.close(); ff.wait(); os.remove(wav); print("wrote", out)
 
 
