@@ -33,7 +33,7 @@ def chain(shot):
     tail = []
     pre = ""
     if speed != 1.0:
-        if src.startswith("RPReplay"):            # 60p screen recording of ~30p broadcast: drop dupes, re-time, interpolate
+        if os.path.basename(src).startswith("RPReplay"):            # 60p screen recording of ~30p broadcast: drop dupes, re-time, interpolate
             pre = "mpdecimate,setpts=N/30/TB,minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
         elif src.startswith("v29025"):            # 25p broadcast: motion-interpolate to 60p before slowing down
             pre = "minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:vsbmc=1,"
