@@ -1,4 +1,4 @@
-"""TEAM MOSHE promo v8 - Edit Decision List (the "project file").
+"""TEAM MOSHE promo v9 - Edit Decision List (the "project file").
 
 Brief v4: cinematic slow-mo opening; fight footage from DIFFERENT competitions (no knockdowns at all,
 only ONE pad-work shot); coach section; emotional run of hand-raises from different events; logo.
@@ -31,8 +31,9 @@ Shot = (timeline_start, duration, source, source_in, speed, crop[, hit_src_time]
 
 FPS = 30
 W, H = 1080, 1920
-DURATION = 46.25
-MUSIC_OFFSET = 2.75       # the score keeps its original timing; the first 1.5 s are trimmed
+DURATION = 50.25
+MUSIC_OFFSET = 2.75
+MUSIC_INSERT = (16.0, 4.0)   # two extra bars of the fight groove (picture 13.25) -> GFN shots get more time       # the score keeps its original timing; the first 1.5 s are trimmed
 
 def win(x):                    # 16:9 1080p source -> 9:16 window (never stretched)
     return {"type": "win", "x": x}
@@ -59,53 +60,54 @@ SHOTS = [
     # ---- 0-1.25 OPEN: the arena shot (unchanged) ----------------------------------------------------
     (0.00, 1.25, "IMG_7991.MOV", 88.10, 0.5, zoom(1.25, 0.48, 0.42)),  # arena lights | אור משה
 
-    # ---- 1.25-18.25 FIGHTS: real fight action only; each shot runs through the strike and the reaction --
+    # ---- 1.25-22.25 FIGHTS: GFN shots extended; Euro + World Games kept ----------------------------
     (1.25, 0.50, EU,   12.72, 1.0, panel(640, 40, 820, 820)),          # DROP - Euro: Or takes off...
     (1.75, 1.10, EU,   13.22, 0.4, panel(660, 40, 820, 820), 13.30),   # ...flying knee + punch land (slow-mo)
-    (2.85, 1.52, GFN,  29.58, 1.0, BC, 30.40),                         # NEW 3rd clip: right hand lands, Or drives him to the ropes (ends 31.10, before any fall)
-    (4.37, 1.00, WGF2,  0.00, 0.9, panel(450, 60, 1100, 828)),       # NEW: World Games - Or (blue) attacks, cut before the clinch | אלוף משחקי העולם
-    (5.37, 1.68, GFN,   6.82, 1.0, BC, 8.05),                          # NEW: Or presses forward, body kick lands 8.05 | מעל 200 קרבות זירה
-    (7.05, 1.20, EU,   14.10, 1.0, rect(760, 0, 500, 888), 14.84),     # spinning kick lands 14.84 + follow-up
-    (8.25, 1.25, GFN,  19.45, 1.0, BC, 20.50),                         # knee + punch on the ropes, lands 20.5, head snaps
-    (9.50, 1.00, "PHOTO", 0, 1.0, photo("IMG_8697.JPG", "panel", .55, .45, 1.0, 1.10)),   # photo: Or's straight right landing (GFN)
-    (10.50, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # NEW: Euro attack - punches + kicks
-    (12.35, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # kick lands 6.12 | פעמיים אלוף אירופה
-    (13.28, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle - follow-up
-    (14.05, 0.80, GFN,  1.25, 1.0, BC, 1.55),                          # Or's high kick
-    (14.85, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
-    (15.85, 2.40, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # ringside angle: kick + exchange
+    (2.85, 1.52, GFN,  29.58, 1.0, BC, 30.40),                         # GFN: right hand lands, Or drives him to the ropes (ends before any fall)
+    (4.37, 1.00, WGF2,  0.00, 0.9, panel(450, 60, 1100, 828)),       # World Games: Or (blue) attacks | אלוף משחקי העולם
+    (5.37, 2.75, GFN,   6.15, 1.0, BC, 8.05),                          # GFN (extended): knee, pressure, body kick lands 8.05 | מעל 200 קרבות זירה
+    (8.12, 1.55, EU,   13.75, 1.0, rect(760, 0, 500, 888), 14.84),     # Euro: spinning kick lands 14.84
+    (9.67, 0.45, GFN,  18.55, 1.0, BC, 18.80),                         # GFN: Or's punch lands
+    (10.12, 1.50, GFN, 19.45, 1.0, BC, 20.50),                         # GFN (extended): knee + punch on the ropes, head snaps
+    (11.62, 1.63, "PHOTO", 0, 1.0, photo("IMG_8697.JPG", "panel", .55, .45, 1.0, 1.10)),  # photo: Or's straight right (GFN)
+    (13.25, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # Euro attack - punches + kicks
+    (15.10, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # Euro kick lands | פעמיים אלוף אירופה
+    (16.03, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle
+    (16.80, 0.95, GFN,  1.30, 1.0, BC, 1.55),                          # GFN (extended): Or's high kick + recovery
+    (17.75, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
+    (18.75, 3.50, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # GFN ringside (extended): kicks + exchanges
 
     # ---- 18.25-30.25 TEAM MOSHE ---------------------------------------------------------------------
-    (18.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
-    (19.25, 1.00, "D67A6795.MP4", 37.60, 1.0, win(770)),                 # לדור הבא
-    (20.25, 1.00, "D67A6791.MP4",  0.60, 1.0, win(660)),
-    (21.25, 1.00, "D67A6790.MP4", 11.50, 1.0, win(560)),
-    (22.25, 1.00, "PHOTO", 0, 1.0, photo("IMG_0414.JPG", "full", .48, .40, 1.05, 1.14)),  # photo: Or coaching at the club
-    (23.25, 0.75, "D67A6791.MP4",  9.85, 1.0, win(560), 10.30),
-    (24.00, 0.75, "IMG_1612.MOV", 5.30, 1.0, FULL),
-    (24.75, 1.00, "D67A6795.MP4", 30.20, 1.0, win(1120)),
-    (25.75, 0.50, "D67A6790.MP4", 13.40, 1.0, win(620)),
-    (26.25, 0.50, "IMG_1601.MOV",  2.00, 1.0, FULL),
-    (26.75, 0.50, "D67A6791.MP4", 12.90, 1.0, win(720)),
-    (27.25, 1.00, "D67A6790.MP4",  2.00, 1.0, win(640)),                 # כאן מגדלים אלופים
-    (28.25, 1.00, "IMG_1612.MOV",  7.90, 1.0, FULL),
-    (29.25, 1.00, "IMG_7991_small.mov", 0.40, 1.0, FULL),
+    (22.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
+    (23.25, 1.00, "D67A6795.MP4", 37.60, 1.0, win(770)),                 # לדור הבא
+    (24.25, 1.00, "D67A6791.MP4",  0.60, 1.0, win(660)),
+    (25.25, 1.00, "D67A6790.MP4", 11.50, 1.0, win(560)),
+    (26.25, 1.00, "PHOTO", 0, 1.0, photo("IMG_0414.JPG", "full", .48, .40, 1.05, 1.14)),  # photo: Or coaching at the club
+    (27.25, 0.75, "D67A6791.MP4",  9.85, 1.0, win(560), 10.30),
+    (28.00, 0.75, "IMG_1612.MOV", 5.30, 1.0, FULL),
+    (28.75, 1.00, "D67A6795.MP4", 30.20, 1.0, win(1120)),
+    (29.75, 0.50, "D67A6790.MP4", 13.40, 1.0, win(620)),
+    (30.25, 0.50, "IMG_1601.MOV",  2.00, 1.0, FULL),
+    (30.75, 0.50, "D67A6791.MP4", 12.90, 1.0, win(720)),
+    (31.25, 1.00, "D67A6790.MP4",  2.00, 1.0, win(640)),                 # כאן מגדלים אלופים
+    (32.25, 1.00, "IMG_1612.MOV",  7.90, 1.0, FULL),
+    (33.25, 1.00, "IMG_7991_small.mov", 0.40, 1.0, FULL),
 
     # ---- 30.25-41.25 VICTORIES (+ podium and trophy photos) -------------------------------------------
-    (30.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
-    (31.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
-    (32.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
-    (33.50, 1.25, "PHOTO", 0, 1.0, photo("f6ef7cb0.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: WAKO European Championship hand raise
-    (34.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
-    (36.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
-    (38.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
-    (39.25, 2.00, GFN,  63.90, 1.0, BC),                                 # GFN: hand raised -> close-up
+    (34.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
+    (35.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
+    (36.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
+    (37.50, 1.25, "PHOTO", 0, 1.0, photo("f6ef7cb0.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: WAKO European Championship hand raise
+    (38.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
+    (40.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
+    (42.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
+    (43.25, 2.00, GFN,  63.90, 1.0, BC),                                 # GFN: hand raised -> close-up
 
     # ---- 41.25-46.25 LOGO ------------------------------------------------------------------------
-    (41.25, 5.00, "D67A6795.MP4", 12.00, 1.0, win(656)),
+    (45.25, 5.00, "D67A6795.MP4", 12.00, 1.0, win(656)),
 ]
 
-DIM = {41.25: 0.6}
+DIM = {45.25: 0.6}
 
 def hit_times():
     out = []

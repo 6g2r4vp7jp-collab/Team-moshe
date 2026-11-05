@@ -7,7 +7,12 @@ import os, sys, wave
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from edl import SHOTS, DURATION as PIC_DURATION, MUSIC_OFFSET as OFF, hit_times
-DURATION = PIC_DURATION + OFF          # the score keeps its original timing; first OFF seconds trimmed at the end
+try:
+    from edl import MUSIC_INSERT          # (music time, seconds): whole bars duplicated inside the fight section
+except ImportError:
+    MUSIC_INSERT = (16.0, 0.0)
+INS_T, INS_X = MUSIC_INSERT
+DURATION = PIC_DURATION + OFF - INS_X  # the score is composed at its original length, then extended by INS_X
 
 SR = 44100
 N = int(SR * DURATION)
@@ -232,11 +237,18 @@ put("music", pad([45, 57, 60, 64, 69], 5.0, 1600, vowel=True), 44.0, .8, send=.6
 put("music", bell(81, 3.0), 45.0, .45, send=.8); put("music", bell(76, 3.0), 45.5, .35, send=.8)
 put("fx", whoosh(.9), 46.9, .35)
 
+# ---- extend the fight section: duplicate the INS_X seconds of bars that end at INS_T ----
+if INS_X > 0:
+    a, x = int(INS_T * SR), int(INS_X * SR)
+    for k in BUS: BUS[k] = np.concatenate([BUS[k][:a], BUS[k][a - x:a], BUS[k][a:]])
+    VERB = np.concatenate([VERB[:a], VERB[a - x:a], VERB[a:]])
+    N += x; DURATION += INS_X
+
 # ---- strike sound design (real-sounding, synced to the verified hits) ----
 for h in hit_times():
     put("fx", punch(), h + OFF, .8); put("fx", breath(), h + OFF - .05, .35)
 # arena atmosphere bed under the fights
-t = tt(16.0); put("fx", crowd(16.0, .5) * 0 + np.stack([fft_bp(rng.standard_normal(len(t)), 250, 2500)] * 2, 1) * .06, 4.0, 1.0)
+t = tt(16.0 + INS_X); put("fx", np.stack([fft_bp(rng.standard_normal(len(t)), 250, 2500)] * 2, 1) * .06, 4.0, 1.0)
 
 # ---- real location sound (pads, gloves, arena) - never broadcast commentary or phone recordings ----
 LOC = {"IMG_7970.mov": .5, "IMG_7991.MOV": .4, "IMG_7997.MOV": .35, "D67A6790.MP4": .3, "D67A6791.MP4": .3,
@@ -245,8 +257,8 @@ for i, s in enumerate(SHOTS):
     t0, dur, src, sin, speed, crop = s[:6]
     p = os.path.join(SHOTDIR, f"{i:02d}.wav")
     t0 += OFF
-    if speed != 1.0 or not os.path.exists(p) or src not in LOC or t0 >= 44.0: continue
-    if src.startswith("v29025") and t0 < 40.0: continue        # only the GFN crowd at the hand raise
+    if speed != 1.0 or not os.path.exists(p) or src not in LOC or t0 >= 44.0 + INS_X: continue
+    if src.startswith("v29025") and t0 < 40.0 + INS_X: continue        # only the GFN crowd at the hand raise
     with wave.open(p) as w:
         x = np.frombuffer(w.readframes(w.getnframes()), np.int16).reshape(-1, w.getnchannels()).astype(float) / 32768
     if x.shape[1] == 1: x = np.repeat(x, 2, 1)
@@ -257,7 +269,7 @@ for i, s in enumerate(SHOTS):
 # ================= MIX =================
 # sidechain: duck music/bass under the kicks of the trap sections
 kick_env = np.zeros(N)
-for b in list(np.arange(4.0, 20.0, BAR)) + list(np.arange(33.0, 44.0, BAR)):
+for b in list(np.arange(4.0, 20.0 + INS_X, BAR)) + list(np.arange(33.0 + INS_X, 44.0 + INS_X, BAR)):
     for s in (0, 6, 10):
         i = int((b + s * .125) * SR)
         if i < N:
