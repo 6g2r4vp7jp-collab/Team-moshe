@@ -1,4 +1,4 @@
-"""TEAM MOSHE promo v12 - Edit Decision List (the "project file").
+"""TEAM MOSHE promo v13 - Edit Decision List (the "project file").
 
 Brief v4: cinematic slow-mo opening; fight footage from DIFFERENT competitions (no knockdowns at all,
 only ONE pad-work shot); coach section; emotional run of hand-raises from different events; logo.
@@ -31,9 +31,9 @@ Shot = (timeline_start, duration, source, source_in, speed, crop[, hit_src_time]
 
 FPS = 30
 W, H = 1080, 1920
-DURATION = 52.25
+DURATION = 56.25
 MUSIC_OFFSET = 2.75
-MUSIC_INSERT = (16.0, 6.0)   # two extra bars of the fight groove (picture 13.25) -> GFN shots get more time       # the score keeps its original timing; the first 1.5 s are trimmed
+MUSIC_INSERT = (16.0, 10.0)   # two extra bars of the fight groove (picture 13.25) -> GFN shots get more time       # the score keeps its original timing; the first 1.5 s are trimmed
 
 def win(x):                    # 16:9 1080p source -> 9:16 window (never stretched)
     return {"type": "win", "x": x}
@@ -55,6 +55,8 @@ WGF2 = "RPReplay_Final1658089749.mov"
 WG451 = "RPReplay_Final1687870451.mp4"
 WG418 = "RPReplay_Final1687870418.mp4"
 WC = "RPReplay_Final1634644693.mov"
+MT = "new/RPReplay_Final1606732711.mov"      # Muay Thai (Sport channel) - Or: blue gloves, black shorts (confirmed by Or)
+WGP = "new/f49b8c0f.mov"                      # World GP - Or: red headgear (confirmed by Or)
 
 SHOTS = [
     # ---- 0-1.25 OPEN: the arena shot (unchanged) ----------------------------------------------------
@@ -70,47 +72,48 @@ SHOTS = [
     (9.67, 0.45, GFN,  18.55, 1.0, BC, 18.80),                         # GFN: Or's punch lands
     (10.12, 1.50, GFN, 19.45, 1.0, BC, 20.50),                         # GFN (extended): knee + punch on the ropes, head snaps
     (11.62, 1.63, "PHOTO", 0, 1.0, photo("IMG_8697.JPG", "panel", .55, .45, 1.0, 1.10)),  # photo: Or's straight right (GFN)
-    (13.25, 1.00, GFN, 14.50, 1.0, BC, 15.10),                         # NEW knee: straight right, then Or's knee lands
-    (14.25, 0.72, GFN, 49.90, 1.0, BC, 50.50),                         # NEW knee: Or grips his head (blue glove) and drives the knee in
-    (14.97, 1.08, GFN, 50.78, 1.0, BC),                                # close-up: Or's clinch control (his reply knee cut out)
-    (16.05, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # Euro attack - punches + kicks
-    (17.90, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # Euro kick lands | פעמיים אלוף אירופה
-    (18.83, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle
-    (19.60, 0.95, GFN,  1.30, 1.0, BC, 1.55),                          # GFN: Or's high kick + recovery
-    (20.55, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
-    (21.55, 2.70, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # GFN ringside: kicks + exchanges
+    (13.25, 2.20, MT,   3.30, 1.0, panel(500, 40, 760, 760), 5.20),     # NEW Muay Thai: clinch, punches, Or's knee
+    (15.45, 1.80, WGP,  4.65, 1.0, panel(130, 0, 400, 256), 5.20),       # NEW World GP: Or's combination snaps his head back
+    (17.25, 1.30, GFN, 14.50, 1.0, BC, 15.10),                         # NEW knee: straight right, then Or's knee lands
+    (18.55, 1.50, GFN, 50.78, 1.0, BC),                                # close-up: Or's clinch control (opponent's knee in the wide angle cut out)
+    (20.05, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # Euro attack - punches + kicks
+    (21.90, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # Euro kick lands | פעמיים אלוף אירופה
+    (22.83, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle
+    (23.60, 0.95, GFN,  1.30, 1.0, BC, 1.55),                          # GFN: Or's high kick + recovery
+    (24.55, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
+    (25.55, 2.70, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # GFN ringside: kicks + exchanges
 
     # ---- 18.25-30.25 TEAM MOSHE ---------------------------------------------------------------------
-    (24.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
-    (25.25, 1.00, "D67A6795.MP4", 37.60, 1.0, win(770)),                 # לדור הבא
-    (26.25, 1.00, "D67A6791.MP4",  0.60, 1.0, win(660)),
-    (27.25, 1.00, "D67A6790.MP4", 11.50, 1.0, win(560)),
-    (28.25, 1.00, "PHOTO", 0, 1.0, photo("IMG_0414.JPG", "full", .48, .40, 1.05, 1.14)),  # photo: Or coaching at the club
-    (29.25, 0.75, "D67A6791.MP4",  9.85, 1.0, win(560), 10.30),
-    (30.00, 0.75, "IMG_1612.MOV", 5.30, 1.0, FULL),
-    (30.75, 1.00, "D67A6795.MP4", 30.20, 1.0, win(1120)),
-    (31.75, 0.50, "D67A6790.MP4", 13.40, 1.0, win(620)),
-    (32.25, 0.50, "IMG_1601.MOV",  2.00, 1.0, FULL),
-    (32.75, 0.50, "D67A6791.MP4", 12.90, 1.0, win(720)),
-    (33.25, 1.00, "D67A6790.MP4",  2.00, 1.0, win(640)),                 # כאן מגדלים אלופים
-    (34.25, 1.00, "IMG_1612.MOV",  7.90, 1.0, FULL),
-    (35.25, 1.00, "IMG_7991_small.mov", 0.40, 1.0, FULL),
+    (28.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
+    (29.25, 1.00, "D67A6795.MP4", 37.60, 1.0, win(770)),                 # לדור הבא
+    (30.25, 1.00, "D67A6791.MP4",  0.60, 1.0, win(660)),
+    (31.25, 1.00, "D67A6790.MP4", 11.50, 1.0, win(560)),
+    (32.25, 1.00, "PHOTO", 0, 1.0, photo("IMG_0414.JPG", "full", .48, .40, 1.05, 1.14)),  # photo: Or coaching at the club
+    (33.25, 0.75, "D67A6791.MP4",  9.85, 1.0, win(560), 10.30),
+    (34.00, 0.75, "IMG_1612.MOV", 5.30, 1.0, FULL),
+    (34.75, 1.00, "D67A6795.MP4", 30.20, 1.0, win(1120)),
+    (35.75, 0.50, "D67A6790.MP4", 13.40, 1.0, win(620)),
+    (36.25, 0.50, "IMG_1601.MOV",  2.00, 1.0, FULL),
+    (36.75, 0.50, "D67A6791.MP4", 12.90, 1.0, win(720)),
+    (37.25, 1.00, "D67A6790.MP4",  2.00, 1.0, win(640)),                 # כאן מגדלים אלופים
+    (38.25, 1.00, "IMG_1612.MOV",  7.90, 1.0, FULL),
+    (39.25, 1.00, "IMG_7991_small.mov", 0.40, 1.0, FULL),
 
     # ---- 30.25-41.25 VICTORIES (+ podium and trophy photos) -------------------------------------------
-    (36.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
-    (37.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
-    (38.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
-    (39.50, 1.25, "PHOTO", 0, 1.0, photo("f6ef7cb0.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: WAKO European Championship hand raise
-    (40.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
-    (42.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
-    (44.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
-    (45.25, 2.00, GFN,  63.90, 1.0, BC),                                 # GFN: hand raised -> close-up
+    (40.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
+    (41.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
+    (42.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
+    (43.50, 1.25, "PHOTO", 0, 1.0, photo("f6ef7cb0.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: WAKO European Championship hand raise
+    (44.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
+    (46.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
+    (48.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
+    (49.25, 2.00, GFN,  63.90, 1.0, BC),                                 # GFN: hand raised -> close-up
 
     # ---- 41.25-46.25 LOGO ------------------------------------------------------------------------
-    (47.25, 5.00, "D67A6795.MP4", 12.00, 1.0, win(656)),
+    (51.25, 5.00, "D67A6795.MP4", 12.00, 1.0, win(656)),
 ]
 
-DIM = {47.25: 0.6}
+DIM = {51.25: 0.6}
 
 def hit_times():
     out = []
