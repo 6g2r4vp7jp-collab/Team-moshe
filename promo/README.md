@@ -1,7 +1,7 @@
 # TEAM MOSHE – סרטון תדמית רשמי
 
 **קובץ סופי:** `promo/final/TEAM_MOSHE_promo_9x16.mp4`
-1080×1920 (9:16) · 30fps · H.264 High · AAC 320k · 48 שניות · ללא סימני מים · מתאים ל-Reels / TikTok / Stories
+1080×1920 (9:16) · 30fps · H.264 High · AAC 320k · 50 שניות (גרסה מאושרת v9) · ללא סימני מים · מתאים ל-Reels / TikTok / Stories
 
 ## מבנה העריכה (מקור: `edit/edl.py`)
 | זמן | חלק | חומרים |
