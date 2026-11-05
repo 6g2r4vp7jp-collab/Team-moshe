@@ -1,4 +1,4 @@
-"""TEAM MOSHE promo v6 - Edit Decision List (the "project file").
+"""TEAM MOSHE promo v7 - Edit Decision List (the "project file").
 
 Brief v4: cinematic slow-mo opening; fight footage from DIFFERENT competitions (no knockdowns at all,
 only ONE pad-work shot); coach section; emotional run of hand-raises from different events; logo.
@@ -20,6 +20,11 @@ v6 (Or's notes): the seated locker-room shot is gone - the film opens on the are
 another 1.25 s (offset 2.75) so all cues stay in sync. Every strike was re-checked frame by frame and each
 shot now runs until the strike has landed (ends moved past the impact; opponent strikes and camera switches cut).
 
+v7 (Or's notes): longer fight shots (1.2-2.4 s each, strike + follow-up + reaction); 3rd clip replaced with
+the GFN pressure sequence; all pad work, the World Games clinch (red-helmet opponent) and non-action ring
+moments removed; new footage (GFN press + body kick, Euro attack sequence, 2nd Euro angle); six photos from
+the Drive folder with slow camera moves. Opening unchanged (arena shot).
+
 Timeline 46.25 s, 30 fps, 1080x1920, 120 BPM (beat 0.5 s, bar 2 s).
 Shot = (timeline_start, duration, source, source_in, speed, crop[, hit_src_time])
 """
@@ -35,6 +40,8 @@ def zoom(z, cx=0.5, cy=0.5):   # portrait 4K source -> punch-in
     return {"type": "zoom", "z": z, "cx": cx, "cy": cy}
 def rect(x, y, w, h):          # 9:16 crop rectangle (display coords) -> full frame
     return {"type": "rect", "x": x, "y": y, "w": w, "h": h}
+def photo(file, mode="full", cx=0.5, cy=0.5, z0=1.0, z1=1.08):   # still image with a slow camera move
+    return {"type": "photo", "file": file, "mode": mode, "cx": cx, "cy": cy, "z0": z0, "z1": z1}
 def panel(x, y, w, h):         # landscape crop shown full-width over its own blurred fill (keeps the whole action)
     return {"type": "panel", "x": x, "y": y, "w": w, "h": h}
 
@@ -49,36 +56,31 @@ WG418 = "RPReplay_Final1687870418.mp4"
 WC = "RPReplay_Final1634644693.mov"
 
 SHOTS = [
-    # ---- 0-1.25 OPEN: straight on the arena shot -------------------------------------------------
+    # ---- 0-1.25 OPEN: the arena shot (unchanged) ----------------------------------------------------
     (0.00, 1.25, "IMG_7991.MOV", 88.10, 0.5, zoom(1.25, 0.48, 0.42)),  # arena lights | אור משה
 
-    # ---- 1.25-18.25 FIGHTS: every shot runs until the strike has landed -------------------------
-    (1.25, 0.50, EU,   12.72, 1.0, panel(640, 40, 820, 820)),          # DROP - Or takes off...
-    (1.75, 1.10, EU,   13.22, 0.4, panel(660, 40, 820, 820), 13.30),   # flying knee lands -> punch lands (13.6), slow-mo
-    (2.85, 1.20, GFN,  25.40, 1.0, BC, 25.90),                         # punches land 25.9 / 26.5 (ends 26.60, before any fall)
-    (4.05, 1.60, WGF,   3.30, 1.0, panel(560, 134, 1000, 754)),        # World Games | אלוף משחקי העולם
-    (5.65, 1.07, GFN,  19.55, 1.0, BC, 20.50),                         # knee + punch on the ropes, lands 20.5
-    (6.72, 0.70, "IMG_7991.MOV", 91.00, 1.0, zoom(1.15, 0.5, 0.5)),    # Or walks to the ring
-    (7.42, 1.00, EU,   14.20, 1.0, rect(760, 0, 500, 888), 14.84),     # spinning kick lands 14.84
-    (8.42, 1.20, GFN,  29.58, 1.0, BC, 30.40),                         # exchange, Or's right lands 30.4 | מעל 200 קרבות זירה
-    (9.62, 0.80, "IMG_7970.mov", 5.50, 1.0, zoom(1.45, 0.52, 0.58), 5.95),  # the one pad shot
-    (10.42, 0.45, GFN, 14.50, 1.0, BC, 14.88),                         # punch lands 14.88 (cut before his knee)
-    (10.87, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # kick lands 6.12 (cut before camera switch) | פעמיים אלוף אירופה
-    (11.80, 0.75, GFN,  1.25, 1.0, BC),                                # Or's high kick
-    (12.55, 1.00, WGF, 12.40, 1.0, panel(520, 134, 1000, 754)),        # World Games exchange
-    (13.55, 0.45, GFN, 18.60, 1.0, BC, 18.85),                         # Or's punch (cut after it lands)
-    (14.00, 0.75, "IMG_7997.MOV", 36.00, 1.0, zoom(1.5, 0.50, 0.62)),  # ringside angle
-    (14.75, 0.75, "IMG_7997.MOV", 43.10, 1.0, zoom(1.6, 0.47, 0.60)),
-    (15.50, 0.75, "IMG_7997.MOV", 38.20, 1.0, zoom(1.5, 0.50, 0.62)),
-    (16.25, 1.00, "IMG_7997.MOV", 41.30, 1.0, zoom(1.6, 0.45, 0.60)),
-    (17.25, 1.00, "IMG_7997.MOV", 29.60, 0.5, zoom(1.5, 0.50, 0.62)),  # slow-mo exchange
+    # ---- 1.25-18.25 FIGHTS: real fight action only; each shot runs through the strike and the reaction --
+    (1.25, 0.50, EU,   12.72, 1.0, panel(640, 40, 820, 820)),          # DROP - Euro: Or takes off...
+    (1.75, 1.10, EU,   13.22, 0.4, panel(660, 40, 820, 820), 13.30),   # ...flying knee + punch land (slow-mo)
+    (2.85, 1.52, GFN,  29.58, 1.0, BC, 30.40),                         # NEW 3rd clip: right hand lands, Or drives him to the ropes (ends 31.10, before any fall)
+    (4.37, 1.00, "PHOTO", 0, 1.0, photo("IMG_8678.JPG", "panel", .30, .45, 1.02, 1.12)),  # photo: fight-night focus | אלוף משחקי העולם
+    (5.37, 1.68, GFN,   6.82, 1.0, BC, 8.05),                          # NEW: Or presses forward, body kick lands 8.05 | מעל 200 קרבות זירה
+    (7.05, 1.20, EU,   14.10, 1.0, rect(760, 0, 500, 888), 14.84),     # spinning kick lands 14.84 + follow-up
+    (8.25, 1.25, GFN,  19.45, 1.0, BC, 20.50),                         # knee + punch on the ropes, lands 20.5, head snaps
+    (9.50, 1.00, "PHOTO", 0, 1.0, photo("IMG_8697.JPG", "panel", .55, .45, 1.0, 1.10)),   # photo: Or's straight right landing (GFN)
+    (10.50, 1.85, EU,  10.10, 1.0, panel(560, 140, 860, 660), 10.80),  # NEW: Euro attack - punches + kicks
+    (12.35, 0.93, EU,   5.35, 1.0, rect(752, 0, 500, 888), 6.12),      # kick lands 6.12 | פעמיים אלוף אירופה
+    (13.28, 0.77, EU,   6.33, 1.0, rect(560, 0, 500, 888)),            # same exchange, 2nd broadcast angle - follow-up
+    (14.05, 0.80, GFN,  1.25, 1.0, BC, 1.55),                          # Or's high kick
+    (14.85, 1.00, "PHOTO", 0, 1.0, photo("IMG_8711.JPG", "panel", .45, .45, 1.0, 1.10)),  # photo: Or's flying knee (GFN)
+    (15.85, 2.40, "IMG_7997.MOV", 32.60, 1.0, zoom(1.8, 0.50, 0.60), 33.20),  # ringside angle: kick + exchange
 
-    # ---- 19.5-31.5 TEAM MOSHE (unchanged, shifted) ---------------------------------------------
+    # ---- 18.25-30.25 TEAM MOSHE ---------------------------------------------------------------------
     (18.25, 1.00, "IMG_7991.MOV", 98.70, 1.0, zoom(1.2, 0.5, 0.48)),    # מהזירה
     (19.25, 1.00, "D67A6795.MP4", 37.60, 1.0, win(770)),                 # לדור הבא
     (20.25, 1.00, "D67A6791.MP4",  0.60, 1.0, win(660)),
     (21.25, 1.00, "D67A6790.MP4", 11.50, 1.0, win(560)),
-    (22.25, 1.00, "D67A6795.MP4", 40.00, 1.0, win(900)),
+    (22.25, 1.00, "PHOTO", 0, 1.0, photo("IMG_0414.JPG", "full", .48, .40, 1.05, 1.14)),  # photo: Or coaching at the club
     (23.25, 0.75, "D67A6791.MP4",  9.85, 1.0, win(560), 10.30),
     (24.00, 0.75, "IMG_1612.MOV", 5.30, 1.0, FULL),
     (24.75, 1.00, "D67A6795.MP4", 30.20, 1.0, win(1120)),
@@ -89,15 +91,17 @@ SHOTS = [
     (28.25, 1.00, "IMG_1612.MOV",  7.90, 1.0, FULL),
     (29.25, 1.00, "IMG_7991_small.mov", 0.40, 1.0, FULL),
 
-    # ---- 31.5-42.5 VICTORIES (unchanged, shifted) ----------------------------------------------
+    # ---- 30.25-41.25 VICTORIES (+ podium and trophy photos) -------------------------------------------
     (30.25, 1.00, EU,   19.35, 0.75, panel(200, 60, 900, 760)),
-    (31.25, 1.50, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
-    (32.75, 1.50, WG418, 1.40, 1.0, panel(230, 280, 780, 510)),
-    (34.25, 1.50, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
-    (35.75, 2.00, "C7925.mov",     1.15, 0.5, win(560)),
-    (37.75, 3.50, GFN,  63.30, 1.0, BC),
+    (31.25, 1.25, WG451, 1.00, 1.0, panel(250, 268, 780, 520)),
+    (32.50, 1.00, "PHOTO", 0, 1.0, photo("54141f8b.jpg", "panel", .45, .50, 1.0, 1.08)),  # photo: gold on the podium
+    (33.50, 1.25, WG418, 1.40, 1.0, panel(230, 280, 780, 510)),
+    (34.75, 1.25, WC,    1.90, 1.0, panel(720, 110, 860, 730)),
+    (36.00, 2.00, "C7925.mov",     1.15, 0.5, win(560)),                 # ספורטאי השנה
+    (38.00, 1.25, "PHOTO", 0, 1.0, photo("b97b8a80.jpg", "full", .50, .42, 1.04, 1.12)),  # photo: Or with the trophy
+    (39.25, 2.00, GFN,  63.90, 1.0, BC),                                 # GFN: hand raised -> close-up
 
-    # ---- 42.5-47.5 LOGO ------------------------------------------------------------------------
+    # ---- 41.25-46.25 LOGO ------------------------------------------------------------------------
     (41.25, 5.00, "D67A6795.MP4", 12.00, 1.0, win(656)),
 ]
 

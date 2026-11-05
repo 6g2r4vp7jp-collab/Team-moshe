@@ -75,9 +75,42 @@ def chain(shot):
     f.append("format=yuv420p")
     return ",".join(f)
 
+def render_photo(i, t0, dur, crop):
+    """Still photo -> 1080x1920 clip with a slow, smooth push-in (rendered at 2x then downscaled: no jitter)."""
+    from PIL import Image, ImageOps, ImageFilter
+    n = int((t0 + dur) * FPS + 0.5) - int(t0 * FPS + 0.5)
+    im = ImageOps.exif_transpose(Image.open(os.path.join(RAW, "photos", crop["file"]))).convert("RGB")
+    BW, BH = W * 2, H * 2
+    if crop["mode"] == "full":                     # fill the 9:16 frame around the focus point
+        sc = max(BW / im.width, BH / im.height); im2 = im.resize((round(im.width * sc), round(im.height * sc)), Image.LANCZOS)
+        x = min(max(0, int(im2.width * crop["cx"] - BW / 2)), im2.width - BW)
+        y = min(max(0, int(im2.height * crop["cy"] - BH / 2)), im2.height - BH)
+        canvas = im2.crop((x, y, x + BW, y + BH))
+    else:                                          # whole photo full-width over its own blurred, darkened fill
+        sc = max(BW / im.width, BH / im.height); bg = im.resize((round(im.width * sc), round(im.height * sc)), Image.LANCZOS)
+        bx, by = (bg.width - BW) // 2, (bg.height - BH) // 2
+        bg = bg.crop((bx, by, bx + BW, by + BH)).filter(ImageFilter.GaussianBlur(60))
+        bg = Image.eval(bg, lambda v: int(v * 0.5))
+        fg = im.resize((BW, round(im.height * BW / im.width)), Image.LANCZOS)
+        if fg.height > BH:
+            y = min(max(0, int(fg.height * crop["cy"] - BH / 2)), fg.height - BH); fg = fg.crop((0, y, BW, y + BH))
+        bg.paste(fg, (0, (BH - fg.height) // 2)); canvas = bg
+    src = os.path.join(OUT, f"{i:02d}_still.png"); canvas.save(src)
+    z0, z1 = crop["z0"], crop["z1"]
+    zexpr = f"{z0}+({z1}-{z0})*(1-pow(1-on/{max(n - 1, 1)},2))"     # ease-out push-in
+    vf = (f"zoompan=z='{zexpr}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s={BW}x{BH}:fps={FPS},"
+          f"scale={W}:{H}:flags=lanczos,{GRADE},format=yuv420p")
+    name = os.path.join(OUT, f"{i:02d}.mp4")
+    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-loop", "1", "-framerate", str(FPS), "-i", src,
+                    "-vf", vf, "-frames:v", str(n), "-c:v", "libx264", "-preset", "fast", "-crf", "14", "-pix_fmt", "yuv420p", name], check=True)
+    os.remove(src)
+    return name
+
 def render(i_shot):
     i, shot = i_shot
     t0, dur, src, sin, speed, crop = shot[:6]
+    if crop["type"] == "photo":
+        return render_photo(i, t0, dur, crop)
     n = int((t0 + dur) * FPS + 0.5) - int(t0 * FPS + 0.5)
     name = os.path.join(OUT, f"{i:02d}.mp4")
     src_len = dur * speed + 0.25

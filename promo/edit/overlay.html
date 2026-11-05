@@ -47,9 +47,9 @@
   <div class="fx center" style="top:1335px" data-in="0.3" data-out="1.25" data-fx="wipe"><div class="line" style="width:560px"></div></div>
 
   <!-- FIGHTS -->
-  <div class="fx title sh" style="top:1170px" data-in="4.15" data-out="5.6" data-fx="mask"><div class="bar"></div><div class="big">אלוף<br><em>משחקי העולם</em></div></div>
-  <div class="fx title sh" style="top:1170px" data-in="10.95" data-out="11.78" data-fx="mask"><div class="bar"></div><div class="big"><em>פעמיים</em><br>אלוף אירופה</div></div>
-  <div class="fx title sh" style="top:1170px" data-in="8.5" data-out="9.6" data-fx="mask"><div class="bar"></div><div class="big">מעל <em>200</em><br>קרבות זירה</div></div>
+  <div class="fx title sh" style="top:1170px" data-in="4.4" data-out="5.35" data-fx="mask"><div class="bar"></div><div class="big">אלוף<br><em>משחקי העולם</em></div></div>
+  <div class="fx title sh" style="top:1170px" data-in="12.45" data-out="13.25" data-fx="mask"><div class="bar"></div><div class="big"><em>פעמיים</em><br>אלוף אירופה</div></div>
+  <div class="fx title sh" style="top:1170px" data-in="5.45" data-out="7.0" data-fx="mask"><div class="bar"></div><div class="big">מעל <em>200</em><br>קרבות זירה</div></div>
 
   <!-- TEAM MOSHE -->
   <div class="fx center huge sh" style="top:1160px" data-in="18.25" data-out="19.2" data-fx="track2">מהזירה</div>
@@ -57,11 +57,11 @@
   <div class="fx center sh" style="top:1150px; font-weight:900; font-size:112px; line-height:1.05" data-in="27.25" data-out="28.7" data-fx="mask">כאן מגדלים<br><span style="color:var(--ice)">אלופים</span></div>
 
   <!-- VICTORIES -->
-  <div class="fx center huge sh" style="top:1230px; font-size:128px" data-in="35.95" data-out="37.7" data-fx="track2">ספורטאי <span style="color:var(--ice)">השנה</span></div>
-  <div class="fx center stat sh" style="top:1230px" data-in="38.25" data-out="41.05" data-fx="rise">אלוף משחקי העולם <b>2022</b></div>
-  <div class="fx center stat sh" style="top:1298px" data-in="38.6" data-out="41.05" data-fx="rise"><b>פעמיים</b> אלוף אירופה</div>
-  <div class="fx center stat sh" style="top:1366px" data-in="38.95" data-out="41.05" data-fx="rise"><b>3 פעמים</b> סגן אלוף העולם</div>
-  <div class="fx center stat sh" style="top:1434px" data-in="39.3" data-out="41.05" data-fx="rise"><b>18 פעמים</b> אלוף ישראל</div>
+  <div class="fx center huge sh" style="top:1230px; font-size:128px" data-in="36.2" data-out="37.95" data-fx="track2">ספורטאי <span style="color:var(--ice)">השנה</span></div>
+  <div class="fx center stat sh" style="top:1230px" data-in="39.35" data-out="41.1" data-fx="rise">אלוף משחקי העולם <b>2022</b></div>
+  <div class="fx center stat sh" style="top:1298px" data-in="39.6" data-out="41.1" data-fx="rise"><b>פעמיים</b> אלוף אירופה</div>
+  <div class="fx center stat sh" style="top:1366px" data-in="39.85" data-out="41.1" data-fx="rise"><b>3 פעמים</b> סגן אלוף העולם</div>
+  <div class="fx center stat sh" style="top:1434px" data-in="40.1" data-out="41.1" data-fx="rise"><b>18 פעמים</b> אלוף ישראל</div>
 
   <!-- LOGO -->
   <div id="logoWrap"><div id="halo"></div><img src="../assets/team_moshe_logo.png"><div id="sweep"></div></div>
@@ -73,7 +73,7 @@
 <script>
 const DURATION = 46.25;
 const FLASH_AT = [1.25, 18.25, 30.25];
-const GRAD = [[0.0,1.25],[4.05,5.65],[8.42,9.62],[10.92,11.8],[18.25,21.75],[27.25,28.75],[35.75,37.75],[38.15,41.25]];
+const GRAD = [[0.0,1.25],[4.37,7.05],[12.35,13.28],[18.25,21.75],[27.25,28.75],[36.0,38.0],[39.25,41.25]];
 const LETTERBOX = [[0.0,1.25]];
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), seg=(t,a,b)=>clamp((t-a)/(b-a)), eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, lerp=(a,b,x)=>a+(b-a)*x;
 const $=id=>document.getElementById(id);
