@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <title>Team Moshe Overlay</title>
 <link rel="stylesheet" href="../src/fonts/fonts.css">
+<link rel="stylesheet" href="../src/fonts/frank.css">
 <style>
   /* Instagram Reels safe area: nothing important above y=250, below y=1520, or right of x=940 */
   :root { --blue:#1e90ff; --ice:#9fd6ff; --white:#f7f6f2; }
@@ -34,6 +35,15 @@
   #halo { background:radial-gradient(closest-side, rgba(30,144,255,.33), rgba(30,144,255,.08) 55%, transparent 75%); transform:scale(1.3); }
   #sweep { -webkit-mask-image:url(../assets/team_moshe_logo.png); mask-image:url(../assets/team_moshe_logo.png); -webkit-mask-size:100% 100%; mask-size:100% 100%;
            background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.9) 50%, transparent 60%); background-size:300% 100%; mix-blend-mode:screen; }
+  /* ---- luxury gold captions ---- */
+  .lux { font-family:'Frank Ruhl Libre','Heebo',serif; font-weight:900; }
+  .ch { display:inline-block; white-space:pre; opacity:0;
+        background:linear-gradient(180deg,#fff7d6 0%,#f7dc8a 28%,#d4a640 52%,#a8741c 72%,#f3d27a 100%);
+        -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .ch.hi { background:linear-gradient(180deg,#ffffff 0%,#fff1c2 35%,#f0c55a 60%,#c08a24 100%); -webkit-background-clip:text; background-clip:text; }
+  .gshadow { filter:drop-shadow(0 4px 18px rgba(0,0,0,.85)) drop-shadow(0 0 22px rgba(212,166,64,.35)); }
+  .gline { height:3px; background:linear-gradient(90deg,transparent,#d4a640,#fff1c2,#d4a640,transparent); box-shadow:0 0 16px rgba(240,197,90,.8); margin:0 auto; }
+  .roll { left:0; right:0; text-align:center; font-size:46px; line-height:1; }
 </style>
 </head>
 <body>
@@ -43,46 +53,74 @@
 <div id="black"></div>
 <div class="layer">
   <!-- COLD OPEN -->
-  <div class="fx center name sh" style="top:1150px" data-in="0.05" data-out="1.25" data-fx="track">אור משה</div>
-  <div class="fx center" style="top:1335px" data-in="0.3" data-out="1.25" data-fx="wipe"><div class="line" style="width:560px"></div></div>
+  <div class="fx center lux gshadow" style="top:1140px; font-size:176px; line-height:1" data-in="0.05" data-out="1.25" data-fx="write">אור משה</div>
+  <div class="fx center" style="top:1350px" data-in="0.45" data-out="1.25" data-fx="wipe"><div class="gline" style="width:560px"></div></div>
 
   <!-- FIGHTS -->
-  <div class="fx title sh" style="top:1170px" data-in="4.4" data-out="5.35" data-fx="mask"><div class="bar"></div><div class="big">אלוף<br><em>משחקי העולם</em></div></div>
-  <div class="fx title sh" style="top:1170px" data-in="15.15" data-out="16.0" data-fx="mask"><div class="bar"></div><div class="big"><em>פעמיים</em><br>אלוף אירופה</div></div>
-  <div class="fx title sh" style="top:1170px" data-in="5.45" data-out="7" data-fx="mask"><div class="bar"></div><div class="big">מעל <em>200</em><br>קרבות זירה</div></div>
+  <div class="fx title lux gshadow" style="top:1170px" data-in="4.4" data-out="5.35" data-fx="write"><div class="big" style="font-weight:900">אלוף<br><b>משחקי העולם</b></div></div>
+  <div class="fx title lux gshadow" style="top:1170px" data-in="5.45" data-out="7" data-fx="write"><div class="big" style="font-weight:900">מעל <b>200</b><br>קרבות זירה</div></div>
+  <div class="fx title lux gshadow" style="top:1170px" data-in="15.15" data-out="16.0" data-fx="write"><div class="big" style="font-weight:900"><b>פעמיים</b><br>אלוף אירופה</div></div>
 
   <!-- TEAM MOSHE -->
-  <div class="fx center huge sh" style="top:1160px" data-in="22.25" data-out="23.2" data-fx="track2">מהזירה</div>
-  <div class="fx center huge sh" style="top:1160px; color:var(--ice)" data-in="23.25" data-out="25.65" data-fx="mask">לדור הבא</div>
-  <div class="fx center sh" style="top:1150px; font-weight:900; font-size:112px; line-height:1.05" data-in="31.25" data-out="32.7" data-fx="mask">כאן מגדלים<br><span style="color:var(--ice)">אלופים</span></div>
+  <div class="fx center lux gshadow" style="top:1160px; font-size:150px; line-height:1" data-in="22.25" data-out="23.2" data-fx="write">מהזירה</div>
+  <div class="fx center lux gshadow" style="top:1160px; font-size:150px; line-height:1" data-in="23.25" data-out="25.65" data-fx="write"><b>לדור הבא</b></div>
+  <div class="fx center lux gshadow" style="top:1150px; font-size:118px; line-height:1.08" data-in="31.25" data-out="32.7" data-fx="write">כאן מגדלים<br><b>אלופים</b></div>
 
-  <!-- VICTORIES -->
-  <div class="fx center huge sh" style="top:1230px; font-size:128px" data-in="40.2" data-out="41.95" data-fx="track2">ספורטאי <span style="color:var(--ice)">השנה</span></div>
-  <div class="fx center stat sh" style="top:1230px" data-in="43.35" data-out="45.1" data-fx="rise">אלוף משחקי העולם <b>2022</b></div>
-  <div class="fx center stat sh" style="top:1298px" data-in="43.6" data-out="45.1" data-fx="rise"><b>פעמיים</b> אלוף אירופה</div>
-  <div class="fx center stat sh" style="top:1366px" data-in="43.85" data-out="45.1" data-fx="rise"><b>3 פעמים</b> סגן אלוף העולם</div>
-  <div class="fx center stat sh" style="top:1434px" data-in="44.1" data-out="45.1" data-fx="rise"><b>18 פעמים</b> אלוף ישראל</div>
+  <!-- VICTORIES: gold honor roll, one line written on every hand raise -->
+  <div class="fx roll lux gshadow" style="top:1040px" data-in="34.35" data-out="45.1" data-fx="write">אלוף אירופה <b>פעמיים</b></div>
+  <div class="fx roll lux gshadow" style="top:1100px" data-in="35.35" data-out="45.1" data-fx="write">אלוף <b>משחקי העולם</b></div>
+  <div class="fx roll lux gshadow" style="top:1160px" data-in="36.6" data-out="45.1" data-fx="write">אלוף <b>גביע העולם</b></div>
+  <div class="fx roll lux gshadow" style="top:1220px" data-in="37.6" data-out="45.1" data-fx="write">אלוף <b>גביע אירופה</b></div>
+  <div class="fx roll lux gshadow" style="top:1280px" data-in="38.85" data-out="45.1" data-fx="write">סגן אלוף העולם <b>3 פעמים</b></div>
+  <div class="fx roll lux gshadow" style="top:1340px" data-in="40.1" data-out="45.1" data-fx="write">ספורטאי השנה <b>פעמיים</b></div>
+  <div class="fx roll lux gshadow" style="top:1400px" data-in="42.1" data-out="45.1" data-fx="write"><b>18 פעמים</b> אלוף ישראל</div>
+  <div class="fx roll lux gshadow" style="top:1460px" data-in="43.35" data-out="45.1" data-fx="write">מעל <b>200</b> קרבות זירה</div>
 
   <!-- LOGO -->
   <div id="logoWrap"><div id="halo"></div><img src="../assets/team_moshe_logo.png"><div id="sweep"></div></div>
-  <div class="fx center kick sh" style="top:1130px" data-in="46.25" data-out="99" data-fx="rise">אגרוף תאילנדי · קיקבוקסינג</div>
-  <div class="fx center sh" style="top:1200px; font-size:44px; font-weight:500; color:#fff" data-in="46.65" data-out="99" data-fx="rise">קיבוץ לוחמי הגטאות</div>
+  <div class="fx center lux gshadow" style="top:1125px; font-size:50px" data-in="46.25" data-out="99" data-fx="write">אגרוף תאילנדי · קיקבוקסינג</div>
+  <div class="fx center lux gshadow" style="top:1200px; font-size:46px; font-weight:600" data-in="46.75" data-out="99" data-fx="write">קיבוץ לוחמי הגטאות</div>
 </div>
 <div id="flash"></div>
 <div id="fade"></div>
 <script>
 const DURATION = 50.25;
 const FLASH_AT = [1.25, 22.25, 34.25];
-const GRAD = [[0.0,1.25],[4.37,8.12],[15.10,16.03],[22.25,25.75],[31.25,32.75],[40.0,42.0],[43.25,45.25]];
+const GRAD = [[0.0,1.25],[4.37,8.12],[15.10,16.03],[22.25,25.75],[31.25,32.75],[34.25,45.25]];
 const LETTERBOX = [[0.0,1.25]];
 const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x)), seg=(t,a,b)=>clamp((t-a)/(b-a)), eOut=x=>1-Math.pow(1-x,3), eIO=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2, lerp=(a,b,x)=>a+(b-a)*x;
 const $=id=>document.getElementById(id);
-const items=[...document.querySelectorAll('.fx')].map(el=>({el,tin:+el.dataset.in,tout:+el.dataset.out,fx:el.dataset.fx}));
+function splitChars(root){
+  const out=[];
+  (function walk(node,hi){
+    [...node.childNodes].forEach(c=>{
+      if(c.nodeType===3){
+        const frag=document.createDocumentFragment();
+        for(const chr of (c.textContent.match(/[0-9A-Za-z.,×]+|./gsu)||[])){ const sp=document.createElement('span'); sp.className='ch'+(hi?' hi':''); sp.textContent=chr; if(/[0-9A-Za-z]/.test(chr)) sp.style.unicodeBidi='isolate'; frag.appendChild(sp); out.push(sp); }
+        c.replaceWith(frag);
+      } else if(c.nodeType===1 && c.tagName!=='BR'){ walk(c, hi || c.tagName==='B'); }
+    });
+  })(root,false);
+  return out;
+}
+const items=[...document.querySelectorAll('.fx')].map(el=>({el,tin:+el.dataset.in,tout:+el.dataset.out,fx:el.dataset.fx, chars: el.dataset.fx==='write' ? splitChars(el) : null}));
 function apply(it,t){
   const {el,tin,tout,fx}=it;
   if(t<tin-0.01||t>tout+0.01){el.style.opacity=0;return;}
   const life=t-tin, outP=eOut(seg(t,tout-0.22,tout));
   let op=1,tx=0,ty=0,sc=1,blur=0,clip='none',ls=null;
+  if(fx==='write'){
+    const ch=it.chars, n=ch.length, span=Math.min(0.85, 0.05*n), per=0.22;
+    const sweep=seg(life, span*0.6, span*0.6+0.9);
+    ch.forEach((c,i)=>{
+      const p=eOut(seg(life, (i/Math.max(n,1))*span, (i/Math.max(n,1))*span+per));
+      const g=Math.exp(-Math.pow((i/Math.max(n-1,1))-sweep,2)/0.012)*(sweep>0&&sweep<1?1:0);
+      c.style.opacity=p; c.style.transform=`translateY(${((1-p)*14).toFixed(1)}px)`;
+      c.style.filter=`blur(${((1-p)*6).toFixed(2)}px) brightness(${(1+0.9*g).toFixed(3)})`;
+    });
+    el.style.opacity=1-outP; el.style.transform=''; el.style.clipPath='none';
+    return;
+  }
   if(fx==='track'){const p=eOut(seg(life,0,1.0)); op=clamp(p*1.6); blur=(1-p)*14; ls=lerp(.22,.06,p)+'em'; sc=lerp(1.05,1,p);}
   else if(fx==='track2'){const p=eOut(seg(life,0,0.5)); op=p; blur=(1-p)*10; sc=lerp(1.12,1,p);}
   else if(fx==='rise'){const p=eOut(seg(life,0,0.45));op=p;ty=(1-p)*30;blur=(1-p)*5;}
