@@ -4,3 +4,4 @@ promo/work/
 __pycache__/
 promo/edit/*.log
 promo/edit/*.mov
+reels/*.mp4
