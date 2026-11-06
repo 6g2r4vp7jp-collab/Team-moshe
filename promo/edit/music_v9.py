@@ -315,6 +315,9 @@ for i, s in enumerate(SHOTS):
     put("loc", x, t0, LOC[src])
 
 # ================= MIX =================
+if os.environ.get("NO_MUSIC"):                       # natural sound only: real location audio + soft strike sounds
+    for k in ("music", "drums", "bass"): BUS[k][:] = 0
+    VERB[:] = 0
 # sidechain: duck music/bass under the kicks of the trap sections
 kick_env = np.zeros(N)
 for b in list(np.arange(4.0, 20.0 + INS_X, BAR)) + list(np.arange(33.0 + INS_X, 44.0 + INS_X, BAR)):
