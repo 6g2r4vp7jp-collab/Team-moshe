@@ -1,0 +1,4 @@
+company,category,contact_name,contact_channel,status,package,value,last_contact,next_followup,notes,is_sample
+[דוגמה] חנות ציוד לחימה,equipment,,,research,,,,,דוגמה בלבד: למחוק או להחליף,yes
+[דוגמה] מסעדה מקומית בנהריה,food,,,research,,,,,דוגמה בלבד,yes
+[דוגמה] רשת חדרי כושר / תוספי תזונה,nutrition,,,research,,,,,דוגמה בלבד,yes

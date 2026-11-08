@@ -1,0 +1,170 @@
+{
+  "week_start": "2026-11-01",
+  "is_sample": true,
+  "source_files": [
+    "sample_posts.csv"
+  ],
+  "unrecognised_columns": [],
+  "posts_count": 5,
+  "prev_posts_count": 5,
+  "summary": [
+    {
+      "metric": "views",
+      "label": "צפיות",
+      "current": 31956.0,
+      "previous": 19951.0,
+      "change_pct": 60.17242243496567
+    },
+    {
+      "metric": "reach",
+      "label": "חשיפה (סכום לפי פוסט)",
+      "current": 21509.0,
+      "previous": 14897.0,
+      "change_pct": 44.38477545814594
+    },
+    {
+      "metric": "shares",
+      "label": "שיתופים",
+      "current": 261.0,
+      "previous": 121.0,
+      "change_pct": 115.70247933884296
+    },
+    {
+      "metric": "saves",
+      "label": "שמירות",
+      "current": 415.0,
+      "previous": 194.0,
+      "change_pct": 113.91752577319588
+    },
+    {
+      "metric": "follows",
+      "label": "עוקבים מפוסטים",
+      "current": 80.0,
+      "previous": 46.0,
+      "change_pct": 73.91304347826086
+    },
+    {
+      "metric": "profile_visits",
+      "label": "כניסות לפרופיל (מפוסטים)",
+      "current": 460.0,
+      "previous": 308.0,
+      "change_pct": 49.35064935064935
+    }
+  ],
+  "avg_watch_time_sec": 7.824999999999999,
+  "kpis": {
+    "followers_total": 4318.0,
+    "new_followers": 108.0,
+    "profile_visits": 1515.0,
+    "sponsor_inquiries": 1.0,
+    "club_inquiries": 7.0,
+    "club_signups": 2.0
+  },
+  "kpis_prev": {
+    "followers_total": 4210.0,
+    "new_followers": 86.0,
+    "profile_visits": 1240.0,
+    "sponsor_inquiries": 0.0,
+    "club_inquiries": 4.0,
+    "club_signups": 1.0
+  },
+  "top_posts": [
+    {
+      "date": "2026-11-05",
+      "post_id": "SAMPLE009",
+      "format": "reel",
+      "pillar": "club",
+      "title": "[דוגמה] מבוגרים מתחילים",
+      "views": 3759.0,
+      "reach": 2691.0,
+      "avg_watch_time_sec": 5.5,
+      "likes": 202.0,
+      "comments": 19.0,
+      "shares": 53.0,
+      "saves": 68.0,
+      "follows": 6.0,
+      "profile_visits": 58.0,
+      "score": 0.12560386473429952
+    },
+    {
+      "date": "2026-11-03",
+      "post_id": "SAMPLE007",
+      "format": "reel",
+      "pillar": "coach",
+      "title": "[דוגמה] תרגיל לבית",
+      "views": 5090.0,
+      "reach": 3762.0,
+      "avg_watch_time_sec": 6.4,
+      "likes": 242.0,
+      "comments": 8.0,
+      "shares": 54.0,
+      "saves": 89.0,
+      "follows": 14.0,
+      "profile_visits": 136.0,
+      "score": 0.10738968633705476
+    },
+    {
+      "date": "2026-11-01",
+      "post_id": "SAMPLE006",
+      "format": "reel",
+      "pillar": "fighter",
+      "title": "[דוגמה] GFN היכל מנורה",
+      "views": 11690.0,
+      "reach": 7142.0,
+      "avg_watch_time_sec": 10.2,
+      "likes": 473.0,
+      "comments": 64.0,
+      "shares": 109.0,
+      "saves": 82.0,
+      "follows": 42.0,
+      "profile_visits": 96.0,
+      "score": 0.10123214785774293
+    }
+  ],
+  "by_pillar": [
+    {
+      "key": "club",
+      "posts": 1,
+      "reach": 2691.0,
+      "views": 3759.0,
+      "avg_score": 0.12560386473429952
+    },
+    {
+      "key": "coach",
+      "posts": 2,
+      "reach": 5333.0,
+      "views": 5090.0,
+      "avg_score": 0.10143513597565659
+    },
+    {
+      "key": "fighter",
+      "posts": 2,
+      "reach": 13485.0,
+      "views": 23107.0,
+      "avg_score": 0.08506349628422383
+    }
+  ],
+  "by_format": [
+    {
+      "key": "reel",
+      "posts": 4,
+      "reach": 19938.0,
+      "views": 31956.0,
+      "avg_score": 0.10078013590995048
+    },
+    {
+      "key": "carousel",
+      "posts": 1,
+      "reach": 1571.0,
+      "views": 0.0,
+      "avg_score": 0.09548058561425843
+    }
+  ],
+  "recommendations": [
+    "עמוד התוכן 'Team Moshe' הוביל במעורבות (ציון 12.56 מול 8.51 ב'לוחם'). כדאי להוסיף פוסט אחד מהסוג הזה בשבוע הבא.",
+    "הפוסט המוביל, '[דוגמה] מבוגרים מתחילים', הביא 53 שיתופים ו-68 שמירות. כדאי לעשות לו המשך (חלק 2, או אותו הוק עם קטע אחר).",
+    "זמן הצפייה הממוצע ברילס הוא 7.8 שניות. כדאי לקצר את הפתיחה ולשים את המכה החזקה ב-1.5 השניות הראשונות.",
+    "לפי פורמט: 'reel' מוביל (ציון 10.08) מול 'carousel' (9.55)."
+  ],
+  "generated_at": "2026-11-08T21:30:08"
+}

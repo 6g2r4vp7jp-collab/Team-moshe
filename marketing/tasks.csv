@@ -1,0 +1,14 @@
+due,area,task,owner,status,needs_approval,notes
+2026-11-10,brand,"לאמת את כל התארים ב-brand/achievements.json (שנה, ארגון, מקור)",אור,open,no,בלי זה אין מדיה קיט ופניות לחו"ל
+2026-11-10,brand,"למלא ב-profile.md: מערכת שעות, מחירים, טלפון, handle של אינסטגרם",אור,open,no,
+2026-11-10,connections,להחליט על חיבור Instagram Graph API (ראה docs/CONNECTIONS.md),אור,open,yes,בינתיים: ייצוא CSV שבועי
+2026-11-11,analytics,לייצא Insights של 30 הימים האחרונים ל-analytics/data,אור,open,no,קו בסיס לפני התוכנית
+2026-11-11,content,לאשר ולפרסם את סרטון התדמית (בחירת מוזיקה מספריית IG),אור,open,yes,
+2026-11-12,reels,לבחור 6–8 קטעי קרבות חזקים מהדרייב לרילס 'ברכיים' ו-GFN,Claude,open,no,קריאה בלבד מהדרייב
+2026-11-13,club,לאסוף טופסי הסכמת צילום מהורים,אור,open,no,crm/media_consents.csv
+2026-11-16,career,Highlight באנגלית 60–90 שניות (16:9 + 9:16),Claude,open,no,אחרי אימות תארים
+2026-11-18,career,תיק ספורטאי עברית + אנגלית,Claude,open,no,
+2026-11-22,club,להחליט על אימון ניסיון (חינם? מתי?) ועל תקציב מודעות (אם בכלל),אור,open,yes,
+2026-11-29,career,מדיה קיט + רשימת 10 ספונסרים פוטנציאליים,Claude,open,no,
+2026-12-01,career,טיוטות פנייה ל-5 ארגונים/מאצ'מייקרים,Claude,open,yes,אור שולח בעצמו
+2026-12-07,analytics,דוח חודשי + תוכנית ל-30 הימים הבאים,Claude,open,no,

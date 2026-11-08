@@ -5,3 +5,8 @@ __pycache__/
 promo/edit/*.log
 promo/edit/*.mov
 reels/*.mp4
+.env
+*.env
+reels/raw/
+reels/out/
+reels/inventory.csv

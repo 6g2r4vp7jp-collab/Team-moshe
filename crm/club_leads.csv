@@ -1,0 +1,4 @@
+date,name,phone_or_handle,source,age_group,program,status,trial_date,next_followup,notes,consent_media,is_sample
+2026-11-01,[דוגמה] דנה (אמא של יואב),05x-xxx,instagram,kids,kids,trial_booked,2026-11-10,2026-11-11,נתוני דוגמה,unknown,yes
+2026-11-03,[דוגמה] רון,@example,whatsapp,adult,adults,new,,2026-11-09,נתוני דוגמה,unknown,yes
+2026-11-04,[דוגמה] משפחת לוי,05x-xxx,friend,teens,teens,joined,2026-11-06,,נתוני דוגמה,yes,yes

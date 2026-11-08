@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>OR MOSHE BRAND</title>
+<link rel="stylesheet" href="../promo/src/fonts/frank.css">
+<style>
+:root{
+  --bg:#0A0A0A; --surface:#141414; --surface-2:#1C1C1C; --line:#2A2A2A;
+  --gold:#D4AF37; --gold-hi:#F1D27A; --gold-dim:#8C7426;
+  --ink:#FFFFFF; --ink-2:#BDBDBD; --ink-3:#8A8A8A;
+  --ok:#5FBF7A; --warn:#E0A43A; --bad:#E2604F;
+  --r:14px; --gut:16px;
+  --serif:"Frank Ruhl Libre", "David", Georgia, serif;
+  --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", "Heebo", "Arial Hebrew", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+a{color:var(--gold-hi)}
+header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#000 0%,rgba(10,10,10,.96) 100%);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) var(--gut) 10px}
+.brand{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.brand h1{margin:0;font-family:var(--serif);font-weight:900;font-size:22px;letter-spacing:.06em;color:var(--gold)}
+.brand h1 span{color:var(--ink)}
+.brand small{color:var(--ink-3);font-size:12px}
+main{max-width:1100px;margin:0 auto;padding:var(--gut)}
+section.tab{display:none}
+section.tab.on{display:block}
+h2{font-family:var(--serif);font-size:20px;margin:22px 0 10px;color:var(--ink);display:flex;align-items:center;gap:8px}
+h2::before{content:"";width:4px;height:18px;background:var(--gold);border-radius:2px}
+h2:first-child{margin-top:4px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.tile .v{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tile .l{color:var(--ink-2);font-size:13px}
+.tile .d{font-size:12px;color:var(--ink-3)}
+.sample{display:inline-block;font-size:11px;font-weight:700;color:#000;background:var(--gold-hi);border-radius:999px;padding:1px 8px;margin-inline-start:6px;vertical-align:middle}
+.banner{border:1px dashed var(--gold-dim);background:rgba(212,175,55,.07);color:var(--gold-hi);border-radius:var(--r);padding:10px 12px;font-size:13px;margin-bottom:12px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.list li:last-child{border-bottom:0}
+.when{flex:0 0 auto;min-width:52px;text-align:center;font-variant-numeric:tabular-nums;color:var(--gold);font-weight:700;font-size:13px;line-height:1.2}
+.when b{display:block;font-size:11px;color:var(--ink-3);font-weight:500}
+.grow{flex:1;min-width:0;overflow-wrap:anywhere}
+.card,.banner{overflow-wrap:anywhere}
+.tbl td{overflow-wrap:normal;white-space:nowrap}
+.tbl td:last-child{white-space:normal;min-width:160px}
+.t{font-weight:700}
+.s{color:var(--ink-2);font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--ink-2);white-space:nowrap}
+.pill.gold{border-color:var(--gold-dim);color:var(--gold-hi)}
+.pill.ok{border-color:#2d5e3a;color:var(--ok)}
+.pill.warn{border-color:#6b4e1b;color:var(--warn)}
+.pill.bad{border-color:#6b2c24;color:var(--bad)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}
+.filters button{font:inherit;font-size:13px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:6px 12px;cursor:pointer;min-height:36px}
+.filters button.on{background:var(--gold);border-color:var(--gold);color:#000;font-weight:700}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{text-align:start;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{color:var(--ink-3);font-weight:600;font-size:12px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chart{position:relative}
+.bar-row{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:8px;align-items:center;padding:5px 0;font-size:13px}
+.bar-row .lab{color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{height:14px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.bar{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:4px;min-width:2px}
+.bar-row .num{font-variant-numeric:tabular-nums;color:var(--ink);font-weight:600;min-width:52px;text-align:end}
+.bar-row:hover .bar,.bar-row:focus .bar{background:var(--gold-hi)}
+.bar-row:focus{outline:1px solid var(--gold-dim);border-radius:6px}
+.tip{position:fixed;z-index:20;pointer-events:none;background:#000;border:1px solid var(--gold-dim);color:var(--ink);border-radius:10px;padding:8px 10px;font-size:12px;max-width:260px;display:none;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.cap{white-space:pre-wrap;background:var(--surface-2);border-radius:10px;padding:8px 10px;margin-top:8px;font-size:13px;color:var(--ink)}
+.copy{font:inherit;font-size:12px;background:none;border:1px solid var(--gold-dim);color:var(--gold-hi);border-radius:8px;padding:4px 10px;margin-top:6px;cursor:pointer;min-height:32px}
+.muted{color:var(--ink-3)}
+.empty{color:var(--ink-3);font-size:13px;padding:8px 0}
+nav{position:fixed;bottom:0;left:0;right:0;z-index:10;background:rgba(0,0,0,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav button{flex:1;font:inherit;background:none;border:0;color:var(--ink-3);font-size:11px;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;min-height:48px}
+nav button .ic{font-size:19px;line-height:1}
+nav button.on{color:var(--gold)}
+@media (min-width:900px){
+  body{padding-bottom:0}
+  nav{position:sticky;top:57px;bottom:auto;justify-content:center;gap:4px;border-top:0;border-bottom:1px solid var(--line);padding:6px}
+  nav button{flex:0 0 auto;flex-direction:row;font-size:14px;padding:8px 14px;border-radius:999px;min-height:40px}
+  nav button.on{background:var(--surface-2)}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><h1>OR MOSHE <span>BRAND</span></h1><small id="gen"></small></div>
+</header>
+<nav id="nav"></nav>
+<main>
+  <section class="tab" id="t-home"></section>
+  <section class="tab" id="t-calendar"></section>
+  <section class="tab" id="t-reels"></section>
+  <section class="tab" id="t-stats"></section>
+  <section class="tab" id="t-sponsors"></section>
+  <section class="tab" id="t-club"></section>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

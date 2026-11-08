@@ -1,0 +1,18 @@
+{
+  "_note": "מקור האמת היחיד לתארים. verified=false עד שאור מספק מקור (תעודה, אתר הפדרציה, כתבה). חובה למלא year, organization ו-source לפני שימוש בחומר חיצוני.",
+  "achievements": [
+    {"id": "world_games_champion", "title_he": "אלוף משחקי העולם", "title_en": "World Games Champion", "count": 1, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "איזה אירוע בדיוק (The World Games / IFMA World Combat Games / אחר)? שנה ומקום?"},
+    {"id": "european_champion", "title_he": "אלוף אירופה", "title_en": "European Champion", "count": 2, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "איזו פדרציה (IFMA / WAKO / אחר)? שנים?"},
+    {"id": "world_runner_up", "title_he": "סגן אלוף עולם", "title_en": "World Championship Silver Medalist", "count": 3, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "פדרציה ושנים לכל אחת משלוש הפעמים"},
+    {"id": "world_cup_champion", "title_he": "אלוף גביע העולם", "title_en": "World Cup Champion", "count": 1, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "איזה גביע עולם, שנה ומקום"},
+    {"id": "european_cup_champion", "title_he": "אלוף גביע אירופה", "title_en": "European Cup Champion", "count": 1, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "איזה גביע, שנה ומקום"},
+    {"id": "athlete_of_year", "title_he": "ספורטאי השנה", "title_en": "Athlete of the Year", "count": 2, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "מי העניק (איגוד / עירייה / מועצה)? שנים?"},
+    {"id": "israel_champion", "title_he": "אלוף ישראל", "title_en": "Israeli National Champion", "count": 18, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "איזה איגוד? מואי תאי וקיקבוקסינג יחד או בנפרד?"},
+    {"id": "ring_fights", "title_he": "מעל 200 קרבות זירה", "title_en": "200+ ring fights", "count": 200, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "פילוח חובבני/מקצועי ורקורד מקצועי W-L-D"},
+    {"id": "experience", "title_he": "מעל 15 שנות ניסיון", "title_en": "15+ years in the ring", "count": 15, "organization": null, "year": null, "weight_class": null, "source": null, "verified": false, "verify_note": "שנת התחלה"}
+  ],
+  "professional_record": {"wins": null, "losses": null, "draws": null, "ko_wins": null, "verified": false, "source": null},
+  "events_featured": [
+    {"name": "GFN", "note": "מופיע בחומרי הווידאו (היכל מנורה). לאמת שם מלא, תאריכים ותוצאות", "verified": false}
+  ]
+}
