@@ -40,6 +40,15 @@ CLEAN = ("highpass=f=85,afftdn=nr=14:nf=-42:tn=1,"
          "acompressor=threshold=-22dB:ratio=3.5:attack=6:release=150:makeup=7,"
          "loudnorm=I=-16:TP=-2:LRA=6")
 
+# "excited" delivery: +~0.8 semitone lift and ~7% quicker (energy), forward presence, tighter compression, light drive
+ENERGY = ("highpass=f=95,afftdn=nr=14:nf=-42:tn=1,"
+          "equalizer=f=160:t=q:w=1.0:g=1,equalizer=f=380:t=q:w=1.3:g=-3,"
+          "equalizer=f=1300:t=q:w=1.0:g=2,equalizer=f=3600:t=q:w=1.0:g=5.5,equalizer=f=8000:t=q:w=1.5:g=1.5,"
+          "acompressor=threshold=-24dB:ratio=5:attack=4:release=110:makeup=9,"
+          "asoftclip=type=tanh:threshold=0.8,loudnorm=I=-15:TP=-1.5:LRA=5")
+import os
+if os.environ.get("ENERGY"): CLEAN = ENERGY
+
 def load(src):
     raw = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-i", src, "-af", CLEAN,
                           "-ac", "1", "-ar", str(SR), "-f", "s16le", "-"], capture_output=True, check=True).stdout
@@ -52,6 +61,14 @@ def tempo(seg, t):
                           "-af", f"atempo={t}", "-f", "s16le", "-"], input=raw, capture_output=True, check=True).stdout
     return np.frombuffer(out, np.int16).astype(float) / 32768
 
+def lift(seg):
+    """per-line energy lift: ~+0.8 semitone, ~7% quicker (applied after cutting, so line timing stays right)"""
+    raw = (np.clip(seg, -1, 1) * 32767).astype(np.int16).tobytes()
+    out = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-f", "s16le", "-ar", str(SR), "-ac", "1", "-i", "-",
+                          "-af", f"asetrate={SR}*1.047,aresample={SR},atempo=1.022", "-f", "s16le", "-"],
+                         input=raw, capture_output=True, check=True).stdout
+    return np.frombuffer(out, np.int16).astype(float) / 32768
+
 def main(full, first, dst):
     rec = {"full": load(full), "first": load(first)}
     track = np.zeros(int(SR * DURATION)); cursor = 0.0
@@ -59,6 +76,7 @@ def main(full, first, dst):
         x = rec[r]
         seg = x[int(max(0, a - 0.03) * SR): int(min(b + 0.08, len(x) / SR) * SR)].copy()
         seg = tempo(seg, tp)
+        if os.environ.get("ENERGY"): seg = lift(seg)
         k = int(0.012 * SR); seg[:k] *= np.linspace(0, 1, k); seg[-k:] *= np.linspace(1, 0, k)
         start = max(t, cursor + (0.05 if tp != 1.0 or t > 55 else 0.10))
         i0 = int(start * SR); n = min(len(seg), len(track) - i0)
