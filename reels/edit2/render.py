@@ -13,7 +13,7 @@ def job(i):
     fi=round(e['lead']*30)
     zexp="1"
     if e['mode'] in ('push','end'): zexp+=f"*(1+{0.22 if e['mode']=='end' else 0.16}*on/{n})"
-    if e['mode']!='end' and (i%2==1 or e['mode']=='push' or e['dur']<0.7):
+    if e.get('bump', e['mode']!='end' and (i%2==1 or e['mode']=='push' or e['dur']<0.7)):
         zexp+=f"*(1+0.08*exp(-pow((on-{fi})/3.5,2)))"
     zp=f"zoompan=z='{zexp}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s={W}x{H}:fps=30"
     vf=(f"trim=duration={srcdur:.3f},setpts=PTS-STARTPTS,fps=30,crop={cw}:{ch}:{x}:{y},{TM},"
