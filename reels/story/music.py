@@ -2,7 +2,7 @@
 import numpy as np
 from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
-SR=48000; BPM=90; BEAT=60/BPM; BAR=4*BEAT; NB=19
+SR=48000; BPM=90; BEAT=60/BPM; BAR=4*BEAT; NB=int(__import__('os').environ.get('NB','19'))
 N=int(NB*BAR*SR)+SR*2
 L=np.zeros(N); R=np.zeros(N)
 rng=np.random.default_rng(7)
@@ -71,7 +71,7 @@ def bar_t(b): return b*BAR
 # Section map (bar index from 0): 0 intro hit, 1-4 build, 5 slow drop, 6-11 drop, 12 breath/slowmo, 13-15 final, 16 outro
 for b in range(NB):
     t0=bar_t(b); ch=b%4
-    sect = 'intro' if b==0 else 'build' if b<=4 else 'brk' if b in (5,12) else 'out' if b==NB-1 else 'drop'
+    sect = ('intro' if b==0 else 'build' if b<=4 else 'brk' if b in (5,12) else 'out' if b==NB-1 else 'drop') if NB>12 else ('intro' if b==0 else 'build' if b==1 else 'out' if b==NB-1 else 'drop')
     # pads everywhere except outro tail
     if sect!='out': add(pad(chords[ch],BAR+0.6),t0,0.22 if sect!='drop' else 0.26)
     else: add(pad(chords[0],BAR+1.5),t0,0.2)
@@ -84,7 +84,7 @@ for b in range(NB):
             for e in range(2): add(HAT,t0+q*BEAT+e*BEAT/2,0.12,pan=0.3)
         add(SNR,t0+2*BEAT,0.35+0.08*(b-1))
         for i,f in enumerate(melody[(b%2)*4:(b%2)*4+4]): add(pluck(f*2),t0+i*BEAT,0.13,pan=-0.3)
-        if b==4: add(riser(BAR),t0,0.35); add(whoosh_rev(1.2),t0+BAR-1.2,0.5)
+        if b==(4 if NB>12 else 1): add(riser(BAR),t0,0.35); add(whoosh_rev(1.2),t0+BAR-1.2,0.5)
     if sect in ('drop',):
         # trap half-time: kick on 1 & 'and of 2', snare on 3
         for kt in (0,1.5*BEAT,2.75*BEAT):
@@ -100,8 +100,8 @@ for b in range(NB):
             for r in range(6): add(HAT,t0+3.5*BEAT+r*BEAT/12,0.07+0.01*r,pan=0.35)
         add(OH,t0+3*BEAT,0.08,pan=-0.35)
         for i,f in enumerate(melody[(b%2)*4:(b%2)*4+4]): add(pluck(f*2),t0+i*BEAT+BEAT/2,0.10,pan=-0.3)
-        if b in (6,13): add(boom(),t0,0.7)
-        if b==16: add(riser(BAR),t0,0.3)
+        if b in ((6,13) if NB>12 else (2,6)): add(boom(),t0,0.7)
+        if b==NB-3: add(riser(BAR),t0,0.3)
         if b==11: add(riser(BAR),t0,0.3); add(whoosh_rev(1.2),t0+BAR-1.2,0.5)
         if b==NB-2: add(whoosh_rev(1.2),t0+BAR-1.2,0.55)
     if sect=='brk':
