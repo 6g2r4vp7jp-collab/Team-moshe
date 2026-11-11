@@ -2,8 +2,9 @@ import json, sys, numpy as np
 sys.path.insert(0, __file__.rsplit('/',1)[0]); from picks_plus import SEQ, PRE, POST, FINALE
 segs=[]
 for s in SEQ:
-    if len(s)==2: segs.append((s[0],s[1]-PRE,s[1]+POST))
-    elif isinstance(s[1],float) and isinstance(s[2],float) and s[2]-s[1]<1.5 and s[0]!='n6': segs.append((s[0],s[1]-PRE,s[2]+POST))
+    if len(s)==2:
+        ts=s[1] if isinstance(s[1],list) else [s[1]]
+        segs.append((s[0],ts[0]-PRE,ts[-1]+POST))
     else: segs.append(s)
 segs.append(FINALE)
 out=[]
