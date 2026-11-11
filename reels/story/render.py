@@ -30,7 +30,7 @@ def job(i):
             "-frames:v",str(n),"-c:v","libx264","-preset",preset,"-crf",crf,"-profile:v","high","-pix_fmt","yuv420p",
             "-color_primaries","bt709","-color_trc","bt709","-colorspace","bt709","-x264-params","keyint=60","-r","30",v+".tmp.mp4"],check=True)
         os.rename(v+".tmp.mp4",v)
-        subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-ss",str(e['ss']),"-i",src,"-t",f"{srcdur:.3f}","-map","0:a:0",
+        subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-ss",str(e['ss']),"-i",src,"-t",f"{srcdur:.3f}","-map","0:a:0" if e["clip"]!="n6" else "0:2",
             "-af",f"apad,atrim=0:{n/30:.4f},afade=t=in:d=0.01,afade=t=out:st={n/30-0.02:.4f}:d=0.02","-ar","48000","-ac","2",a],check=True)
     return i
 with ThreadPoolExecutor(par) as ex:

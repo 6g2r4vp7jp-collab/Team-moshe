@@ -7,5 +7,7 @@ HITS=[
  ('n3',[160.06]), ('n4',[2.23]), ('n4',[41.23]), ('n5',[108.56]), ('n4',[171.26]),
  ('n3',[165.04,165.59]), ('n5',[141.60]), ('n4',[164.22]), ('n4',[8.47]), ('n4',[18.00]), ('n5',[181.03]),
 ]
+# extra ranges (clip, start, end) from the 6th upload, inserted at given positions
+EXTRA=[(1,('n6',6.0,9.9)),(9,('n6',11.9,12.85)),(16,('n6',13.4,15.2))]
 # finale: the ~11-kick series with the other leg
 FINALE=('n3',171.85,178.15)

@@ -1,7 +1,9 @@
 import json, sys, numpy as np
-sys.path.insert(0, __file__.rsplit('/',1)[0]); from picks_power import HITS, FINALE, PRE, POST
+sys.path.insert(0, __file__.rsplit('/',1)[0]); from picks_power import HITS, FINALE, PRE, POST, EXTRA
 Z=1.55
-segs=[(c,h[0]-PRE,h[-1]+POST) for c,h in HITS]+[FINALE]
+segs=[(c,h[0]-PRE,h[-1]+POST) for c,h in HITS]
+for pos,seg in sorted(EXTRA,key=lambda x:-x[0]): segs.insert(pos,seg)
+segs=segs+[FINALE]
 out=[]
 for i,(c,a,b) in enumerate(segs):
     a=round(a,3); b=round(b,3)
