@@ -23,7 +23,7 @@ def job(i):
         f"crop={cw}:{ch}:'{pw(e['kt'],xs)}':'{pw(e['kt'],ys)}',{TM},"
         f"eq=contrast=1.1:saturation=1.12:gamma=0.96,unsharp=5:5:0.6,{zp},vignette=angle=PI/5,format=yuv420p")
     if i==0: vf+=",fade=t=in:d=0.15"
-    if e['end']: vf+=f",fade=t=out:st={n/30-0.6:.3f}:d=0.6"
+    if e['end']: vf+=f",fade=t=out:st={n/30-0.3:.3f}:d=0.3"
     v=f"{out}/v{i:02d}.mp4"; a=f"{out}/a{i:02d}.wav"
     if not (os.path.exists(v) and os.path.exists(a)):
         subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-threads","4","-ss",str(e['ss']),"-i",src,"-map","0:v:0","-vf",vf,
