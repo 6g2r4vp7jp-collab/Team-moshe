@@ -17,7 +17,7 @@ def job(i):
     xs=[min(max(x*10-cw/2,0),2160-cw) for x,_ in e['keys']]; ys=[min(max(y*10-ch/2,0),3840-ch) for _,y in e['keys']]
     zexp="1"
     for b in e['bumps']: zexp+=f"*(1+0.06*exp(-pow((on-{round(b*30)})/3.5,2)))"
-    if e['end']: zexp+=f"*(1+0.25*on/{n})"
+    if e['end'] and not e.get('nopush'): zexp+=f"*(1+0.25*on/{n})"
     zp=f"zoompan=z='{zexp}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s={W}x{H}:fps=30"
     vf=(f"trim=duration={srcdur:.3f},setpts=PTS-STARTPTS,fps=30,"
         f"crop={cw}:{ch}:'{pw(e['kt'],xs)}':'{pw(e['kt'],ys)}',{TM},"
