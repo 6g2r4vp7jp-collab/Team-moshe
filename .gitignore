@@ -6,3 +6,11 @@ promo/edit/*.log
 promo/edit/*.mov
 reels/*.mp4
 reels/**/*.mp4
+
+# Fight Performance AI - never commit secrets or personal data
+.env
+*.env
+client.json
+tokens.json
+pending_auth.json
+fight-performance-ai/data/
