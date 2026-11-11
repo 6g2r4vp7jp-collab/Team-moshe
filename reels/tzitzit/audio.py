@@ -96,10 +96,10 @@ add(pop(), 5.2, .4)
 add(thud(), 5.85, .6)
 add(tinkle(2.5), 6.0, .25, .2)
 add(pop(), 9.05, .5)
-add(choir(5.0), 9.9, .9); add(ding(), 10.0, .8); add(ding(2093), 10.3, .5, .3)
-add(pop(), 11.1, .6)
+add(choir(5.0), 9.9, .6); add(ding(), 10.0, .8); add(ding(2093), 10.3, .5, .3)
+add(pop(), 11.05, .6)
 add(whoosh(.5, 400, 3000), 14.95, .6)
-add(pop(), 15.25, .6)
+add(pop(), 15.05, .6)
 add(thud() * .4, 16.4, .5, .8); add(clang()[: int(.5 * SR)] * .3, 16.42, .3, .8)
 add(hum(7.0, 4), 18.5, 1.2)
 add(whoosh(.4, 300, 1500), 18.8, .4)
@@ -109,6 +109,22 @@ add(skid(1.2), 24.5, .9)
 # outro stinger
 for n in [52, 64, 68, 71, 76]: add(lead(n, 2.4) * env(2.4, .01, 1.2), 25.7, .5)
 add(kick(), 25.7, 1.0); add(ding(1318), 25.75, .6)
+
+# --- voice (voice.wav = cleaned recording) ---
+# line 1 "אוי שכויחה, זה השריון שלי" ; line 2 "זרוק את הקסדה..." (pause between its parts shortened)
+vw = wave.open('voice.wav'); vx = np.frombuffer(vw.readframes(vw.getnframes()), '<i2') / 32768
+def clip(a, b):
+    c = vx[int(a * SR):int(b * SR)].copy(); f = int(.015 * SR); c[:f] *= np.linspace(0, 1, f); c[-f:] *= np.linspace(1, 0, f); return c
+L1 = clip(0.10, 2.80)
+L2 = np.concatenate([clip(3.55, 4.05), np.zeros(int(.2 * SR)), clip(5.05, 7.60)])
+voice = np.zeros(N)
+for sig, t in [(L1, 11.15), (L2, 15.15)]: i = int(t * SR); voice[i:i + len(sig)] += sig
+# mouth envelope for the animation, one value per 1/30 s
+fr = SR // 30; envv = np.array([np.sqrt(np.mean(voice[i:i + fr] ** 2)) for i in range(0, N, fr)])
+envv = np.clip(envv / (np.percentile(envv[envv > .01], 90) + 1e-9), 0, 1)
+open('voice.js', 'w').write('window.VOICE=[' + ','.join(f'{v:.2f}' for v in envv) + '];\n')
+mix *= 0.55 / np.max(np.abs(mix))
+mix += voice[:, None] * 1.0
 
 mix /= np.max(np.abs(mix)) / 0.89
 fade = np.minimum(1, (DUR - np.arange(N) / SR) / 0.8); mix *= fade[:, None]
