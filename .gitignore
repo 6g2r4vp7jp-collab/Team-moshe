@@ -5,3 +5,4 @@ __pycache__/
 promo/edit/*.log
 promo/edit/*.mov
 reels/*.mp4
+reels/**/*.mp4
