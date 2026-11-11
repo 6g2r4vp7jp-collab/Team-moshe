@@ -22,7 +22,7 @@ with ThreadPoolExecutor(par) as ex:
 # one clean re-encode of the whole timeline (continuous timestamps, constant 60fps)
 k=len(S); ins=sum([["-i",f"{out}/v{i:02d}.mp4"] for i in range(k)],[])
 fc="".join(f"[{i}:v]" for i in range(k))+f"concat=n={k}:v=1:a=0,fade=t=out:st={sum(s[2] for s in S)*B+0.2-0.9:.3f}:d=0.9[v]"
-ff(*ins,"-filter_complex",fc,"-map","[v]","-r",str(FPS),"-c:v","libx264","-preset","slow","-crf","17","-profile:v","high","-pix_fmt","yuv420p",
+ff(*ins,"-filter_complex",fc,"-map","[v]","-r",str(FPS),"-c:v","libx264","-preset","medium","-crf","19","-profile:v","high","-pix_fmt","yuv420p",
    "-color_primaries","bt709","-color_trc","bt709","-colorspace","bt709","-g","60",f"{out}/video.mp4")
 ins=sum([["-i",f"{out}/a{i:02d}.wav"] for i in range(k)],[])
 ff(*ins,"-filter_complex","".join(f"[{i}:a]" for i in range(k))+f"concat=n={k}:v=0:a=1[a]","-map","[a]","-c:a","pcm_s16le",f"{out}/hits.wav")
