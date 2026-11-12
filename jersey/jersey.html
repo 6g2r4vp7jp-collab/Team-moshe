@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#eef0f3}
+  .stage{width:1200px;height:900px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:radial-gradient(ellipse at 50% 40%,#ffffff 0%,#e4e7ec 75%);font-family:Montserrat,Arial,sans-serif}
+  .row{display:flex;gap:40px}
+  .cap{text-align:center;color:#6b7280;font-size:15px;letter-spacing:.3em;font-weight:600;margin-top:6px}
+  h1{margin:0 0 26px;font:800 30px Montserrat,Arial;letter-spacing:.35em;color:#0d1117}
+  h1 span{color:#2f8fd0}
+</style>
+</head>
+<body>
+<div class="stage">
+  <h1>TEAM <span>MOSHE</span> · FIGHT JERSEY</h1>
+  <div class="row">
+    <div><svg id="front" width="520" height="660" viewBox="0 0 500 640"></svg><div class="cap">FRONT</div></div>
+    <div><svg id="back" width="520" height="660" viewBox="0 0 500 640"></svg><div class="cap">BACK</div></div>
+  </div>
+</div>
+<script>
+const NAME = 'MOSHE', NUM = '1';
+const BLUE='#2f8fd0', BLUE_L='#7cc4f2', BASE='#0c0e12';
+
+function jersey(svg, side){
+  const front = side==='front';
+  const neckDepth = front ? 112 : 52;
+  const body = `M135,25 Q162,14 190,22 C198,${neckDepth} 302,${neckDepth} 310,22 Q338,14 365,25
+    C372,140 410,222 460,245 L456,588 Q250,628 44,588 L40,245 C90,222 128,140 135,25 Z`;
+  const neck = `M190,22 C198,${neckDepth} 302,${neckDepth} 310,22`;
+  const armL = `M135,25 C128,140 90,222 40,245`;
+  const armR = `M365,25 C372,140 410,222 460,245`;
+  const id = side;
+  // brush-stroke shards on the side panels (mirrored)
+  const shards = [
+    [[40,300],[95,250],[110,262],[48,330]],
+    [[40,380],[118,300],[126,318],[42,420]],
+    [[40,470],[100,410],[108,428],[44,505]],
+    [[44,560],[130,470],[136,492],[60,592]],
+  ];
+  const poly = (pts,mirror,fill,op)=>`<polygon points="${pts.map(([x,y])=>`${mirror?500-x:x},${y}`).join(' ')}" fill="${fill}" opacity="${op}"/>`;
+  let art = '';
+  shards.forEach((s,i)=>{ art += poly(s,false,i%2?BLUE_L:BLUE,.85) + poly(s,true,i%2?BLUE_L:BLUE,.85); });
+
+  const content = front ? `
+      <image href="logo_transparent.png" x="138" y="128" width="224" height="225" />
+      <text x="250" y="402" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="46" letter-spacing="6"
+            fill="#fff" stroke="${BLUE}" stroke-width="1.2">TEAM MOSHE</text>
+      <rect x="168" y="416" width="164" height="2.5" fill="${BLUE}"/>
+      <text x="250" y="442" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="12.5"
+            letter-spacing="5" fill="${BLUE_L}">MUAY THAI · KICKBOXING</text>`
+    : `
+      <text x="250" y="112" text-anchor="middle" font-family="Montserrat,Arial" font-weight="800" font-size="12"
+            letter-spacing="6" fill="${BLUE_L}">TEAM MOSHE</text>
+      <text x="250" y="178" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="58" letter-spacing="8"
+            fill="#fff">${NAME}</text>
+      <text x="250" y="420" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="250"
+            fill="${BLUE}" stroke="${BLUE}" stroke-width="18" stroke-linejoin="round">${NUM}</text>
+      <text x="250" y="420" text-anchor="middle" font-family="Anton,Impact,sans-serif" font-size="250"
+            fill="#fff" stroke="${BASE}" stroke-width="6" stroke-linejoin="round">${NUM}</text>
+      <g transform="translate(250,520)" fill="none" stroke="${BLUE}" stroke-width="3">
+        <polygon points="0,-22 19,11 -19,11"/><polygon points="0,22 19,-11 -19,-11"/>
+      </g>`;
+
+  svg.innerHTML = `
+  <defs>
+    <clipPath id="clip-${id}"><path d="${body}"/></clipPath>
+    <radialGradient id="shade-${id}" cx="50%" cy="38%" r="70%">
+      <stop offset="0" stop-color="#2a2f38"/><stop offset=".6" stop-color="${BASE}"/><stop offset="1" stop-color="#050608"/>
+    </radialGradient>
+    <pattern id="mesh-${id}" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r=".9" fill="#ffffff" opacity=".05"/>
+    </pattern>
+    <filter id="drop-${id}" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-opacity=".28"/>
+    </filter>
+    <filter id="glow-${id}"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <g filter="url(#drop-${id})"><path d="${body}" fill="url(#shade-${id})"/></g>
+  <g clip-path="url(#clip-${id})">
+    <path d="${body}" fill="url(#mesh-${id})"/>
+    ${art}
+    <!-- hem stripe -->
+    <path d="M44,572 Q250,612 456,572" stroke="${BLUE}" stroke-width="5" fill="none" opacity=".9"/>
+    ${content}
+    <!-- subtle fabric folds -->
+    <path d="M150,470 Q200,520 180,600" stroke="#000" stroke-width="18" opacity=".18" fill="none" filter="url(#glow-${id})"/>
+    <path d="M360,450 Q320,520 340,600" stroke="#000" stroke-width="14" opacity=".14" fill="none"/>
+  </g>
+  <!-- trims: white outer, blue inner -->
+  ${[neck,armL,armR].map(d=>`
+    <path d="${d}" stroke="#fff" stroke-width="15" fill="none" stroke-linecap="round"/>
+    <path d="${d}" stroke="${BLUE}" stroke-width="7" fill="none" stroke-linecap="round" filter="url(#glow-${id})"/>
+    <path d="${d}" stroke="${BASE}" stroke-width="2" fill="none"/>`).join('')}
+  ${front?'':`<rect x="236" y="38" width="28" height="18" rx="2" fill="#fff" opacity=".9"/><text x="250" y="51" text-anchor="middle" font-family="Montserrat" font-weight="800" font-size="9" fill="${BASE}">TM</text>`}
+  `;
+}
+jersey(document.getElementById('front'),'front');
+jersey(document.getElementById('back'),'back');
+</script>
+</body>
+</html>
