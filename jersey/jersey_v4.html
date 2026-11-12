@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Heebo:wght@700;800&family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:#111}
+  svg{display:block}
+</style>
+</head>
+<body>
+<svg id="scene" width="1200" height="1600" viewBox="0 0 1200 1600"></svg>
+<script>
+const NAVY='#3a4b68', NAVY2='#2c3a52';
+
+// jersey outline in a 500x640 box
+function bodyPath(front){
+  const nd = front?78:40;
+  return `M130,30 C160,20 190,20 206,26 C214,${nd} 286,${nd} 294,26 C310,20 340,20 370,30
+    C372,140 400,240 446,258 L454,820 C454,836 446,842 434,844 Q250,866 66,844
+    C54,842 46,836 46,820 L54,258 C100,240 128,140 130,30 Z`;
+}
+function trims(front){
+  const nd = front?78:40;
+  return {
+    neck:`M206,26 C214,${nd} 286,${nd} 294,26`,
+    armL:`M130,30 C128,140 100,240 54,258`,
+    armR:`M370,30 C372,140 400,240 446,258`,
+    sideL:`M62,266 L55,836`,
+    sideR:`M438,266 L445,836`,
+  };
+}
+
+// grungy dry-brush band, drawn along +x then rotated into place
+function band(x,y,len,w,ang,color,op,seed){
+  return `<g transform="translate(${x},${y}) rotate(${ang})">
+    <rect x="0" y="${-w/2}" width="${len}" height="${w}" fill="${color}" opacity="${op}"
+          filter="url(#grunge${seed})" mask="url(#fade)"/>
+  </g>`;
+}
+
+
+const GLOW='#3fa6e6';
+// Star of David from two triangles, centre (cx,cy), radius R
+function star(cx,cy,R){
+  const k=R*0.866;
+  return [`${cx},${cy-R} ${cx+k},${cy+R/2} ${cx-k},${cy+R/2}`, `${cx},${cy+R} ${cx+k},${cy-R/2} ${cx-k},${cy-R/2}`];
+}
+function starArt(cx,cy,R,id){
+  const [u,d]=star(cx,cy,R), [u2,d2]=star(cx,cy,R*0.86), [u3,d3]=star(cx,cy,R*0.72);
+  return `
+    <clipPath id="sc-${id}"><polygon points="${u}"/><polygon points="${d}"/></clipPath>
+    <g clip-path="url(#sc-${id})"><rect width="500" height="880" fill="url(#tri)"/></g>
+    <g fill="none" stroke-linejoin="round">
+      <g filter="url(#glow)" stroke="${GLOW}" stroke-width="5"><polygon points="${u}"/><polygon points="${d}"/></g>
+      <g stroke="#bfe3fb" stroke-width="1.3" opacity=".9"><polygon points="${u}"/><polygon points="${d}"/></g>
+      <g stroke="${GLOW}" stroke-width="1.4" opacity=".55"><polygon points="${u2}"/><polygon points="${d2}"/></g>
+      <g stroke="${GLOW}" stroke-width="1" opacity=".3"><polygon points="${u3}"/><polygon points="${d3}"/></g>
+    </g>`;
+}
+
+function jersey(front){
+  const t=trims(front), id=front?'f':'b';
+  const art = front ? starArt(430,790,330,id) : starArt(70,790,330,id);
+  const content = front ? `
+    <image href="logo_transparent.png" x="170" y="96" width="160" height="161"/>
+    <text x="250" y="300" text-anchor="middle" font-family="Michroma" font-size="27" letter-spacing="7" fill="#f2f4f7">TEAM MOSHE</text>
+    <rect x="120" y="318" width="90" height="1.5" fill="${GLOW}"/><rect x="290" y="318" width="90" height="1.5" fill="${GLOW}"/>
+    <polygon points="250,312 256,318 250,324 244,318" fill="${GLOW}"/>`
+  : `
+    <text x="250" y="122" text-anchor="middle" font-family="Michroma" font-size="12" letter-spacing="8" fill="#9fb3c6">TEAM MOSHE</text>
+    <text x="250" y="230" text-anchor="middle" font-family="Michroma" font-size="44" letter-spacing="5" fill="#f2f4f7">MOSHE</text>
+    <text x="250" y="292" text-anchor="middle" font-family="Heebo" font-weight="800" font-size="34" fill="${GLOW}">צוות משה</text>
+    <image href="logo_transparent.png" x="200" y="320" width="100" height="101" opacity=".95"/>`;
+
+  const body = bodyPath(front);
+  return `
+  <clipPath id="clip-${id}"><path d="${body}"/></clipPath>
+  <path d="${body}" fill="#0b0b0d"/>
+  <g clip-path="url(#clip-${id})">
+    ${art}
+    ${content}
+    <rect width="500" height="880" fill="url(#mesh)" opacity=".35"/>
+    <rect width="500" height="880" filter="url(#noise)" opacity=".25"/>
+    <g filter="url(#soft)" fill="none">
+      <path d="M112,330 C135,480 125,640 160,850" stroke="#000" stroke-width="30" opacity=".45"/>
+      <path d="M124,330 C147,480 137,640 172,850" stroke="#fff" stroke-width="8" opacity=".045"/>
+      <path d="M390,360 C365,500 375,660 348,850" stroke="#000" stroke-width="26" opacity=".4"/>
+      <path d="M377,360 C352,500 362,660 336,850" stroke="#fff" stroke-width="7" opacity=".04"/>
+    </g>
+    <rect width="500" height="880" fill="url(#sideShade)"/>
+    <rect width="500" height="880" fill="url(#topLight)"/>
+  </g>
+  ${['neck','armL','armR'].map(k=>`
+    <path d="${t[k]}" stroke="#0b0b0d" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <path d="${t[k]}" stroke="#16181c" stroke-width="12" fill="none" stroke-linecap="round" transform="translate(0,${k==='neck'?3:0})"/>
+    <path d="${t[k]}" stroke="${GLOW}" stroke-width="2.4" fill="none" stroke-linecap="round" filter="url(#glowS)" transform="translate(0,${k==='neck'?3:0})"/>`).join('')}
+  <path d="${t.sideL}" stroke="${GLOW}" stroke-width="2" opacity=".85" filter="url(#glowS)"/>
+  <path d="${t.sideR}" stroke="${GLOW}" stroke-width="2" opacity=".85" filter="url(#glowS)"/>
+  <path d="M66,844 Q250,866 434,844" stroke="#000" stroke-width="3" opacity=".6" fill="none"/>
+  `;
+}
+
+const defs = `
+<defs>
+  ${[1,2,3].map(s=>`
+  <filter id="grunge${s}" x="-10%" y="-60%" width="120%" height="220%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.01 0.06" numOctaves="3" seed="${s*7}" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="${22+s*4}" xChannelSelector="G" yChannelSelector="R" result="d"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.6" numOctaves="3" seed="${s*13}" result="g"/>
+    <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.4 2.15" result="gm"/>
+    <feComposite in="d" in2="gm" operator="in"/>
+  </filter>`).join('')}
+  <linearGradient id="fadeG" x1="0" x2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".12" stop-color="#fff"/>
+    <stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <mask id="fade" maskContentUnits="objectBoundingBox"><rect width="1" height="1" fill="url(#fadeG)"/></mask>
+  <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#e3e6ea"/>
+    <stop offset=".55" stop-color="#a9aeb6"/><stop offset="1" stop-color="#f2f3f5"/>
+  </linearGradient>
+  <linearGradient id="trim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#e6e8eb"/><stop offset="1" stop-color="#c9cdd2"/>
+  </linearGradient>
+  <filter id="white"><feColorMatrix type="matrix" values=".25 .25 .25 0 .2  .25 .25 .25 0 .22  .3 .3 .3 0 .28  0 0 0 1 0"/></filter>
+  <pattern id="mesh" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <circle cx="2" cy="2" r=".8" fill="#000"/>
+  </pattern>
+  <filter id="noise" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="5"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .6 -.22"/>
+  </filter>
+  <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
+  <linearGradient id="sideShade" x1="0" x2="1">
+    <stop offset="0" stop-color="#000" stop-opacity=".65"/><stop offset=".2" stop-color="#000" stop-opacity="0"/>
+    <stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset=".8" stop-color="#000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000" stop-opacity=".65"/>
+  </linearGradient>
+  <linearGradient id="topLight" x1="0" x2="0" y1="0" y2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity=".07"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+    <stop offset="1" stop-color="#000" stop-opacity=".35"/>
+  </linearGradient>
+  <!-- background -->
+  <radialGradient id="bgGlow" cx="50%" cy="38%" r="65%">
+    <stop offset="0" stop-color="#3a3c40"/><stop offset=".55" stop-color="#1c1d20"/><stop offset="1" stop-color="#0a0a0b"/>
+  </radialGradient>
+  <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+    <stop offset="0" stop-color="#2b2c2f"/><stop offset=".35" stop-color="#18191b"/><stop offset="1" stop-color="#0b0b0c"/>
+  </linearGradient>
+  <filter id="bgBlur"><feGaussianBlur stdDeviation="14"/></filter>
+  <filter id="shadowBlur"><feGaussianBlur stdDeviation="22"/></filter>
+  <filter id="drop" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-opacity=".7"/></filter>
+  <radialGradient id="vig" cx="50%" cy="48%" r="75%">
+    <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".75"/>
+  </radialGradient>
+
+  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
+  <filter id="glowS" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="tri" width="28" height="48.5" patternUnits="userSpaceOnUse">
+    <path d="M0,0 L28,0 M0,24.25 L28,24.25 M0,48.5 L28,48.5 M0,0 L28,48.5 M28,0 L0,48.5 M14,-24.25 L-14,24.25 M14,72.75 L42,24.25" stroke="#1d2a3a" stroke-width="1" fill="none"/>
+  </pattern>
+</defs>`;
+
+const bg = `
+  <rect width="1200" height="1600" fill="url(#bgGlow)"/>
+  <g filter="url(#bgBlur)" opacity=".85">
+    <!-- blurred gym: windows, hanging bags, wall line -->
+    <rect x="0" y="0" width="1200" height="120" fill="#101012"/>
+    <rect x="60" y="140" width="320" height="420" fill="#232427"/>
+    <rect x="820" y="140" width="320" height="420" fill="#222326"/>
+    
+    <rect x="215" y="230" width="44" height="210" rx="18" fill="#141416"/>
+    <rect x="300" y="250" width="40" height="190" rx="18" fill="#161618"/>
+    <rect x="940" y="230" width="44" height="210" rx="18" fill="#141416"/>
+    <line x1="237" y1="120" x2="237" y2="232" stroke="#141416" stroke-width="4"/>
+    <line x1="962" y1="120" x2="962" y2="232" stroke="#141416" stroke-width="4"/>
+  </g>
+  <rect x="0" y="1010" width="1200" height="590" fill="url(#floor)"/>
+  <rect x="0" y="1005" width="1200" height="14" fill="#0e0e10" filter="url(#bgBlur)"/>
+  <ellipse cx="600" cy="1215" rx="540" ry="45" fill="#000" opacity=".75" filter="url(#shadowBlur)"/>`;
+
+document.getElementById('scene').innerHTML = defs + bg + `
+  <g transform="translate(32,215) scale(1.1)" filter="url(#drop)">${jersey(true)}</g>
+  <g transform="translate(618,215) scale(1.1)" filter="url(#drop)">${jersey(false)}</g>
+  <rect width="1200" height="1600" fill="url(#vig)"/>`;
+</script>
+</body>
+</html>
