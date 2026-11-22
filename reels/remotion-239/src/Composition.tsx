@@ -17,7 +17,7 @@ const MusicBed: React.FC = () => {
     <Audio
       name="Music"
       src={staticFile("music.wav")}
-      volume={interpolate(frame, [0, 8, durationInFrames - 30, durationInFrames - 1], [0, 0.42, 0.42, 0], {
+      volume={interpolate(frame, [0, 8, durationInFrames - 30, durationInFrames - 1], [0, 0.28, 0.28, 0], {
         extrapolateLeft: "clamp",
         extrapolateRight: "clamp",
       })}

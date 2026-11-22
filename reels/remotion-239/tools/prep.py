@@ -17,7 +17,7 @@ def job(i):
     vf=f"fps=30,{crop},{TM}:w=1080:h=1920,eq=contrast=1.07:saturation=1.08:gamma=0.97,format=yuv420p"
     subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-ss",str(p['ss']),"-i",f"{RAW}/{p['src']}.mov","-t",f"{d+0.2:.3f}",
         "-map","0:v:0","-map","0:a:0","-vf",vf,"-c:v","libx264","-preset","medium","-crf","17","-pix_fmt","yuv420p",
-        "-color_primaries","bt709","-color_trc","bt709","-colorspace","bt709","-r","30","-c:a","aac","-b:a","192k","-ar","48000",out],check=True)
+        "-color_primaries","bt709","-color_trc","bt709","-colorspace","bt709","-r","30","-af","highpass=f=70,acompressor=threshold=0.08:ratio=4:attack=2:release=80:makeup=3,alimiter=limit=0.95","-c:a","aac","-b:a","192k","-ar","48000",out],check=True)
     return i
 with ThreadPoolExecutor(3) as ex:
     for i in ex.map(job,range(len(P))): print(i,end=' ',flush=True)
