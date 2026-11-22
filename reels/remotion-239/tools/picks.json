@@ -1,21 +1,15 @@
 [
  {
-  "src": "a0505",
-  "ss": 55.14,
-  "f": 110,
-  "note": "punches > high kick > knee (opener)"
- },
- {
-  "src": "a0514",
-  "ss": 1.64,
-  "f": 137,
-  "note": "10-strike combo"
- },
- {
   "src": "a0506",
-  "ss": 106.84,
-  "f": 92,
-  "note": "kicks + punches"
+  "ss": 106.99,
+  "f": 88,
+  "note": "kicks + punches (opener, fastest/hardest)"
+ },
+ {
+  "src": "a0505",
+  "ss": 82.65,
+  "f": 65,
+  "note": "punches > kick"
  },
  {
   "src": "a0505",
@@ -30,10 +24,16 @@
   "note": "punch, kick, knee"
  },
  {
-  "src": "a0509",
-  "ss": 3.13,
-  "f": 158,
-  "note": "11-strike combo"
+  "src": "a0515",
+  "ss": 6.33,
+  "f": 116,
+  "note": "10-strike combo"
+ },
+ {
+  "src": "a0514",
+  "ss": 1.64,
+  "f": 137,
+  "note": "10-strike combo"
  },
  {
   "src": "a0505",
@@ -42,28 +42,10 @@
   "note": "punch combo"
  },
  {
-  "src": "a0506",
-  "ss": 146.14,
-  "f": 95,
-  "note": "punches, close"
- },
- {
-  "src": "a0515",
-  "ss": 6.33,
-  "f": 116,
-  "note": "10-strike combo"
- },
- {
-  "src": "a0505",
-  "ss": 82.65,
-  "f": 65,
-  "note": "punches > kick"
- },
- {
-  "src": "a0514",
-  "ss": 7.65,
-  "f": 80,
-  "note": "punches > kick"
+  "src": "a0509",
+  "ss": 3.13,
+  "f": 158,
+  "note": "11-strike combo"
  },
  {
   "src": "a0505",
