@@ -125,25 +125,11 @@ export const Title: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-// Instagram-style bookmark (save) icon. `fill` 0..1 animates the outline filling in.
-const Bookmark: React.FC<{ fill: number; size: number }> = ({ fill, size }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24">
-    <defs>
-      <clipPath id="bm-fill">
-        <rect x="0" y={24 - 24 * fill} width="24" height={24 * fill} />
-      </clipPath>
-    </defs>
-    <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="#1a1a1a" clipPath="url(#bm-fill)" />
-    <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4.5L5 21V4a1 1 0 0 1 1-1z" fill="none" stroke="#1a1a1a" strokeWidth={2} strokeLinejoin="round" />
-  </svg>
-);
-
-// End card: "save the recipe" + an animated save button that gets tapped (press, fill, pop).
+// End card: "save the recipe".
 export const Cta: React.FC<{ text: string }> = ({ text }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t0 = Math.round(0.5 * fps); // card appears
-  const tap = Math.round(1.8 * fps); // button pressed
   const f = Math.max(0, frame - t0);
   return (
     <Sequence from={t0} layout="none">
@@ -166,30 +152,6 @@ export const Cta: React.FC<{ text: string }> = ({ text }) => {
           }}
         >
           {text}
-        </div>
-        <div
-          dir="rtl"
-          lang="he"
-          style={{
-            opacity: interpolate(frame, [t0 + 8, t0 + 14], [0, 1], clamp),
-            scale:
-              interpolate(frame, [t0 + 8, t0 + 16], [0.8, 1], { ...clamp, easing: ease }) *
-              interpolate(frame, [tap - 3, tap, tap + 4, tap + 10], [1, 0.88, 1.12, 1], clamp),
-            display: "flex",
-            alignItems: "center",
-            gap: 20,
-            background: interpolate(frame, [tap, tap + 4], [0, 1], clamp) > 0.5 ? "#F2C94C" : "white",
-            padding: "20px 44px 22px",
-            borderRadius: 999,
-            boxShadow: "0 10px 34px rgba(0,0,0,0.35)",
-            fontFamily: FAMILY,
-            fontWeight: 800,
-            fontSize: 60,
-            color: "#1a1a1a",
-          }}
-        >
-          <Bookmark size={70} fill={interpolate(frame, [tap, tap + 6], [0, 1], clamp)} />
-          <span>{frame >= tap + 2 ? "נשמר!" : "שמירה"}</span>
         </div>
       </AbsoluteFill>
     </Sequence>
