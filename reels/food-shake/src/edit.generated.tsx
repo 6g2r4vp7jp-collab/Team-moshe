@@ -2,7 +2,7 @@
 import { TransitionSeries } from "@remotion/transitions";
 import { Caption, Cta, Label, Shot, Title } from "./parts";
 
-export const TOTAL_FRAMES = 1677;
+export const TOTAL_FRAMES = 1794;
 
 export const Edit: React.FC = () => {
   return (
@@ -94,9 +94,12 @@ export const Edit: React.FC = () => {
         <Caption from={2} durationInFrames={50} text={"אבל נגמרה הגלידה"} />
         <Caption from={79} durationInFrames={96} text={"ויש לנו שייק מלא חלבון לפתיחת הבוקר"} />
       </TransitionSeries.Sequence>
-      <TransitionSeries.Sequence name="20 Final result + CTA" durationInFrames={90}>
-        <Shot name="Final result + CTA" trimBefore={3918} zoom={[1.05, 1.15]} origin={[50, 65]} volume={1} />
+      <TransitionSeries.Sequence name="20 Final result" durationInFrames={27}>
+        <Shot name="Final result" trimBefore={3918} zoom={[1.05, 1.07]} origin={[50, 65]} volume={1} />
         <Caption from={3} durationInFrames={16} text={"בבקשה"} />
+      </TransitionSeries.Sequence>
+      <TransitionSeries.Sequence name="21 Final result + CTA + save button" durationInFrames={180}>
+        <Shot name="Final result + CTA + save button" trimBefore={3945} zoom={[1.07, 1.2]} origin={[50, 65]} volume={0} />
         <Cta text={"שמרו את המתכון לפעם הבאה"} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
