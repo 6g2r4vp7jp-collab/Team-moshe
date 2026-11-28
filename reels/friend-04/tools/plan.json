@@ -1,0 +1,15 @@
+[
+ {"t":"photo","src":"IMG_2378","d":2.2},
+ {"t":"video","src":"IMG_2374.MOV","a":3.9,"b":6.0},
+ {"t":"photo","src":"IMG_2376","d":2.0},
+ {"t":"video","src":"IMG_2374.MOV","a":13.6,"b":16.8},
+ {"t":"photo","src":"IMG_2371","d":1.9},
+ {"t":"video","src":"IMG_2375.MOV","a":14.0,"b":18.0},
+ {"t":"video","src":"IMG_2374.MOV","a":28.0,"b":32.0},
+ {"t":"photo","src":"IMG_2373","d":1.9},
+ {"t":"video","src":"IMG_2374.MOV","a":22.7,"b":25.6},
+ {"t":"video","src":"IMG_2382.MOV","a":18.4,"b":22.6},
+ {"t":"photo","src":"IMG_2377","d":2.0},
+ {"t":"video","src":"IMG_2374.MOV","a":35.0,"b":37.3},
+ {"t":"video","src":"IMG_2375.MOV","a":33.5,"b":38.6}
+]
